@@ -1,0 +1,12 @@
+CLASS X::SecurityPolicy::Eval
+The SlurpySentry referenced is an internal role, however it is unused.
+Simply use $.payload.Str instead, which is what CORE should have.
+
+CLASS X::AdHoc
+The SlurpySentry referenced is an old internal role, nowadays unused.
+Most languages should simply use '$.payload.Str' as the entire method,
+which is what CORE should probably do as well.
+
+CLASS X::ControlFlow::Return
+Use $.out-of-dynamic-scope instead of $!out-of-dynamic-scope in translations
+

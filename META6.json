@@ -1,0 +1,20 @@
+{
+  "name": "Intl::X",
+  "description": "Write me!",
+  "version": "0.1",
+  "perl": "6.*",
+  "authors": [
+    "Write me!"
+  ],
+  "auth": "Write me!",
+  "depends": [],
+  "build-depends": [],
+  "test-depends": [],
+  "provides": {
+    "Intl::X::es" : "lib/Intl/X/es.pm6",
+    "Intl::X" : "lib/Intl/X.pm6"
+  },
+  "resources": [],
+  "license": "Artistic-2.0",
+  "source-url": "Write me!"
+}
