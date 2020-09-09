@@ -20,7 +20,56 @@ Eventually, a localization roast will be made, but at the moment is not availabl
 
 ### Example (.message)
 
-You will see in the file
+You will see in the file something like 
+
+```raku
+# Class:  X::Parameter::InvalidType
+# Status: TO DO
+# Original Code:
+#        my $msg := "Invalid typename '$.typename' in parameter declaration.";
+#        if +@.suggestions > 0 {
+#            $msg := $msg ~ " Did you mean '" ~ @.suggestions.join("', '") ~ "'?";
+#        }
+#        $msg.naive-word-wrapper
+
+'X::Parameter::InvalidType' => method {
+        my $msg := "Invalid typename '$.typename' in parameter declaration.";
+        if +@.suggestions > 0 {
+            $msg := $msg ~ " Did you mean '" ~ @.suggestions.join("', '") ~ "'?";
+        }
+        $msg.naive-word-wrapper
+},
+```
+
+This lets us know what the class is and the original Raku code.  
+In most cases, the code is very simple, other times, it may be more complex.
+All you need to do is adjust bits that contain text, but don't be afraid to move stuff around if it makes sense for your language.
+After translating the above for Asturian, the above looked like:
+
+```raku
+# Class:  X::Parameter::InvalidType
+# Status: COMPLETE
+# Original Code:
+#        my $msg := "Invalid typename '$.typename' in parameter declaration.";
+#        if +@.suggestions > 0 {
+#            $msg := $msg ~ " Did you mean '" ~ @.suggestions.join("', '") ~ "'?";
+#        }
+#        $msg.naive-word-wrapper
+
+'X::Parameter::InvalidType' => method {
+        my $msg := "Nome de tipu inválidu '$.typename' nuna declaración de parámetru.";
+        if +@.suggestions > 0 {
+            $msg := $msg ~ " ¿Quixisti dicir '" ~ @.suggestions.join("', '") ~ "'?";
+        }
+        $msg.naive-word-wrapper
+},
+```
+
+The status can really be anything you want.
+This enables you to say, e.g., `COMPLETE (but dobule check)` or similar.
+For stats purposes, it will count as translated, and the updater script will preserve it.
+Don't adjust the contents of `Original Code`, however, because that is used to compare with newer copies of `Exceptions.pm6` and alert you to potential changes.
+Only change the contents of the method -- **I'm lazy** and various scripts depend on the `'X::Type' => method {` header and `},` footer being exactly as they are.
 
 
 ## Translation notes
