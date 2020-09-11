@@ -5,25 +5,17 @@ This is a super simple parser that relies on the fact that Rakudo's code base fo
 fairly good code indenting.  This way we can look for a specific indent.  If Rakudo's
 style changes, a newer parser may be needed.
 =end pod
+use lib ($?FILE.IO.sibling("lib"));
+use Support;
 
 # These classes are to be skipped, because they do not have a
 # defined .message method and will cause an error in wrapping.
-my @skip     = <Exception Exception::JSON>;
 my $x-file   = $?FILE.IO.sibling('Exception.pm6');
+my @exclude  = <Exception X::Method::NotFound X::StubCode CX::Warn Exception::JSON>;
 my $gen-file = $?FILE.IO.parent.sibling('lib').add('Intl').add('X.pm6');
 
-my rule class-header {
-    ^ my class
-    $<class>=(\S+)
-    [[is|does] \S+]*
-    '{'
-    [['...' | '…'] <!>]?     # this disallows stubs
-}
-
-my @classes;
-@classes.push: ~$<class>
-  if .match: &class-header
-    for $x-file.lines;
+my %exceptions := exceptions-in-file $x-file, :@exclude;
+my @classes = %exceptions.keys;
 
 my $header = q:to/GENERATED/;
 #####################################################
@@ -34,16 +26,13 @@ my $header = q:to/GENERATED/;
 
 GENERATED
 
-my $wrap-code;
-for @classes.sort -> $type {
-  $wrap-code ~= qq:to/WRAP/;
-    {$type}.^find_method('message').wrap(%x\{\$language\}<{$type}>//ENGLISH);
-    say 'wrapped $type';
-    WRAP
+my $wrap-code = [~] do for @classes.sort -> $type {
+     $type ~ '.^find_method("message").wrap(%x{$language}<{' ~ $type ~ '>//ENGLISH);' ~ "\n"
 }
 
-my $current-file = $x-file.slurp;
+my $current-file = $gen-file.slurp;
+
 my $offset = $current-file.index($header);
 my $base = $current-file.substr(0,$offset);
 
-$x-file.spurt: $base ~ $header ~ $wrap-code;
+$gen-file.spurt: $base ~ $header ~ $wrap-code;

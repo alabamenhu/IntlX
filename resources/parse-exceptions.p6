@@ -6,83 +6,23 @@ fairly good code indenting.  This way we can look for a specific indent.  If Rak
 style changes, a newer parser may be needed.
 =end pod
 
+# Load the local library
+use lib ($?FILE.IO.sibling("lib"));
+use Support;
+
 # The following exceptions are explicitly excluded, because they have
 # code that is sufficiently complex and sensitive that it's best to request
 # specific sub-phrases as a special translation and have X.pm6 handle things.
-my @excluded = <Exception X::Method::NotFound X::StubCode CX::Warn>;
-
-my rule class-header {
-    ^ my class
-        $<class>=(\S+)
-    [[is|does] \S+]*
-        '{'
-        $     # this disallows stubs
-}
-
-my rule method-header {
-    ^$<indent>=(\h*)method
-        message ['(' ')']?
-        '{'
-        [$<oneliner>=[.*?] '}' \h* ]?  # a few exceptions are in a single line
-        $
-    }
-
+my @exclude = <Exception X::Method::NotFound X::StubCode CX::Warn>;
+my $x-file = $?FILE.IO.sibling("Exception.pm6");
+my $n-file = $?FILE.IO.sibling("translation-notes").add("root");
 
 
 sub MAIN() {
-    # Grab any translation notes.
-    # These will be included with POD to aide translators.
-    my %notes;
-    my $note-file = "translation-notes/root".IO.slurp;
-    for ($note-file ~~ m:g/^^CLASS <.ws> $<class>=(\S+) <.ws> $<note>=(.*?) <before $$ <.ws> [CLASS|$]>/) -> $/ {
-        %notes{~$<class>} = ~$<note>;
-    }
-
-    my $file = "Exception.pm6".IO;
-
-    my $in-class = False;
-    my $in-method = False;
-    my $class = "";
-    my $method = "";
-    my $method-indent = "";
-    my %exceptions;
-
-    for $file.lines -> $line {
-        if not $in-class {
-            if $line ~~ &class-header {
-                next if $<class> eq any @excluded;
-                $class = ~$<class>;
-                $in-class = True;
-            }
-        } elsif not $in-method {
-            if $line ~~ &method-header {
-                $method = "";
-                with $<oneliner> {
-                    $method = "        " ~ .Str;
-                    $in-method = False;
-                    $in-class = False;
-                    %exceptions{$class} = $method;
-                } else {
-                    $in-method = True;
-                    $method-indent = $<indent>;
-                }
-            }
-        } else {
-            if $line.starts-with("$method-indent}") {
-                $in-class = False;
-                $in-method = False;
-                %exceptions{$class} = $method;
-            }else{
-                if $method {
-                    $method ~= "\n" ~ $line;
-                }else{
-                    $method = $line;
-                }
-            }
-        }
-    }
-
+    my %notes := notes-in-file $n-file;
+    my %exceptions = exceptions-in-file $x-file, :@exclude;
     say "Found {%exceptions.keys.elems} exceptions";
+
     my $translation-template = q:to/HEADER/;
         # EXCEPTIONS LOCALIZATION FOR ----
         #
@@ -118,10 +58,9 @@ sub MAIN() {
         'X::SecurityPolicy::Eval.payload'     => method { 'EVAL is a very dangerous function!!!'     },
         'X::AdHoc.payload'                    => method { 'Unexplained error'                        },
         'X::StubCode.default'                 => method { 'Stub code executed'                       },
-        'X::Met.default'                      => method { 'Stub code executed'                       },
         'X::Method::NotFound.of-type'         => method { "of type '$.typename'" },
-        'X::Method::NotFound.no-public'       => method { "No such private method '!$.method' for invocant $.of-type" },
-        'X::Method::NotFound.no-private'      => method { "No such method '$.method' for invocant $.of-type" },
+        'X::Method::NotFound.no-public'       => method { "No such method '$.method' for invocant $.of-type" },
+        'X::Method::NotFound.no-private'      => method { "No such private method '!$.method' for invocant $.of-type" },
         'X::Method::NotFound.private-sug'     => method { "Method name starts with '!', did you mean 'self!\"__INDIRECT-METHOD__\"()'?" },
         'X::Method::NotFound.suggestion'      => method { "Did you mean '@.suggestions[0]'?" },
         'X::Method::NotFound.suggestions'     => method { "Did you mean any of these: { @.suggestions.map( { "'$_'" } ).join(", ") }?" },
@@ -151,3 +90,5 @@ sub MAIN() {
     }
     "template.rakumod".IO.open(:w).print: $translation-template ~ ";";
 }
+
+

@@ -1,12 +1,59 @@
 CLASS X::SecurityPolicy::Eval
 The SlurpySentry referenced is an internal role, however it is unused.
-Simply use $.payload.Str instead, which is what CORE should have.
+Simply use $.payload.Str instead, which is what core should have.
 
 CLASS X::AdHoc
 The SlurpySentry referenced is an old internal role, nowadays unused.
 Most languages should simply use '$.payload.Str' as the entire method,
-which is what CORE should probably do as well.
+which is what core should probably do as well.
 
 CLASS X::ControlFlow::Return
 Use $.out-of-dynamic-scope instead of $!out-of-dynamic-scope in translations
+
+CLASS CX::Done
+Currently untranslated in core.  Ensure 'done' is left verbatim.
+
+CLASS CX::Emit
+Currently untranslated in core.  Ensure 'emit' is left verbatim.
+
+CLASS CX::Last
+Currently untranslated in core.  Ensure 'last' is left verbatim.
+
+CLASS CX::Next
+Currently untranslated in core.  Ensure 'next' is left verbatim.
+
+CLASS CX::Proceed
+Currently untranslated in core.  Ensure 'proceed' is left verbatim.
+
+CLASS CX::Redo
+Currently untranslated in core.  Ensure 'redo' is left verbatim.
+
+CLASS CX::Return
+Currently untranslated in core.  Ensure 'return' is left verbatim.
+
+CLASS CX::Succeed
+Currently untranslated in core.  Ensure 'succeed' is left verbatim.
+
+CLASS CX::Take
+Currently untranslated in core.  Ensure 'take' is left verbatim.
+
+CLASS X::Adverb
+Use the method access for the instance variables (@.unexpected, @.nogo, etc).
+You may need to substantially rewrite the logic to create a text that is
+grammatically correct for your language.  The $.what contains one of three
+string values: '{} slice', '[] slice', 'slice'.
+
+CLASS X::Anon::Augment
+The package-types that are possible are <package module class grammar
+role knowhow native slang block>.
+
+CLASS X::Assignment::RO
+Use $.value instead of $!value
+
+CLASS X::Attribute::Package
+The package-types that are possible are <package module class grammar
+role knowhow native slang block>.
+
+CLASS X::Attribute::Required
+The reason is arbitrary text at the moment.  You may consider avoiding printing it.
 

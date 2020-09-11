@@ -4,9 +4,7 @@
 # Do NOT allow a code editor to reformat, as it will mess up (NYI) comparison
 # and update scripts.
 #
-# 1. Change the ?? to your language code.
-#    If your script or region is pertinent, add it as well for now.
-#    (e.g. pt-BR or zh-Hans/zh-CN, etc).
+# 1. Change the ?? to your language code
 unit module Intl::X::??;
 # 2. Rename this template file to match the language code
 # 3. Place in the lib/Intl/X/ directory.
@@ -34,10 +32,9 @@ our %exceptions = Map.new:
 'X::SecurityPolicy::Eval.payload'     => method { 'EVAL is a very dangerous function!!!'     },
 'X::AdHoc.payload'                    => method { 'Unexplained error'                        },
 'X::StubCode.default'                 => method { 'Stub code executed'                       },
-'X::Met.default'                      => method { 'Stub code executed'                       },
 'X::Method::NotFound.of-type'         => method { "of type '$.typename'" },
-'X::Method::NotFound.no-public'       => method { "No such private method '!$.method' for invocant $.of-type" },
-'X::Method::NotFound.no-private'      => method { "No such method '$.method' for invocant $.of-type" },
+'X::Method::NotFound.no-public'       => method { "No such method '$.method' for invocant $.of-type" },
+'X::Method::NotFound.no-private'      => method { "No such private method '!$.method' for invocant $.of-type" },
 'X::Method::NotFound.private-sug'     => method { "Method name starts with '!', did you mean 'self!\"__INDIRECT-METHOD__\"()'?" },
 'X::Method::NotFound.suggestion'      => method { "Did you mean '@.suggestions[0]'?" },
 'X::Method::NotFound.suggestions'     => method { "Did you mean any of these: { @.suggestions.map( { "'$_'" } ).join(", ") }?" },
@@ -52,6 +49,7 @@ our %exceptions = Map.new:
 
 # Class:  CX::Done
 # Status: TO DO
+# Note:   Currently untranslated in core.  Ensure 'done' is left verbatim.
 # Original Code:
 #        "<done control exception>"
 
@@ -62,6 +60,7 @@ our %exceptions = Map.new:
 
 # Class:  CX::Emit
 # Status: TO DO
+# Note:   Currently untranslated in core.  Ensure 'emit' is left verbatim.
 # Original Code:
 #        "<emit control exception>"
 
@@ -72,6 +71,7 @@ our %exceptions = Map.new:
 
 # Class:  CX::Last
 # Status: TO DO
+# Note:   Currently untranslated in core.  Ensure 'last' is left verbatim.
 # Original Code:
 #        "<last control exception>"
 
@@ -82,6 +82,7 @@ our %exceptions = Map.new:
 
 # Class:  CX::Next
 # Status: TO DO
+# Note:   Currently untranslated in core.  Ensure 'next' is left verbatim.
 # Original Code:
 #        "<next control exception>"
 
@@ -92,6 +93,7 @@ our %exceptions = Map.new:
 
 # Class:  CX::Proceed
 # Status: TO DO
+# Note:   Currently untranslated in core.  Ensure 'proceed' is left verbatim.
 # Original Code:
 #        "<proceed control exception>"
 
@@ -102,6 +104,7 @@ our %exceptions = Map.new:
 
 # Class:  CX::Redo
 # Status: TO DO
+# Note:   Currently untranslated in core.  Ensure 'redo' is left verbatim.
 # Original Code:
 #        "<redo control exception>"
 
@@ -112,6 +115,7 @@ our %exceptions = Map.new:
 
 # Class:  CX::Return
 # Status: TO DO
+# Note:   Currently untranslated in core.  Ensure 'return' is left verbatim.
 # Original Code:
 #        "<return control exception>"
 
@@ -122,6 +126,7 @@ our %exceptions = Map.new:
 
 # Class:  CX::Succeed
 # Status: TO DO
+# Note:   Currently untranslated in core.  Ensure 'succeed' is left verbatim.
 # Original Code:
 #        "<succeed control exception>"
 
@@ -132,6 +137,7 @@ our %exceptions = Map.new:
 
 # Class:  CX::Take
 # Status: TO DO
+# Note:   Currently untranslated in core.  Ensure 'take' is left verbatim.
 # Original Code:
 #        "<take control exception>"
 
@@ -144,7 +150,7 @@ our %exceptions = Map.new:
 # Status: TO DO
 # Note:   The SlurpySentry referenced is an old internal role, nowadays unused.
 #         Most languages should simply use '$.payload.Str' as the entire method,
-#         which is what CORE should probably do as well.
+#         which is what core should probably do as well.
 # Original Code:
 #        # Remove spaces for die(*@msg)/fail(*@msg) forms
 #        given $.payload {
@@ -171,6 +177,10 @@ our %exceptions = Map.new:
 
 # Class:  X::Adverb
 # Status: TO DO
+# Note:   Use the method access for the instance variables (@.unexpected, @.nogo, etc).
+#         You may need to substantially rewrite the logic to create a text that is
+#         grammatically correct for your language.  The $.what contains one of three
+#         string values: '{} slice', '[] slice', 'slice'.
 # Original Code:
 #        my $text = '';
 #        if @!unexpected.elems -> $elems {
@@ -201,6 +211,8 @@ our %exceptions = Map.new:
 
 # Class:  X::Anon::Augment
 # Status: TO DO
+# Note:   The package-types that are possible are <package module class grammar
+#         role knowhow native slang block>.
 # Original Code:
 #        "Cannot augment anonymous $.package-kind"
 
@@ -241,6 +253,7 @@ our %exceptions = Map.new:
 
 # Class:  X::Assignment::RO
 # Status: TO DO
+# Note:   Use $.value instead of $!value
 # Original Code:
 #        nqp::isconcrete($!value)
 #                ?? "Cannot modify an immutable {$!value.^name} ({
@@ -279,6 +292,8 @@ our %exceptions = Map.new:
 
 # Class:  X::Attribute::Package
 # Status: TO DO
+# Note:   The package-types that are possible are <package module class grammar
+#         role knowhow native slang block>.
 # Original Code:
 #        "A $.package-kind cannot have attributes, but you tried to declare '$.name'"
 
@@ -299,6 +314,7 @@ our %exceptions = Map.new:
 
 # Class:  X::Attribute::Required
 # Status: TO DO
+# Note:   The reason is arbitrary text at the moment.  You may consider avoiding printing it.
 # Original Code:
 #        $.why && nqp::istype($.why,Str)
 #                ?? "The attribute '$.name' is required because $.why,\nbut you did not provide a value for it."
@@ -2303,7 +2319,7 @@ our %exceptions = Map.new:
 # Class:  X::SecurityPolicy::Eval
 # Status: TO DO
 # Note:   The SlurpySentry referenced is an internal role, however it is unused.
-#         Simply use $.payload.Str instead, which is what CORE should have.
+#         Simply use $.payload.Str instead, which is what core should have.
 # Original Code:
 #        (($.payload ~~ SlurpySentry
 #                ?? $.payload.list.join # Remove spaces die(*@msg)/fail(*@msg) forms

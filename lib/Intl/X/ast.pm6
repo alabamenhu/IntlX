@@ -1,10 +1,12 @@
-# EXCEPTIONS LOCALIZATION FOR ASTURIAN
+# EXCEPTIONS LOCALIZATION FOR ----
 #
 # Note that this file has been automatically generated.
 # Do NOT allow a code editor to reformat, as it will mess up (NYI) comparison
 # and update scripts.
 #
-# 1. Change the ?? to your language code
+# 1. Change the ?? to your language code.
+#    If your script or region is pertinent, add it as well for now.
+#    (e.g. pt-BR or zh-Hans/zh-CN, etc).
 unit module Intl::X::ast;
 # 2. Rename this template file to match the language code
 # 3. Place in the lib/Intl/X/ directory.
@@ -22,83 +24,131 @@ our %exceptions = Map.new:
 # proper post-processing.
 #
 # BEGIN SPECIAL TRANSLATIONS (DO NOT EDIT THIS LINE)
-'Exception.died-with'              => method { "Murrió con {self.^name}"               },
-'Exception.no-backtrace'           => method { '  (pila llamaes non disponible)'       },
-'Exception.something-wrong'        => method { "Dalgo asocedió mal en {self.WHAT.gist}"},
-'Exception.unknown'                => method { "{self.^name} non tiráu ensin mensaxe"  },
-'X::AdHoc.payload'                 => method { 'Fallu non explicáu'                    },
-'X::Comp::Group.difficulties'      => method { 'Dificultaes potenciales:'              },
-'X::Comp::Group.other-diff'        => method { 'Otres dificultaes potenciales:'        },
-'X::Comp::Group.sorry'             => method { '¡SIÉNTOLO!'                            },
-'X::SecurityPolicy::Eval.payload'  => method { '¡¡¡EVAL ye una función perpeligrosa!!!'},
+'Exception.died-with'                  => method { "Murrió con {self.^name}"                                                              },
+'Exception.no-backtrace'               => method { '  (pila llamaes non disponible)'                                                      },
+'Exception.something-wrong'            => method { "Dalgo asocedió mal en {self.WHAT.gist}"                                               },
+'Exception.unknown'                    => method { "{self.^name} non tiráu ensin mensaxe"                                                 },
+'X::AdHoc.payload'                     => method { 'Fallu non explicáu'                                                                   },
+'X::Comp::Group.difficulties'          => method { 'Dificultaes potenciales:'                                                             },
+'X::Comp::Group.other-diff'            => method { 'Otres dificultaes potenciales:'                                                       },
+'X::Comp::Group.sorry'                 => method { '¡SIÉNTOLO!'                                                                           },
+'X::Method::NotFound.no-private'       => method { "Dalu métodu priváu '!$.method' pa un invocante $.of-type"                             },
+'X::Method::NotFound.no-public'        => method { "Dalu métodu '$.method' pa un invocante $.of-type"                                     },
+'X::Method::NotFound.of-type'          => method { "de tipu '$.typename'"                                                                 },
+'X::Method::NotFound.perhaps-private'  => method { "Quiciabas has llamar un métodu priváu."                                               },
+'X::Method::NotFound.perhaps-public'   => method { "Quiciabes has llamar un métodu públicu."                                              },
+'X::Method::NotFound.possible'         => method { ($.addendum ?? "Otres" !! "Les") ~ " causes posibles son:"                             },
+'X::Method::NotFound.private-sug'      => method { "Nome de métodu qu’entama con '!', ¿quixisti dicir '!self!\"__INDIRECT-METHOD__\"()'?" },
+'X::Method::NotFound.suggestion'       => method { "¿Quixisti dicir '@.suggestions[0]'?"                                                  },
+'X::Method::NotFound.suggestions'      => method { "¿Quixisti dicir ún d’estos?: { @.suggestions.map( { "'$_'" } ).join(", ") }?"         },
+'X::SecurityPolicy::Eval.payload'      => method { '¡¡¡EVAL ye una función perpeligrosa!!!'                                               },
+'X::StubCode.default'                  => method { 'Executóse códigu furracu'                                                             },
 # END SPECIAL TRANSLATIONS (DO NOT EDIT THIS LINE)
 
 # For each of the following entries, do not edit the original code in
 # in the comment block, as it is used for tracking.
 # Only adjust the code inside of the primary method block.
 
-# Class:  CX::Done
-# Status: TO DO
+
+# Class: CX::Done
+# Status: COMPLETE
+# Notes:  Currently untranslated in core.  Ensure 'done' is left verbatim.
 # Original Code:
 #        "<done control exception>"
 
 'CX::Done' => method {
-        "<done control exception>"
+        "<exceición de control done>"
 },
 
 
-# Class:  CX::Emit
-# Status: TO DO
+
+# Class: CX::Emit
+# Status: COMPLETE
+# Notes:  Currently untranslated in core.  Ensure 'emit' is left verbatim.
 # Original Code:
 #        "<emit control exception>"
 
 'CX::Emit' => method {
-        "<emit control exception>"
+        "<exceición de control emit>"
 },
 
 
-# Class:  CX::Last
-# Status: TO DO
+
+# Class: CX::Last
+# Status: COMPLETE
+# Notes:  Currently untranslated in core.  Ensure 'last' is left verbatim.
 # Original Code:
 #        "<last control exception>"
 
 'CX::Last' => method {
-        "<last control exception>"
+        "<exceición de control last control>"
 },
 
 
-# Class:  CX::Proceed
-# Status: TO DO
+
+# Class: CX::Next
+# Status: COMPLETE
+# Notes:  Currently untranslated in core.  Ensure 'next' is left verbatim.
+# Original Code:
+#        "<next control exception>"
+
+'CX::Next' => method {
+        "<exceición de control next>"
+},
+
+
+
+# Class: CX::Proceed
+# Status: COMPLETE
+# Notes:  Currently untranslated in core.  Ensure 'proceed' is left verbatim.
 # Original Code:
 #        "<proceed control exception>"
 
 'CX::Proceed' => method {
-        "<proceed control exception>"
+        "<exceición de control proceed>"
 },
 
 
-# Class:  CX::Redo
-# Status: TO DO
+
+# Class: CX::Redo
+# Status: COMPLETE
+# Notes:  Currently untranslated in core.  Ensure 'redo' is left verbatim.
 # Original Code:
 #        "<redo control exception>"
 
 'CX::Redo' => method {
-        "<redo control exception>"
+        "<exceición de control redo>"
 },
 
 
-# Class:  CX::Return
-# Status: TO DO
+
+# Class: CX::Return
+# Status: COMPLETE
+# Notes:  Currently untranslated in core.  Ensure 'return' is left verbatim.
 # Original Code:
 #        "<return control exception>"
 
 'CX::Return' => method {
-        "<return control exception>"
+        "<exceición de control return>"
 },
 
 
-# Class:  CX::Take
-# Status: TO DO
+
+# Class: CX::Succeed
+# Status: COMPLETE
+# Notes:  Currently untranslated in core.  Ensure 'succeed' is left verbatim.
+# Original Code:
+#        "<succeed control exception>"
+
+'CX::Succeed' => method {
+        "<exceición de control succeed>"
+},
+
+
+
+# Class: CX::Take
+# Status: COMPLETE
+# Notes:  Currently untranslated in core.  Ensure 'take' is left verbatim.
 # Original Code:
 #        "<take control exception>"
 
@@ -107,21 +157,12 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  CX::Warn
-# Status: TO DO
-# Original Code:
-#        "<succeed control exception>"
 
-'CX::Warn' => method {
-        "<succeed control exception>"
-},
-
-
-# Class:  X::AdHoc
-# Status: TO DO
-# Note:   The SlurpySentry referenced is an old internal role, nowadays unused.
+# Class: X::AdHoc
+# Status: COMPLETE
+# Notes:  The SlurpySentry referenced is an old internal role, nowadays unused.
 #         Most languages should simply use '$.payload.Str' as the entire method,
-#         which is what CORE should probably do as well.
+#         which is what core should probably do as well.
 # Original Code:
 #        # Remove spaces for die(*@msg)/fail(*@msg) forms
 #        given $.payload {
@@ -134,104 +175,174 @@ our %exceptions = Map.new:
 #        }
 
 'X::AdHoc' => method {
-        # Remove spaces for die(*@msg)/fail(*@msg) forms
-        given $.payload {
-            when SlurpySentry {
-                $_.list.join;
-            }
-            default {
-                .Str;
-            }
-        }
+        $.payload.Str
 },
 
 
-# Class:  X::Adverb
-# Status: TO DO
+
+# Class: X::Adverb
+# Status: COMPLETE
+# Notes:  Use the method access for the instance variables (@.unexpected, @.nogo, etc).
+#         You may need to substantially rewrite the logic to create a text that is
+#         grammatically correct for your language.  The $.what contains one of three
+#         string values: '{} slice', '[] slice', 'slice'.
 # Original Code:
-#        $.target.defined
-#                ?? "Cannot bind to $.target"
-#                !! 'Cannot use bind operator with this left-hand side'
+#        my $text = '';
+#        if @!unexpected.elems -> $elems {
+#            $text = $elems > 1
+#                    ?? "$elems unexpected adverbs ('@.unexpected.join("', '")')"
+#                    !! "Unexpected adverb '@!unexpected[0]'"
+#        }
+#        if @!nogo {
+#            $text ~= $text ?? " and u" !! "U";
+#            $text ~= "nsupported combination of adverbs ('@.nogo.join("', '")')";
+#        }
+#        ($text ~ " passed to $!what on '$!source'.").naive-word-wrapper
 
 'X::Adverb' => method {
-        $.target.defined
-                ?? "Cannot bind to $.target"
-                !! 'Cannot use bind operator with this left-hand side'
+        my $text = '';
+        # the participle of pasar needs to agree.
+        my $plural = @.unexpected + @.nogo > 1;
+        my $female = @.unexpected == 0 && @.nogo;
+
+        if @.unexpected.elems -> $elems {
+            $text = $elems > 1
+                    ?? "$elems alverbios inesperaos ('@.unexpected.join("', '")')"
+                    !! "Alverbiu inesperáu '@.unexpected[0]'"
+        }
+        if @.nogo {
+            $text ~= $text ?? " y c" !! "C";
+            $text ~= "ombinación inesperada d’alverbios ('@.nogo.join("', '")')";
+        }
+        my $slice = $.what ~~ /'[]'/
+                        ?? 'trozu []'
+                        !! $.what ~~ /'{}'/
+                            ?? 'trozu {}'
+                            !! 'trozu';
+        ($text ~ " pas{ $plural ?? 'aos' !! $female ?? 'ada' !! 'áu'} a $slice en '$.source'.").naive-word-wrapper
 },
 
 
-# Class:  X::Anon::Augment
-# Status: TO DO
+
+# Class: X::Anon::Augment
+# Status: COMPLETE
+# Notes:  The package-types that are possible are <package module class grammar
+#         role knowhow native slang block>.
 # Original Code:
 #        "Cannot augment anonymous $.package-kind"
 
 'X::Anon::Augment' => method {
-        "Cannot augment anonymous $.package-kind"
+        # these are feminine: clas(e), subrutina, gramática, subllingua
+        my $a = $.package-kind eq 'class' | 'sub' | 'grammar' | 'slang';
+        "Nun se pue aumentar un{'a' if $a} $.package-kind anónim{$a ?? 'a' !! 'u'}"
 },
 
 
-# Class:  X::Anon::Multi
+
+# Class: X::Anon::Multi
 # Status: TO DO
 # Original Code:
 #        "An anonymous $.routine-type may not take a $.multiness declarator"
 
 'X::Anon::Multi' => method {
-        "An anonymous $.routine-type may not take a $.multiness declarator"
+        "Un $.routine-type anónimu nun almite un declarador $.multiness"
 },
 
 
-# Class:  X::ArrayShapeMismatch
-# Status: TO DO
+
+# Class: X::ArrayShapeMismatch
+# Status: COMPLETE
 # Original Code:
 #        "Cannot assign an array of shape $.source-shape to an array of shape $.target-shape"
 
 'X::ArrayShapeMismatch' => method {
-        "Cannot assign an array of shape $.source-shape to an array of shape $.target-shape"
+     "Nun se pue asignar una matriz de forma $.source-shape a otra de forma $.target-shape"
 },
 
 
-# Class:  X::Assignment::ArrayShapeMismatch
-# Status: TO DO
+
+# Class: X::Assignment::ArrayShapeMismatch
+# Status: COMPLETE
 # Original Code:
 #        "Assignment to array with shape $.shape must provide structured data"
 
 'X::Assignment::ArrayShapeMismatch' => method {
-        "Assignment to array with shape $.shape must provide structured data"
+        "L’asignatura a una matriz de forma $.shape ha proveyer datos estruturaos"
 },
 
 
-# Class:  X::Attribute::NoPackage
-# Status: TO DO
+
+# Class: X::Assignment::RO
+# Status: COMPLETE
+# Notes:  Use $.value instead of $!value
+# Original Code:
+#        nqp::isconcrete($!value)
+#                ?? "Cannot modify an immutable {$!value.^name} ({
+#                    Rakudo::Internals.SHORT-STRING: $!value
+#                })"
+#                !! "Cannot modify an immutable '{$!value.^name}' type object"
+
+'X::Assignment::RO' => method {
+        nqp::isconcrete($.value)
+                ?? "Nun se pue modificar un {$.value.^name} inmutable ({
+                    Rakudo::Internals.SHORT-STRING: $.value
+                })"
+                !! "Nun se pue modificar un oxetu tipu inmutable '{$.value.^name}'"
+},
+
+
+
+# Class: X::Assignment::RO::Comp
+# Status: COMPLETE
+# Original Code:
+#        "Cannot assign to readonly variable {$.variable}"
+
+'X::Assignment::RO::Comp' => method {
+        "Nun se pue asignar a una variable de namái llectura {$.variable}"
+},
+
+
+
+# Class: X::Attribute::NoPackage
+# Status: COMPLETE
 # Original Code:
 #        "You cannot declare attribute '$.name' here; maybe you'd like a class or a role?"
 
 'X::Attribute::NoPackage' => method {
-        "You cannot declare attribute '$.name' here; maybe you'd like a class or a role?"
+        "Nun pues declara l’atributu '$.name' equí; quicibes pretaría una clas o rol?"
 },
 
 
-# Class:  X::Attribute::Package
-# Status: TO DO
+
+# Class: X::Attribute::Package
+# Status: COMPLETE
+# Notes:  The package-types that are possible are <package module class grammar
+#         role knowhow native slang block>.
 # Original Code:
 #        "A $.package-kind cannot have attributes, but you tried to declare '$.name'"
 
 'X::Attribute::Package' => method {
-        "A $.package-kind cannot have attributes, but you tried to declare '$.name'"
+    # these are feminine: clas(e), subrutina, gramática, subllingua
+    my $a = $.package-kind eq 'class' | 'sub' | 'grammar' | 'slang' ?? 'a' !! '';
+    "Un$a $.package-kind nun pue tener atributos, pero intentasti declarar '$.name'"
 },
 
 
-# Class:  X::Attribute::Regex
-# Status: TO DO
+
+# Class: X::Attribute::Regex
+# Status: COMPLETE
 # Original Code:
 #        "Attribute '$.symbol' not available inside of a regex, since regexes are methods on the Cursor class. Consider storing the attribute in a lexical, and using that in the regex.".naive-word-wrapper
 
 'X::Attribute::Regex' => method {
-        "Attribute '$.symbol' not available inside of a regex, since regexes are methods on the Cursor class. Consider storing the attribute in a lexical, and using that in the regex.".naive-word-wrapper
+        "L’atributu '$.symbol' nun se disponibiliza dientro un regex porque los regexes son métodos de la clas Cursor.  Piensa en atroxar l’atributu nuna léxica, ya usala nel regex.".naive-word-wrapper
 },
 
 
-# Class:  X::Attribute::Required
-# Status: TO DO
+
+# Class: X::Attribute::Required
+# Status: COMPLETE
+# Notes:  The reason is arbitrary text at the moment.  You may consider avoiding printing it.
 # Original Code:
 #        $.why && nqp::istype($.why,Str)
 #                ?? "The attribute '$.name' is required because $.why,\nbut you did not provide a value for it."
@@ -239,12 +350,13 @@ our %exceptions = Map.new:
 
 'X::Attribute::Required' => method {
         $.why && nqp::istype($.why,Str)
-                ?? "The attribute '$.name' is required because $.why,\nbut you did not provide a value for it."
-                !! "The attribute '$.name' is required, but you did not provide a value for it."
+                ?? "L’atributu '$.name' ye obligatoriu porque $.why,\npero nun-y disti dalu valor."
+                !! "L’atributu '$.name' ye obligatoriu, pero nun-y disti dalu valor."
 },
 
 
-# Class:  X::Attribute::Scope::Package
+
+# Class: X::Attribute::Scope::Package
 # Status: TO DO
 # Original Code:
 #        "Cannot use '$.scope' with $.declaration declaration"
@@ -254,30 +366,31 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Attribute::Undeclared
-# Status: TO DO
+
+# Class: X::Attribute::Undeclared
+# Status: COMPLETE
 # Original Code:
 #        "Attribute $.symbol not declared in $.package-kind $.package-name";
 
 'X::Attribute::Undeclared' => method {
-        "Attribute $.symbol not declared in $.package-kind $.package-name";
+        "L’atributu $.symbol nun ta declaráu en $.package-kind $.package-name";
 },
 
 
-# Class:  X::Augment::NoSuchType
-# Status: TO DO
+
+# Class: X::Augment::NoSuchType
+# Status: COMPLETE
 # Original Code:
 #        "You tried to augment $.package-kind $.package, but it does not exist"
 
 'X::Augment::NoSuchType' => method {
-        "You tried to augment $.package-kind $.package, but it does not exist"
+        "Intentasti aumentar $.package-kind $.package, pero nun esiste"
 },
 
 
-# Class:  X::Backslash::NonVariableDollar
+
+# Class: X::Backslash::NonVariableDollar
 # Status: TO DO
-# Note:   The private attribute $!out-of-dynamic-scope is not currently accessible.
-#         Please delay translating this until updates can be made to core.
 # Original Code:
 #        "Non-variable \$ must be backslashed"
 
@@ -286,7 +399,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Backslash::UnrecognizedSequence
+
+# Class: X::Backslash::UnrecognizedSequence
 # Status: TO DO
 # Original Code:
 #        "Unrecognized backslash sequence: '\\$.sequence'"
@@ -298,7 +412,23 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Bind::NativeType
+
+# Class: X::Bind
+# Status: TO DO
+# Original Code:
+#        $.target.defined
+#                ?? "Cannot bind to $.target"
+#                !! 'Cannot use bind operator with this left-hand side'
+
+'X::Bind' => method {
+        $.target.defined
+                ?? "Cannot bind to $.target"
+                !! 'Cannot use bind operator with this left-hand side'
+},
+
+
+
+# Class: X::Bind::NativeType
 # Status: TO DO
 # Original Code:
 #        "Cannot bind to natively typed variable '$.name'; use assignment instead"
@@ -308,7 +438,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Bind::Slice
+
+# Class: X::Bind::Slice
 # Status: TO DO
 # Original Code:
 #        "Cannot bind to {$.type.^name} slice";
@@ -318,7 +449,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Bind::ZenSlice
+
+# Class: X::Bind::ZenSlice
 # Status: TO DO
 # Original Code:
 #        "Cannot bind to {$.type.^name} zen slice";
@@ -328,7 +460,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Buf::AsStr
+
+# Class: X::Buf::AsStr
 # Status: TO DO
 # Original Code:
 #        my $message = $.method.starts-with('Str')
@@ -346,7 +479,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Buf::Pack
+
+# Class: X::Buf::Pack
 # Status: TO DO
 # Original Code:
 #        "Unrecognized directive '$.directive'";
@@ -356,7 +490,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Buf::Pack::NonASCII
+
+# Class: X::Buf::Pack::NonASCII
 # Status: TO DO
 # Original Code:
 #        "non-ASCII character '$.char' while processing an 'A' template in pack";
@@ -366,7 +501,19 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Cannot::Capture
+
+# Class: X::Caller::NotDynamic
+# Status: TO DO
+# Original Code:
+#        "Cannot access '$.symbol' through CALLER, because it is not declared as dynamic";
+
+'X::Caller::NotDynamic' => method {
+        "Cannot access '$.symbol' through CALLER, because it is not declared as dynamic";
+},
+
+
+
+# Class: X::Cannot::Capture
 # Status: TO DO
 # Original Code:
 #        "Cannot unpack or Capture `$!what.gist()`.\n"
@@ -384,7 +531,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Cannot::Empty
+
+# Class: X::Cannot::Empty
 # Status: TO DO
 # Original Code:
 #        "Cannot $.action from an empty $.what";
@@ -394,7 +542,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Cannot::Junction
+
+# Class: X::Cannot::Junction
 # Status: TO DO
 # Original Code:
 #        "Cannot use Junction '$.junction' $.for."
@@ -404,7 +553,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Cannot::Lazy
+
+# Class: X::Cannot::Lazy
 # Status: TO DO
 # Original Code:
 #        $.what
@@ -418,7 +568,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Cannot::Map
+
+# Class: X::Cannot::Map
 # Status: TO DO
 # Original Code:
 #        my $message = "Cannot map a $.what using $.using";
@@ -430,7 +581,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Cannot::New
+
+# Class: X::Cannot::New
 # Status: TO DO
 # Original Code:
 #        "Cannot make a {$.class.^name} object using .new";
@@ -440,7 +592,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Comp::BeginTime
+
+# Class: X::Comp::BeginTime
 # Status: TO DO
 # Original Code:
 #        $!exception ~~ X::MOP
@@ -454,7 +607,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Comp::FailGoal
+
+# Class: X::Comp::FailGoal
 # Status: TO DO
 # Original Code:
 #        my $msg = "{ $.feature andthen "$_ not" orelse "Not" } yet implemented. Sorry.";
@@ -470,7 +624,39 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Comp::WheneverOutOfScope
+
+# Class: X::Comp::Group
+# Status: TO DO
+# Original Code:
+#        my @m;
+#        for @.sorrows {
+#            @m.append(.message);
+#        }
+#        if $.panic {
+#            @m.append($.panic.message);
+#        }
+#        for @.worries {
+#            @m.append(.message);
+#        }
+#        @m.join("\n")
+
+'X::Comp::Group' => method {
+        my @m;
+        for @.sorrows {
+            @m.append(.message);
+        }
+        if $.panic {
+            @m.append($.panic.message);
+        }
+        for @.worries {
+            @m.append(.message);
+        }
+        @m.join("\n")
+},
+
+
+
+# Class: X::Comp::WheneverOutOfScope
 # Status: TO DO
 # Original Code:
 #        "Cannot have a 'whenever' block outside the scope of a 'supply' or 'react' block"
@@ -480,7 +666,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::CompUnit::UnsatisfiedDependency
+
+# Class: X::CompUnit::UnsatisfiedDependency
 # Status: TO DO
 # Original Code:
 #        my $name = $.specification.short-name;
@@ -508,7 +695,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Composition::NotComposable
+
+# Class: X::Composition::NotComposable
 # Status: TO DO
 # Original Code:
 #        $!composer.^name ~ " is not composable, so $!target-name cannot compose it";
@@ -518,7 +706,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Constructor::Positional
+
+# Class: X::Constructor::Positional
 # Status: TO DO
 # Original Code:
 #        "Default constructor for '" ~ $.type.^name ~ "' only takes named arguments"
@@ -528,7 +717,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::ControlFlow
+
+# Class: X::ControlFlow
 # Status: TO DO
 # Original Code:
 #        "$.illegal without $.enclosing"
@@ -538,8 +728,10 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::ControlFlow::Return
+
+# Class: X::ControlFlow::Return
 # Status: TO DO
+# Notes:  Use $.out-of-dynamic-scope instead of $!out-of-dynamic-scope in translations
 # Original Code:
 #        'Attempt to return outside of ' ~ (
 #        $!out-of-dynamic-scope
@@ -558,7 +750,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::DateTime::InvalidDeltaUnit
+
+# Class: X::DateTime::InvalidDeltaUnit
 # Status: TO DO
 # Original Code:
 #        "Cannot use unit $.unit with Date.delta";
@@ -568,7 +761,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::DateTime::TimezoneClash
+
+# Class: X::DateTime::TimezoneClash
 # Status: TO DO
 # Original Code:
 #        'DateTime.new(Str): :timezone argument not allowed with a timestamp offset';
@@ -578,7 +772,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Declaration::OurScopeInRole
+
+# Class: X::Declaration::OurScopeInRole
 # Status: TO DO
 # Original Code:
 #        "Cannot declare our-scoped $.declaration inside of a role\n" ~
@@ -592,7 +787,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Declaration::Scope::Multi
+
+# Class: X::Declaration::Scope::Multi
 # Status: TO DO
 # Original Code:
 #        "Cannot use '$.scope' with individual multi candidates. Please declare an {$.scope}-scoped proto instead";
@@ -602,7 +798,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Dynamic::NotFound
+
+# Class: X::Dynamic::NotFound
 # Status: TO DO
 # Original Code:
 #        "Dynamic variable $.name not found";
@@ -612,7 +809,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Dynamic::Package
+
+# Class: X::Dynamic::Package
 # Status: TO DO
 # Original Code:
 #        "Dynamic variables cannot have package-like names (with '::'), so '$!symbol' is not allowed.".naive-word-wrapper
@@ -622,7 +820,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Dynamic::Postdeclaration
+
+# Class: X::Dynamic::Postdeclaration
 # Status: TO DO
 # Original Code:
 #        "Illegal post-declaration of dynamic variable '$.symbol'. Earlier access must be written as 'CALLERS::<$.symbol>' if that's what you meant.".naive-word-wrapper
@@ -632,7 +831,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::EXPORTHOW::Conflict
+
+# Class: X::EXPORTHOW::Conflict
 # Status: TO DO
 # Original Code:
 #        "'EXPORTHOW::{$.directive}::{$.declarator}' conflicts with an existing meta-object imported into this lexical scope"
@@ -642,7 +842,19 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::EXPORTHOW::NothingToSupersede
+
+# Class: X::EXPORTHOW::InvalidDirective
+# Status: TO DO
+# Original Code:
+#        "Unknown EXPORTHOW directive '$.directive' encountered during import"
+
+'X::EXPORTHOW::InvalidDirective' => method {
+        "Unknown EXPORTHOW directive '$.directive' encountered during import"
+},
+
+
+
+# Class: X::EXPORTHOW::NothingToSupersede
 # Status: TO DO
 # Original Code:
 #        "There is no package declarator '$.declarator' to supersede"
@@ -652,7 +864,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Encoding::AlreadyRegistered
+
+# Class: X::Encoding::AlreadyRegistered
 # Status: TO DO
 # Original Code:
 #        "An encoding with name '$.name' has already been registered"
@@ -662,7 +875,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Encoding::Unknown
+
+# Class: X::Encoding::Unknown
 # Status: TO DO
 # Original Code:
 #        "Unknown string encoding '$.name'"
@@ -672,7 +886,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Eval::NoSuchLang
+
+# Class: X::Eval::NoSuchLang
 # Status: TO DO
 # Original Code:
 #        "No compiler available for language '$.lang'";
@@ -682,23 +897,23 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Exhausted
+
+# Class: X::Exhausted
 # Status: TO DO
 # Original Code:
-#        my $result = $.comment.defined
-#                ?? "$.what out of range. Is: $.got.gist(), should be in $.range.gist(); $.comment"
-#                !! "$.what out of range. Is: $.got.gist(), should be in $.range.gist()";
-#        $result;
+#        $.reason
+#                ?? "Could not create another $.what because of: $.reason"
+#                !! "Could not create another $.what"
 
 'X::Exhausted' => method {
-        my $result = $.comment.defined
-                ?? "$.what out of range. Is: $.got.gist(), should be in $.range.gist(); $.comment"
-                !! "$.what out of range. Is: $.got.gist(), should be in $.range.gist()";
-        $result;
+        $.reason
+                ?? "Could not create another $.what because of: $.reason"
+                !! "Could not create another $.what"
 },
 
 
-# Class:  X::Experimental
+
+# Class: X::Experimental
 # Status: TO DO
 # Original Code:
 #        "Use of $.feature is experimental; please 'use experimental :$.use'"
@@ -708,7 +923,19 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::Hash::Store::OddNumber
+
+# Class: X::Export::NameClash
+# Status: TO DO
+# Original Code:
+#        "A symbol '$.symbol' has already been exported";
+
+'X::Export::NameClash' => method {
+        "A symbol '$.symbol' has already been exported";
+},
+
+
+
+# Class: X::Hash::Store::OddNumber
 # Status: TO DO
 # Original Code:
 #        my $msg =
@@ -738,7 +965,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::HyperOp::Infinite
+
+# Class: X::HyperOp::Infinite
 # Status: TO DO
 # Original Code:
 #        $.side eq "both"
@@ -752,7 +980,8 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::HyperOp::NonDWIM
+
+# Class: X::HyperOp::NonDWIM
 # Status: TO DO
 # Original Code:
 #        "Lists on either side of non-dwimmy hyperop of &.operator.name() are not of the same length"
@@ -766,61 +995,41 @@ our %exceptions = Map.new:
 },
 
 
-# Class:  X::HyperWhatever::Multiple
+
+# Class: X::HyperWhatever::Multiple
 # Status: TO DO
 # Original Code:
 #                "Multiple HyperWhatevers and Whatevers may not be used together"
-#            }
-#        }
-#
-#my class X::EXPORTHOW::InvalidDirective does X::Comp {
-#    has $.directive;
-#    method message() {
-#        "Unknown EXPORTHOW directive '$.directive' encountered during import"
 
 'X::HyperWhatever::Multiple' => method {
                 "Multiple HyperWhatevers and Whatevers may not be used together"
-            }
-        }
-
-my class X::EXPORTHOW::InvalidDirective does X::Comp {
-    has $.directive;
-    method message() {
-        "Unknown EXPORTHOW directive '$.directive' encountered during import"
 },
 
 
-# Class:  X::IO::BinaryAndEncoding
+
+# Class: X::IO::BinaryAndEncoding
 # Status: TO DO
 # Original Code:
-#        my @m;
-#        for @.sorrows {
-#            @m.append(.message);
-#        }
-#        if $.panic {
-#            @m.append($.panic.message);
-#        }
-#        for @.worries {
-#            @m.append(.message);
-#        }
-#        @m.join("\n")
+#        "Cannot open a handle in binary mode (:bin) and also specify an encoding"
 
 'X::IO::BinaryAndEncoding' => method {
-        my @m;
-        for @.sorrows {
-            @m.append(.message);
-        }
-        if $.panic {
-            @m.append($.panic.message);
-        }
-        for @.worries {
-            @m.append(.message);
-        }
-        @m.join("\n")
+        "Cannot open a handle in binary mode (:bin) and also specify an encoding"
 },
 
 
-# Class:  X::IO::Chdir
+
+# Class: X::IO::BinaryMode
+# Status: TO DO
+# Original Code:
+#        "Cannot do '$.trying' on a handle in binary mode"
+
+'X::IO::BinaryMode' => method {
+        "Cannot do '$.trying' on a handle in binary mode"
+},
+
+
+
+# Class: X::IO::Chdir
 # Status: TO DO
 # Original Code:
 #        "Failed to change the working directory to '$.path': $.os-error"
@@ -830,7 +1039,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Chmod
+
+# Class: X::IO::Chmod
 # Status: TO DO
 # Original Code:
 #        "Failed to set the mode of '$.path' to '0o{$.mode.fmt("%03o")}': $.os-error"
@@ -840,7 +1050,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Copy
+
+# Class: X::IO::Copy
 # Status: TO DO
 # Original Code:
 #        "Failed to copy '$.from' to '$.to': $.os-error"
@@ -850,7 +1061,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Cwd
+
+# Class: X::IO::Cwd
 # Status: TO DO
 # Original Code:
 #        "Failed to get the working directory: $.os-error"
@@ -860,7 +1072,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Dir
+
+# Class: X::IO::Dir
 # Status: TO DO
 # Original Code:
 #        "Failed to get the directory contents of '$.path': $.os-error"
@@ -870,7 +1083,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Directory
+
+# Class: X::IO::Directory
 # Status: TO DO
 # Original Code:
 #        my $x = "'$.path' is a directory, cannot do '.$.trying' on a directory";
@@ -884,7 +1098,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::DoesNotExist
+
+# Class: X::IO::DoesNotExist
 # Status: TO DO
 # Original Code:
 #        "Failed to find '$.path' while trying to do '.$.trying'"
@@ -894,7 +1109,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Flush
+
+# Class: X::IO::Flush
 # Status: TO DO
 # Original Code:
 #        "Cannot flush handle: $.os-error"
@@ -904,7 +1120,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Link
+
+# Class: X::IO::Link
 # Status: TO DO
 # Original Code:
 #        "Failed to create link called '$.name' on target '$.target': $.os-error"
@@ -914,7 +1131,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Lock
+
+# Class: X::IO::Lock
 # Status: TO DO
 # Original Code:
 #        "Could not obtain $.lock-type lock: $.os-error"
@@ -924,7 +1142,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Mkdir
+
+# Class: X::IO::Mkdir
 # Status: TO DO
 # Original Code:
 #        "Failed to create directory '$.path' with mode '0o{$.mode.fmt("%03o")}': $.os-error"
@@ -934,7 +1153,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Move
+
+# Class: X::IO::Move
 # Status: TO DO
 # Original Code:
 #        "Failed to move '$.from' to '$.to': $.os-error"
@@ -944,7 +1164,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::NotAChild
+
+# Class: X::IO::NotAChild
 # Status: TO DO
 # Original Code:
 #        "Path {$.child.raku} is not a child of path {$.path.raku}"
@@ -954,7 +1175,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::NotAFile
+
+# Class: X::IO::NotAFile
 # Status: TO DO
 # Original Code:
 #        "'$.path' is not a regular file while trying to do '.$.trying'"
@@ -964,7 +1186,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Null
+
+# Class: X::IO::Null
 # Status: TO DO
 # Original Code:
 #        "Cannot use null character (U+0000) as part of the path"
@@ -974,7 +1197,19 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Resolve
+
+# Class: X::IO::Rename
+# Status: TO DO
+# Original Code:
+#        "Failed to rename '$.from' to '$.to': $.os-error"
+
+'X::IO::Rename' => method {
+        "Failed to rename '$.from' to '$.to': $.os-error"
+},
+
+
+
+# Class: X::IO::Resolve
 # Status: TO DO
 # Original Code:
 #        "Failed to completely resolve {$.path.raku}"
@@ -984,7 +1219,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Rmdir
+
+# Class: X::IO::Rmdir
 # Status: TO DO
 # Original Code:
 #        "Failed to remove the directory '$.path': $.os-error"
@@ -994,7 +1230,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Symlink
+
+# Class: X::IO::Symlink
 # Status: TO DO
 # Original Code:
 #        "Failed to create symlink called '$.name' on target '$.target': $.os-error"
@@ -1004,17 +1241,19 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IO::Unknown
+
+# Class: X::IO::Unknown
 # Status: TO DO
 # Original Code:
-#        "Failed to rename '$.from' to '$.to': $.os-error"
+#        "Unknown IO error trying '$.trying'"
 
 'X::IO::Unknown' => method {
-        "Failed to rename '$.from' to '$.to': $.os-error"
+        "Unknown IO error trying '$.trying'"
 },
 
 
-# Class:  X::IO::Unlink
+
+# Class: X::IO::Unlink
 # Status: TO DO
 # Original Code:
 #        "Failed to remove the file '$.path': $.os-error"
@@ -1024,7 +1263,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IllegalDimensionInShape
+
+# Class: X::IllegalDimensionInShape
 # Status: TO DO
 # Original Code:
 #        "Illegal dimension in shape: $.dim. All dimensions must be integers bigger than 0"
@@ -1034,7 +1274,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::IllegalOnFixedDimensionArray
+
+# Class: X::IllegalOnFixedDimensionArray
 # Status: TO DO
 # Original Code:
 #        "Cannot $.operation a fixed-dimension array"
@@ -1044,7 +1285,19 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Import::MissingSymbols
+
+# Class: X::Immutable
+# Status: TO DO
+# Original Code:
+#        "Cannot call '$.method' on an immutable '$.typename'";
+
+'X::Immutable' => method {
+        "Cannot call '$.method' on an immutable '$.typename'";
+},
+
+
+
+# Class: X::Import::MissingSymbols
 # Status: TO DO
 # Original Code:
 #        "Trying to import from '$.from', but the following symbols are missing: "
@@ -1056,7 +1309,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Import::NoSuchTag
+
+# Class: X::Import::NoSuchTag
 # Status: TO DO
 # Original Code:
 #        "Error while importing from '$.source-package': no such tag '$.tag'"
@@ -1066,7 +1320,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Import::OnlystarProto
+
+# Class: X::Import::OnlystarProto
 # Status: TO DO
 # Original Code:
 #        (@.symbols == 1
@@ -1082,7 +1337,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Import::Positional
+
+# Class: X::Import::Positional
 # Status: TO DO
 # Original Code:
 #        "Error while importing from '$.source-package':\n"
@@ -1094,7 +1350,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Import::Redeclaration
+
+# Class: X::Import::Redeclaration
 # Status: TO DO
 # Original Code:
 #        (@.symbols == 1
@@ -1110,7 +1367,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Inheritance::NotComposed
+
+# Class: X::Inheritance::NotComposed
 # Status: TO DO
 # Original Code:
 #        "'$.child-name' cannot inherit from '$.parent-name' because '$.parent-name' isn't composed yet"
@@ -1122,27 +1380,81 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Inheritance::Unsupported
+
+# Class: X::Inheritance::SelfInherit
 # Status: TO DO
 # Original Code:
-#        "A symbol '$.symbol' has already been exported";
+#        "'$.name' cannot inherit from itself."
+
+'X::Inheritance::SelfInherit' => method {
+        "'$.name' cannot inherit from itself."
+},
+
+
+
+# Class: X::Inheritance::UnknownParent
+# Status: TO DO
+# Original Code:
+#        my $message := "'" ~ $.child ~ "' cannot inherit from '" ~ $.parent ~ "' because it is unknown.";
+#        if +@.suggestions > 1 {
+#            $message := $message ~ "\nDid you mean one of these?\n    '" ~ @.suggestions.join("'\n    '") ~ "'\n";
+#        } elsif +@.suggestions == 1 {
+#            $message := $message ~ "\nDid you mean '" ~ @.suggestions[0] ~ "'?\n";
+#        }
+#        $message;
+
+'X::Inheritance::UnknownParent' => method {
+        my $message := "'" ~ $.child ~ "' cannot inherit from '" ~ $.parent ~ "' because it is unknown.";
+        if +@.suggestions > 1 {
+            $message := $message ~ "\nDid you mean one of these?\n    '" ~ @.suggestions.join("'\n    '") ~ "'\n";
+        } elsif +@.suggestions == 1 {
+            $message := $message ~ "\nDid you mean '" ~ @.suggestions[0] ~ "'?\n";
+        }
+        $message;
+},
+
+
+
+# Class: X::Inheritance::Unsupported
+# Status: TO DO
+# Original Code:
+#        $!parent.^name ~ ' does not support inheritance, so '
+#                ~ $!child-typename ~ ' cannot inherit from it';
 
 'X::Inheritance::Unsupported' => method {
-        "A symbol '$.symbol' has already been exported";
+        $!parent.^name ~ ' does not support inheritance, so '
+                ~ $!child-typename ~ ' cannot inherit from it';
 },
 
 
-# Class:  X::Invalid::Value
+
+# Class: X::Invalid::ComputedValue
 # Status: TO DO
 # Original Code:
-#        "$.what value must be known at compile time"
+#        "$.name {"on $.method " if $.method}computed to $.value,"
+#                ~ " which cannot be used"
+#                ~ (" because $.reason" if $.reason);
 
-'X::Invalid::Value' => method {
-        "$.what value must be known at compile time"
+'X::Invalid::ComputedValue' => method {
+        "$.name {"on $.method " if $.method}computed to $.value,"
+                ~ " which cannot be used"
+                ~ (" because $.reason" if $.reason);
 },
 
 
-# Class:  X::InvalidType
+
+# Class: X::Invalid::Value
+# Status: TO DO
+# Original Code:
+#        "Invalid value '$.value' for :$.name on method $.method"
+
+'X::Invalid::Value' => method {
+        "Invalid value '$.value' for :$.name on method $.method"
+},
+
+
+
+# Class: X::InvalidType
 # Status: TO DO
 # Original Code:
 #        my $msg := "Invalid typename '$.typename'";
@@ -1160,7 +1472,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::InvalidTypeSmiley
+
+# Class: X::InvalidTypeSmiley
 # Status: TO DO
 # Original Code:
 #        "Invalid type smiley ':$.name' used, only ':D', ':U' and ':_' are allowed";
@@ -1170,7 +1483,19 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Language::ModRequired
+
+# Class: X::Item
+# Status: TO DO
+# Original Code:
+#        "Cannot index {$.aggregate.^name} with $.index"
+
+'X::Item' => method {
+        "Cannot index {$.aggregate.^name} with $.index"
+},
+
+
+
+# Class: X::Language::ModRequired
 # Status: TO DO
 # Original Code:
 #        "Raku $.version requires $.modifier modifier"
@@ -1180,7 +1505,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Language::TooLate
+
+# Class: X::Language::TooLate
 # Status: TO DO
 # Original Code:
 #        "Too late to switch language version. Must be used as the very first statement."
@@ -1190,7 +1516,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Language::Unsupported
+
+# Class: X::Language::Unsupported
 # Status: TO DO
 # Original Code:
 #        "No compiler available for Raku $.version"
@@ -1200,19 +1527,30 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::LibEmpty
+
+# Class: X::LibEmpty
 # Status: TO DO
 # Original Code:
-#        "The following packages were stubbed but not defined:\n    "
-#                ~ @.packages.join("\n    ");
+#        q/Repository specification can not be an empty string.  Did you mean 'use lib "."' ?/
 
 'X::LibEmpty' => method {
-        "The following packages were stubbed but not defined:\n    "
-                ~ @.packages.join("\n    ");
+        q/Repository specification can not be an empty string.  Did you mean 'use lib "."' ?/
 },
 
 
-# Class:  X::Localizer::NoContainer
+
+# Class: X::LibNone
+# Status: TO DO
+# Original Code:
+#        q/Must specify at least one repository.  Did you mean 'use lib "lib"' ?/
+
+'X::LibNone' => method {
+        q/Must specify at least one repository.  Did you mean 'use lib "lib"' ?/
+},
+
+
+
+# Class: X::Localizer::NoContainer
 # Status: TO DO
 # Original Code:
 #        "Can only use '$.localizer' on a container";
@@ -1222,7 +1560,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Match::Bool
+
+# Class: X::Match::Bool
 # Status: TO DO
 # Original Code:
 #        "Cannot use Bool as Matcher with '" ~ $.type ~ "'.  Did you mean to use \$_ inside a block?"
@@ -1232,19 +1571,21 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Method::NotFound
+
+# Class: X::Method::InvalidQualifier
 # Status: TO DO
 # Original Code:
 #        "Cannot dispatch to method $.method on {$.qualifier-type.^name} "
 #                ~ "because it is not inherited or done by {$.invocant.^name}";
 
-'X::Method::NotFound' => method {
+'X::Method::InvalidQualifier' => method {
         "Cannot dispatch to method $.method on {$.qualifier-type.^name} "
                 ~ "because it is not inherited or done by {$.invocant.^name}";
 },
 
 
-# Class:  X::Method::Private::Permission
+
+# Class: X::Method::Private::Permission
 # Status: TO DO
 # Original Code:
 #        "Cannot call private method '$.method' on package '$.source-package' because it does not trust the '$.calling-package' package.".naive-word-wrapper
@@ -1254,7 +1595,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Method::Private::Unqualified
+
+# Class: X::Method::Private::Unqualified
 # Status: TO DO
 # Original Code:
 #        "Calling private method '$.method' must be fully qualified with the package containing that private method.".naive-word-wrapper
@@ -1264,7 +1606,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Mixin::NotComposable
+
+# Class: X::Mixin::NotComposable
 # Status: TO DO
 # Original Code:
 #        "Cannot mix in non-composable type {$.rolish.^name} into object of type {$.target.^name}";
@@ -1274,7 +1617,232 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::MultipleTypeSmiley
+
+# Class: X::Multi::Ambiguous
+# Status: TO DO
+# Original Code:
+#        my @bits;
+#        my @priors;
+#        if $.capture {
+#            for $.capture.list {
+#                try @bits.push(.WHAT.raku);
+#                @bits.push($_.^name) if $!;
+#                when Failure {
+#                    @priors.push(" " ~ .mess);
+#                }
+#            }
+#            for $.capture.hash {
+#                if .value ~~ Failure {
+#                    @priors.push(" " ~ .value.mess);
+#                }
+#                if .value ~~ Bool {
+#                    @bits.push(':' ~ ('!' x !.value) ~ .key);
+#                }
+#                else {
+#                    try @bits.push(":$(.key)\($(.value.WHAT.raku))");
+#                    @bits.push(':' ~ .value.^name) if $!;
+#                }
+#            }
+#        }
+#        else {
+#            @bits.push('...');
+#        }
+#        if @.ambiguous[0].signature.gist.contains: ': ' {
+#            my $invocant = @bits.shift;
+#            my $first = @bits ?? @bits.shift !! '';
+#            @bits.unshift($invocant ~ ': ' ~ $first);
+#        }
+#        my $cap = '(' ~ @bits.join(", ") ~ ')';
+#        @priors = flat "Earlier failures:\n", @priors, "\nFinal error:\n " if @priors;
+#        @priors.join ~ join "\n",
+#                "Ambiguous call to '$.dispatcher.name()$cap'; these signatures all match:",
+#                @.ambiguous.map: {
+#                    my $sig := .signature.raku.substr(1).subst(/ \s* "-->" <-[)]>+ /);
+#                    .?default ?? "  $sig is default" !! "  $sig"
+#                }
+
+'X::Multi::Ambiguous' => method {
+        my @bits;
+        my @priors;
+        if $.capture {
+            for $.capture.list {
+                try @bits.push(.WHAT.raku);
+                @bits.push($_.^name) if $!;
+                when Failure {
+                    @priors.push(" " ~ .mess);
+                }
+            }
+            for $.capture.hash {
+                if .value ~~ Failure {
+                    @priors.push(" " ~ .value.mess);
+                }
+                if .value ~~ Bool {
+                    @bits.push(':' ~ ('!' x !.value) ~ .key);
+                }
+                else {
+                    try @bits.push(":$(.key)\($(.value.WHAT.raku))");
+                    @bits.push(':' ~ .value.^name) if $!;
+                }
+            }
+        }
+        else {
+            @bits.push('...');
+        }
+        if @.ambiguous[0].signature.gist.contains: ': ' {
+            my $invocant = @bits.shift;
+            my $first = @bits ?? @bits.shift !! '';
+            @bits.unshift($invocant ~ ': ' ~ $first);
+        }
+        my $cap = '(' ~ @bits.join(", ") ~ ')';
+        @priors = flat "Earlier failures:\n", @priors, "\nFinal error:\n " if @priors;
+        @priors.join ~ join "\n",
+                "Ambiguous call to '$.dispatcher.name()$cap'; these signatures all match:",
+                @.ambiguous.map: {
+                    my $sig := .signature.raku.substr(1).subst(/ \s* "-->" <-[)]>+ /);
+                    .?default ?? "  $sig is default" !! "  $sig"
+                }
+},
+
+
+
+# Class: X::Multi::NoMatch
+# Status: TO DO
+# Original Code:
+#        my @cand = $.dispatcher.dispatchees.map(*.signature.gist);
+#        my @un-rw-cand;
+#        if first / 'is rw' /, @cand {
+#            my $rw-capture = Capture.new(
+#                    :list( $!capture.list.map({ my $ = $_ })                  ),
+#                    :hash( $!capture.hash.map({ .key => my $ = .value }).hash ),
+#                    );
+#            @un-rw-cand = $.dispatcher.dispatchees».signature.grep({
+#                $rw-capture ~~ $^cand
+#            })».gist;
+#        }
+#
+#        my $where = so first / where /, @cand;
+#        my @bits;
+#        my @priors;
+#        if $.capture {
+#            for $.capture.list {
+#                try @bits.push(
+#                        $where ?? Rakudo::Internals.SHORT-STRING($_) !! .WHAT.raku ~ ':' ~ (.defined ?? "D" !! "U")
+#                        );
+#                @bits.push($_.^name) if $!;
+#                if nqp::istype($_,Failure) {
+#                    @priors.push(" " ~ .mess);
+#                }
+#            }
+#            for $.capture.hash {
+#                if .value ~~ Failure {
+#                    @priors.push(" " ~ .value.mess);
+#                }
+#                if .value ~~ Bool {
+#                    @bits.push(':' ~ ('!' x !.value) ~ .key);
+#                }
+#                else {
+#                    try @bits.push(":$(.key)\($($where
+#                            ?? Rakudo::Internals.SHORT-STRING(.value)
+#                            !! .value.WHAT.raku
+#                    ))");
+#                    @bits.push(':' ~ .value.^name) if $!;
+#                }
+#            }
+#        }
+#        else {
+#            @bits.push('...');
+#        }
+#        if @cand && @cand[0] ~~ /': '/ {
+#            my $invocant = @bits.shift;
+#            my $first = @bits ?? @bits.shift !! '';
+#            @bits.unshift($invocant ~ ': ' ~ $first);
+#        }
+#        my $cap = '(' ~ @bits.join(", ") ~ ')';
+#        @priors = flat "Earlier failures:\n", @priors, "\nFinal error:\n " if @priors;
+#        @priors.join ~ "Cannot resolve caller $.dispatcher.name()$cap; " ~ (
+#        @un-rw-cand
+#                ?? "the following candidates\nmatch the type but require "
+#                        ~ 'mutable arguments:' ~  join("\n    ", '', @un-rw-cand) ~ (
+#                "\n\nThe following do not match for other reasons:"
+#                        ~  join("\n    ", '', sort keys @cand ∖ @un-rw-cand)
+#                unless @cand == @un-rw-cand
+#                )
+#                !! ( @cand
+#                ??  join "\n    ", 'none of these signatures match:', @cand
+#                !! "Routine does not have any candidates. Is only the proto defined?"
+#        )
+#        );
+
+'X::Multi::NoMatch' => method {
+        my @cand = $.dispatcher.dispatchees.map(*.signature.gist);
+        my @un-rw-cand;
+        if first / 'is rw' /, @cand {
+            my $rw-capture = Capture.new(
+                    :list( $!capture.list.map({ my $ = $_ })                  ),
+                    :hash( $!capture.hash.map({ .key => my $ = .value }).hash ),
+                    );
+            @un-rw-cand = $.dispatcher.dispatchees».signature.grep({
+                $rw-capture ~~ $^cand
+            })».gist;
+        }
+
+        my $where = so first / where /, @cand;
+        my @bits;
+        my @priors;
+        if $.capture {
+            for $.capture.list {
+                try @bits.push(
+                        $where ?? Rakudo::Internals.SHORT-STRING($_) !! .WHAT.raku ~ ':' ~ (.defined ?? "D" !! "U")
+                        );
+                @bits.push($_.^name) if $!;
+                if nqp::istype($_,Failure) {
+                    @priors.push(" " ~ .mess);
+                }
+            }
+            for $.capture.hash {
+                if .value ~~ Failure {
+                    @priors.push(" " ~ .value.mess);
+                }
+                if .value ~~ Bool {
+                    @bits.push(':' ~ ('!' x !.value) ~ .key);
+                }
+                else {
+                    try @bits.push(":$(.key)\($($where
+                            ?? Rakudo::Internals.SHORT-STRING(.value)
+                            !! .value.WHAT.raku
+                    ))");
+                    @bits.push(':' ~ .value.^name) if $!;
+                }
+            }
+        }
+        else {
+            @bits.push('...');
+        }
+        if @cand && @cand[0] ~~ /': '/ {
+            my $invocant = @bits.shift;
+            my $first = @bits ?? @bits.shift !! '';
+            @bits.unshift($invocant ~ ': ' ~ $first);
+        }
+        my $cap = '(' ~ @bits.join(", ") ~ ')';
+        @priors = flat "Earlier failures:\n", @priors, "\nFinal error:\n " if @priors;
+        @priors.join ~ "Cannot resolve caller $.dispatcher.name()$cap; " ~ (
+        @un-rw-cand
+                ?? "the following candidates\nmatch the type but require "
+                        ~ 'mutable arguments:' ~  join("\n    ", '', @un-rw-cand) ~ (
+                "\n\nThe following do not match for other reasons:"
+                        ~  join("\n    ", '', sort keys @cand ∖ @un-rw-cand)
+                unless @cand == @un-rw-cand
+                )
+                !! ( @cand
+                ??  join "\n    ", 'none of these signatures match:', @cand
+                !! "Routine does not have any candidates. Is only the proto defined?"
+        )
+        );
+},
+
+
+
+# Class: X::MultipleTypeSmiley
 # Status: TO DO
 # Original Code:
 #        "Multiple type smileys cannot be used, did you forget a ':' somewhere?";
@@ -1284,7 +1852,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::MustBeParametric
+
+# Class: X::MustBeParametric
 # Status: TO DO
 # Original Code:
 #        "$!type.^name() *must* be parameterized";
@@ -1294,7 +1863,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::NQP::NotFound
+
+# Class: X::NQP::NotFound
 # Status: TO DO
 # Original Code:
 #        "Could not find nqp::$.op, did you forget 'use nqp;' ?"
@@ -1304,7 +1874,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::NYI::Available
+
+# Class: X::NYI::Available
 # Status: TO DO
 # Original Code:
 #        "Please install { self.available-str } for $.feature support. "
@@ -1314,7 +1885,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::NYI::BigInt
+
+# Class: X::NYI::BigInt
 # Status: TO DO
 # Original Code:
 #        "Big integer $!big not yet supported on {$!side}hand side of '$!op' operator"
@@ -1324,17 +1896,41 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::NoSuchSymbol
+
+# Class: X::NoCoreRevision
 # Status: TO DO
 # Original Code:
-#        "Cannot access '$.symbol' through CALLER, because it is not declared as dynamic";
+#        "No CORE for language version 6.$!lang-rev"
 
-'X::NoSuchSymbol' => method {
-        "Cannot access '$.symbol' through CALLER, because it is not declared as dynamic";
+'X::NoCoreRevision' => method {
+        "No CORE for language version 6.$!lang-rev"
 },
 
 
-# Class:  X::NotEnoughDimensions
+
+# Class: X::NoDispatcher
+# Status: TO DO
+# Original Code:
+#        "$.redispatcher is not in the dynamic scope of a dispatcher";
+
+'X::NoDispatcher' => method {
+        "$.redispatcher is not in the dynamic scope of a dispatcher";
+},
+
+
+
+# Class: X::NoSuchSymbol
+# Status: TO DO
+# Original Code:
+#        "No such symbol '$.symbol'"
+
+'X::NoSuchSymbol' => method {
+        "No such symbol '$.symbol'"
+},
+
+
+
+# Class: X::NotEnoughDimensions
 # Status: TO DO
 # Original Code:
 #        "Cannot $.operation a $.needed-dimensions dimension array with only $.got-dimensions dimensions"
@@ -1344,7 +1940,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::NotParametric
+
+# Class: X::NotParametric
 # Status: TO DO
 # Original Code:
 #        "$!type.^name() cannot be parameterized";
@@ -1354,7 +1951,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Numeric::CannotConvert
+
+# Class: X::Numeric::CannotConvert
 # Status: TO DO
 # Original Code:
 #        "Cannot convert {$!source // $!source.raku} to {$!target // $!target.raku}: $!reason";
@@ -1364,7 +1962,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Numeric::Confused
+
+# Class: X::Numeric::Confused
 # Status: TO DO
 # Original Code:
 #        "This call only converts base-$.base strings to numbers; value "
@@ -1386,7 +1985,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Numeric::DivideByZero
+
+# Class: X::Numeric::DivideByZero
 # Status: TO DO
 # Original Code:
 #        "Attempt to divide{$.numerator ?? " $.numerator" !! ''} by zero"
@@ -1400,7 +2000,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Numeric::Overflow
+
+# Class: X::Numeric::Overflow
 # Status: TO DO
 # Original Code:
 #        "Numeric overflow"
@@ -1410,7 +2011,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Numeric::Underflow
+
+# Class: X::Numeric::Underflow
 # Status: TO DO
 # Original Code:
 #        "Numeric underflow"
@@ -1420,7 +2022,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Obsolete
+
+# Class: X::Obsolete
 # Status: TO DO
 # Original Code:
 #        "Unsupported use of $.old. $.when.tc() please use: $.replacement.".naive-word-wrapper
@@ -1430,7 +2033,49 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Pairup::OddNumber
+
+# Class: X::OutOfRange
+# Status: TO DO
+# Original Code:
+#        my $result = $.comment.defined
+#                ?? "$.what out of range. Is: $.got.gist(), should be in $.range.gist(); $.comment"
+#                !! "$.what out of range. Is: $.got.gist(), should be in $.range.gist()";
+#        $result;
+
+'X::OutOfRange' => method {
+        my $result = $.comment.defined
+                ?? "$.what out of range. Is: $.got.gist(), should be in $.range.gist(); $.comment"
+                !! "$.what out of range. Is: $.got.gist(), should be in $.range.gist()";
+        $result;
+},
+
+
+
+# Class: X::Package::Stubbed
+# Status: TO DO
+# Original Code:
+#        "The following packages were stubbed but not defined:\n    "
+#                ~ @.packages.join("\n    ");
+
+'X::Package::Stubbed' => method {
+        "The following packages were stubbed but not defined:\n    "
+                ~ @.packages.join("\n    ");
+},
+
+
+
+# Class: X::Package::UseLib
+# Status: TO DO
+# Original Code:
+#        "Cannot 'use lib' inside a $.what"
+
+'X::Package::UseLib' => method {
+        "Cannot 'use lib' inside a $.what"
+},
+
+
+
+# Class: X::Pairup::OddNumber
 # Status: TO DO
 # Original Code:
 #        "Odd number of elements found for .pairup()"
@@ -1440,7 +2085,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::AfterDefault
+
+# Class: X::Parameter::AfterDefault
 # Status: TO DO
 # Original Code:
 #        "The $.type '$.modifier' came after the default value. Did you mean: ...$.modifier $.default?".naive-word-wrapper
@@ -1450,7 +2096,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::BadType
+
+# Class: X::Parameter::BadType
 # Status: TO DO
 # Original Code:
 #        my $what = ~$!type.HOW.WHAT.^name.match(/ .* '::' <(.*)> HOW/) // 'Namespace';
@@ -1462,7 +2109,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::Default
+
+# Class: X::Parameter::Default
 # Status: TO DO
 # Original Code:
 #        $.parameter
@@ -1476,7 +2124,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::Default::TypeCheck
+
+# Class: X::Parameter::Default::TypeCheck
 # Status: TO DO
 # Original Code:
 #        "Default value '{Rakudo::Internals.MAYBE-STRING: $!got}' will never bind to a parameter of type {$!expected.^name}"
@@ -1486,7 +2135,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::InvalidConcreteness
+
+# Class: X::Parameter::InvalidConcreteness
 # Status: TO DO
 # Original Code:
 #        $!routine = '<anon>' if not $!routine.defined or $!routine eq '';
@@ -1510,7 +2160,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::InvalidType
+
+# Class: X::Parameter::InvalidType
 # Status: TO DO
 # Original Code:
 #        my $msg := "Invalid typename '$.typename' in parameter declaration.";
@@ -1528,7 +2179,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::MultipleTypeConstraints
+
+# Class: X::Parameter::MultipleTypeConstraints
 # Status: TO DO
 # Original Code:
 #        ($.parameter ?? "Parameter $.parameter" !! 'A parameter')
@@ -1540,7 +2192,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::Placeholder
+
+# Class: X::Parameter::Placeholder
 # Status: TO DO
 # Original Code:
 #        "$.type.tc() placeholder variables like '$.parameter' are not allowed in signatures.  Did you mean: '$.right' ?".naive-word-wrapper
@@ -1550,7 +2203,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::RW
+
+# Class: X::Parameter::RW
 # Status: TO DO
 # Original Code:
 #        "Parameter '$.symbol' expects a writable container (variable) as an argument, but got '{Rakudo::Internals.MAYBE-GIST: $.got}' ($.got.^name()) as a value without a container.".naive-word-wrapper
@@ -1560,7 +2214,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::Twigil
+
+# Class: X::Parameter::Twigil
 # Status: TO DO
 # Original Code:
 #        "Parameters with a '$.twigil' twigil, like '$.parameter', are not allowed in signatures.".naive-word-wrapper
@@ -1570,7 +2225,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::TypedSlurpy
+
+# Class: X::Parameter::TypedSlurpy
 # Status: TO DO
 # Original Code:
 #        "Slurpy $.kind parameters with type constraints are not supported"
@@ -1580,7 +2236,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Parameter::WrongOrder
+
+# Class: X::Parameter::WrongOrder
 # Status: TO DO
 # Original Code:
 #        "Cannot put $.misplaced parameter $.parameter after $.after parameters";
@@ -1590,19 +2247,19 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::ParametricConstant
+
+# Class: X::ParametricConstant
 # Status: TO DO
 # Original Code:
-#        self.priors() ~
-#                "Type check failed in $.operation; expected $.expectedn but got $.gotn";
+#        'Parameterization of constants is forbidden'
 
 'X::ParametricConstant' => method {
-        self.priors() ~
-                "Type check failed in $.operation; expected $.expectedn but got $.gotn";
+        'Parameterization of constants is forbidden'
 },
 
 
-# Class:  X::Phaser::Multiple
+
+# Class: X::Phaser::Multiple
 # Status: TO DO
 # Original Code:
 #        "Only one $.block block is allowed"
@@ -1612,19 +2269,25 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Phaser::PrePost
+
+# Class: X::Phaser::PrePost
 # Status: TO DO
 # Original Code:
-#        $!name.chars ?? "Unrecognized character name [{$!name}]"
-#        !! "Cannot use empty name as character name"
+#        my $what = $.phaser eq 'PRE' ?? 'Precondition' !! 'Postcondition';
+#        $.condition.defined
+#                ?? "$what '$.condition.trim()' failed"
+#                !! "$what failed";
 
 'X::Phaser::PrePost' => method {
-        $!name.chars ?? "Unrecognized character name [{$!name}]"
-        !! "Cannot use empty name as character name"
+        my $what = $.phaser eq 'PRE' ?? 'Precondition' !! 'Postcondition';
+        $.condition.defined
+                ?? "$what '$.condition.trim()' failed"
+                !! "$what failed";
 },
 
 
-# Class:  X::PhaserExceptions
+
+# Class: X::PhaserExceptions
 # Status: TO DO
 # Original Code:
 #        "Multiple exceptions were thrown by LEAVE/POST phasers"
@@ -1634,7 +2297,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Placeholder::Attribute
+
+# Class: X::Placeholder::Attribute
 # Status: TO DO
 # Original Code:
 #        "Cannot use placeholder parameter $.placeholder in an attribute initializer"
@@ -1644,7 +2308,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Placeholder::Block
+
+# Class: X::Placeholder::Block
 # Status: TO DO
 # Original Code:
 #        "Placeholder variable '$.placeholder' may not be used here because the surrounding block does not take a signature.".naive-word-wrapper;
@@ -1654,7 +2319,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Placeholder::Mainline
+
+# Class: X::Placeholder::Mainline
 # Status: TO DO
 # Original Code:
 #        "Cannot use placeholder parameter $.placeholder outside of a sub or block"
@@ -1664,7 +2330,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Placeholder::NonPlaceholder
+
+# Class: X::Placeholder::NonPlaceholder
 # Status: TO DO
 # Original Code:
 #        my $decl = $!decl ?? $!decl !! 'block';
@@ -1676,7 +2343,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::PoisonedAlias
+
+# Class: X::PoisonedAlias
 # Status: TO DO
 # Original Code:
 #        ("Cannot directly use poisoned alias '$.alias' because it was declared by several {$.package-type}s." ~
@@ -1694,7 +2362,74 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Proc::Unsuccessful
+
+# Class: X::Pragma::CannotPrecomp
+# Status: TO DO
+# Original Code:
+#        "$.what may not be pre-compiled"
+
+'X::Pragma::CannotPrecomp' => method {
+        "$.what may not be pre-compiled"
+},
+
+
+
+# Class: X::Pragma::CannotWhat
+# Status: TO DO
+# Original Code:
+#        "'$.what $.name' is not an option."
+
+'X::Pragma::CannotWhat' => method {
+        "'$.what $.name' is not an option."
+},
+
+
+
+# Class: X::Pragma::MustOneOf
+# Status: TO DO
+# Original Code:
+#        "'$.name' pragma expects one parameter out of $.alternatives."
+
+'X::Pragma::MustOneOf' => method {
+        "'$.name' pragma expects one parameter out of $.alternatives."
+},
+
+
+
+# Class: X::Pragma::NoArgs
+# Status: TO DO
+# Original Code:
+#        "The '$.name' pragma does not take any arguments."
+
+'X::Pragma::NoArgs' => method {
+        "The '$.name' pragma does not take any arguments."
+},
+
+
+
+# Class: X::Pragma::OnlyOne
+# Status: TO DO
+# Original Code:
+#        "The '$.name' pragma only takes one argument."
+
+'X::Pragma::OnlyOne' => method {
+        "The '$.name' pragma only takes one argument."
+},
+
+
+
+# Class: X::Pragma::UnknownArg
+# Status: TO DO
+# Original Code:
+#        "Unknown argument '{$.arg.raku}' specified with the '$.name' pragma."
+
+'X::Pragma::UnknownArg' => method {
+        "Unknown argument '{$.arg.raku}' specified with the '$.name' pragma."
+},
+
+
+
+# Class: X::Proc::Unsuccessful
 # Status: TO DO
 # Original Code:
 #        "The spawned command '{$.proc.command[0]}' exited unsuccessfully (exit code: $.proc.exitcode(), signal: $.proc.signal())"
@@ -1704,7 +2439,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::PseudoPackage::InDeclaration
+
+# Class: X::PseudoPackage::InDeclaration
 # Status: TO DO
 # Original Code:
 #        "Cannot use pseudo package $.pseudo-package in $.action";
@@ -1714,7 +2450,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Range::InvalidArg
+
+# Class: X::Range::InvalidArg
 # Status: TO DO
 # Original Code:
 #        "{$.got.^name} objects are not valid endpoints for Ranges";
@@ -1724,7 +2461,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Redeclaration::Outer
+
+# Class: X::Redeclaration::Outer
 # Status: TO DO
 # Original Code:
 #        "Lexical symbol '$.symbol' is already bound to an outer symbol.  The implicit outer binding must be rewritten as 'OUTER::<$.symbol>' before you can unambiguously declare a new '$.symbol' in this scope.".naive-word-wrapper
@@ -1734,17 +2472,23 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Role::Parametric::NoSuchCandidate
+
+# Class: X::Role::Parametric::NoSuchCandidate
 # Status: TO DO
 # Original Code:
-#        "<next control exception>"
+#        "No appropriate parametric role variant available for '"
+#                ~ $.role.^name
+#                ~ "'";
 
 'X::Role::Parametric::NoSuchCandidate' => method {
-        "<next control exception>"
+        "No appropriate parametric role variant available for '"
+                ~ $.role.^name
+                ~ "'";
 },
 
 
-# Class:  X::Routine::Unwrap
+
+# Class: X::Routine::Unwrap
 # Status: TO DO
 # Original Code:
 #        "Cannot unwrap routine: invalid wrap handle"
@@ -1754,10 +2498,11 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::SecurityPolicy::Eval
+
+# Class: X::SecurityPolicy::Eval
 # Status: TO DO
-# Note:   The SlurpySentry referenced is an internal role, however it is unused.
-#         Simply use $.payload.Str instead, which is what CORE should have.
+# Notes:  The SlurpySentry referenced is an internal role, however it is unused.
+#         Simply use $.payload.Str instead, which is what core should have.
 # Original Code:
 #        (($.payload ~~ SlurpySentry
 #                ?? $.payload.list.join # Remove spaces die(*@msg)/fail(*@msg) forms
@@ -1774,7 +2519,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Seq::Consumed
+
+# Class: X::Seq::Consumed
 # Status: TO DO
 # Original Code:
 #        "The iterator of this Seq is already in use/consumed by another Seq\n" ~
@@ -1788,7 +2534,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Seq::NotIndexable
+
+# Class: X::Seq::NotIndexable
 # Status: TO DO
 # Original Code:
 #        "Cannot index a Seq; coerce it to a list or assign it to an array first"
@@ -1798,7 +2545,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Sequence::Deduction
+
+# Class: X::Sequence::Deduction
 # Status: TO DO
 # Original Code:
 #        $!from ?? "Unable to deduce arithmetic or geometric sequence from: $!from\nDid you really mean '..'?"
@@ -1810,7 +2558,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Sequence::Endpoint
+
+# Class: X::Sequence::Endpoint
 # Status: TO DO
 # Original Code:
 #        "Incompatible endpoint for sequence: "
@@ -1826,17 +2575,19 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Set::Coerce
+
+# Class: X::Set::Coerce
 # Status: TO DO
 # Original Code:
-#        "Invalid $.target string '$.invalid-str'; use $.format instead";
+#        "Cannot coerce object of type {$.thing.^name} to Set. To create a one-element set, pass it to the 'set' function";
 
 'X::Set::Coerce' => method {
-        "Invalid $.target string '$.invalid-str'; use $.format instead";
+        "Cannot coerce object of type {$.thing.^name} to Set. To create a one-element set, pass it to the 'set' function";
 },
 
 
-# Class:  X::Signature::NameClash
+
+# Class: X::Signature::NameClash
 # Status: TO DO
 # Original Code:
 #        "Name $.name used for more than one named parameter";
@@ -1846,7 +2597,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Signature::Placeholder
+
+# Class: X::Signature::Placeholder
 # Status: TO DO
 # Original Code:
 #        "Placeholder variable '$.placeholder' cannot override existing signature";
@@ -1856,7 +2608,21 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Str::Match::x
+
+# Class: X::Str::InvalidCharName
+# Status: TO DO
+# Original Code:
+#        $!name.chars ?? "Unrecognized character name [{$!name}]"
+#        !! "Cannot use empty name as character name"
+
+'X::Str::InvalidCharName' => method {
+        $!name.chars ?? "Unrecognized character name [{$!name}]"
+        !! "Cannot use empty name as character name"
+},
+
+
+
+# Class: X::Str::Match::x
 # Status: TO DO
 # Original Code:
 #        "in Str.match, got invalid value of type {$.got.^name} for :x, must be Int or Range"
@@ -1866,7 +2632,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Str::Numeric
+
+# Class: X::Str::Numeric
 # Status: TO DO
 # Original Code:
 #        "Cannot convert string to number: $.reason $.source-indicator";
@@ -1876,7 +2643,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Str::Sprintf::Directives::BadType
+
+# Class: X::Str::Sprintf::Directives::BadType
 # Status: TO DO
 # Original Code:
 #        $.expected
@@ -1890,7 +2658,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Str::Sprintf::Directives::Count
+
+# Class: X::Str::Sprintf::Directives::Count
 # Status: TO DO
 # Original Code:
 #        my $msg = "Your printf-style directives specify ";
@@ -1954,7 +2723,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Str::Sprintf::Directives::Unsupported
+
+# Class: X::Str::Sprintf::Directives::Unsupported
 # Status: TO DO
 # Original Code:
 #        "Directive $.directive is not valid in sprintf format sequence $.sequence"
@@ -1964,7 +2734,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Str::Subst::Adverb
+
+# Class: X::Str::Subst::Adverb
 # Status: TO DO
 # Original Code:
 #        "Cannot use :$.name adverb in Str.subst, got $.got"
@@ -1974,27 +2745,30 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Str::Trans::IllegalKey
+
+# Class: X::Str::Trans::IllegalKey
+# Status: TO DO
+# Original Code:
+#        "in Str.trans, got illegal substitution key of type {$.key.^name} (should be a Regex or Str)"
+
+'X::Str::Trans::IllegalKey' => method {
+        "in Str.trans, got illegal substitution key of type {$.key.^name} (should be a Regex or Str)"
+},
+
+
+
+# Class: X::Str::Trans::InvalidArg
 # Status: TO DO
 # Original Code:
 #        "Only Pair objects are allowed as arguments to Str.trans, got {$.got.^name}";
 
-'X::Str::Trans::IllegalKey' => method {
+'X::Str::Trans::InvalidArg' => method {
         "Only Pair objects are allowed as arguments to Str.trans, got {$.got.^name}";
 },
 
 
-# Class:  X::StubCode
-# Status: TO DO
-# Original Code:
-#        "Cannot change REPR of $!type.^name() now (must be set at initial declaration)";
 
-'X::StubCode' => method {
-        "Cannot change REPR of $!type.^name() now (must be set at initial declaration)";
-},
-
-
-# Class:  X::Subscript::Negative
+# Class: X::Subscript::Negative
 # Status: TO DO
 # Original Code:
 #        "Calculated index ({$.index}) is negative, but {$.type.^name} allows only 0-based indexing";
@@ -2004,7 +2778,19 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::AddCategorical::TooManyParts
+
+# Class: X::Syntax::AddCategorical::TooFewParts
+# Status: TO DO
+# Original Code:
+#        "Not enough symbols provided for categorical of type $.category; needs $.needs"
+
+'X::Syntax::AddCategorical::TooFewParts' => method {
+        "Not enough symbols provided for categorical of type $.category; needs $.needs"
+},
+
+
+
+# Class: X::Syntax::AddCategorical::TooManyParts
 # Status: TO DO
 # Original Code:
 #        "Too many symbols provided for categorical of type $.category; needs only $.needs"
@@ -2014,7 +2800,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Adverb
+
+# Class: X::Syntax::Adverb
 # Status: TO DO
 # Original Code:
 #        "You can't adverb " ~ $.what
@@ -2024,7 +2811,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Argument::MOPMacro
+
+# Class: X::Syntax::Argument::MOPMacro
 # Status: TO DO
 # Original Code:
 #        "Can only supply an initialization value for a role if it has a single public attribute, but this is not the case for '{$.role.^name}'"
@@ -2034,7 +2822,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Augment::WithoutMonkeyTyping
+
+# Class: X::Syntax::Augment::WithoutMonkeyTyping
 # Status: TO DO
 # Original Code:
 #        "Cannot put adverbs on a typename when augmenting"
@@ -2044,7 +2833,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::BlockGobbled
+
+# Class: X::Syntax::BlockGobbled
 # Status: TO DO
 # Original Code:
 #        my $looks_like_type = $.what ~~ /'::' | <[A..Z]><[a..z]>+/;
@@ -2062,7 +2852,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::CannotMeta
+
+# Class: X::Syntax::CannotMeta
 # Status: TO DO
 # Original Code:
 #        "Cannot $.meta $.operator because $.dba operators are $.reason";
@@ -2072,7 +2863,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Coercer::TooComplex
+
+# Class: X::Syntax::Coercer::TooComplex
 # Status: TO DO
 # Original Code:
 #        'Coercer is too complex. Only type objects, with optional type'
@@ -2084,7 +2876,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Comment::Embedded
+
+# Class: X::Syntax::Comment::Embedded
 # Status: TO DO
 # Original Code:
 #        "Opening bracket required for #` comment"
@@ -2094,7 +2887,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::ConditionalOperator::PrecedenceTooLoose
+
+# Class: X::Syntax::ConditionalOperator::PrecedenceTooLoose
 # Status: TO DO
 # Original Code:
 #        "Precedence of $.operator is too loose to use inside ?? !!; please parenthesize"
@@ -2104,7 +2898,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::ConditionalOperator::SecondPartGobbled
+
+# Class: X::Syntax::ConditionalOperator::SecondPartGobbled
 # Status: TO DO
 # Original Code:
 #        "Your !! was gobbled by the expression in the middle; please parenthesize"
@@ -2114,7 +2909,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::ConditionalOperator::SecondPartInvalid
+
+# Class: X::Syntax::ConditionalOperator::SecondPartInvalid
 # Status: TO DO
 # Original Code:
 #        "Please use !! rather than $.second-part"
@@ -2124,7 +2920,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Confused
+
+# Class: X::Syntax::Confused
 # Status: TO DO
 # Original Code:
 #        $.reason eq 'unknown' ?? 'Confused' !! $.reason
@@ -2134,7 +2931,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::DuplicatedPrefix
+
+# Class: X::Syntax::DuplicatedPrefix
 # Status: TO DO
 # Original Code:
 #        my $prefix = substr($.prefixes,0,1);
@@ -2148,7 +2946,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Extension::Category
+
+# Class: X::Syntax::Extension::Category
 # Status: TO DO
 # Original Code:
 #        "Cannot add tokens of category '$.category'";
@@ -2158,7 +2957,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Extension::Null
+
+# Class: X::Syntax::Extension::Null
 # Status: TO DO
 # Original Code:
 #        "Null operator is not allowed";
@@ -2168,7 +2968,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Extension::SpecialForm
+
+# Class: X::Syntax::Extension::SpecialForm
 # Status: TO DO
 # Original Code:
 #        "Cannot override $.category operator '$.opname', as it is a special form " ~
@@ -2180,7 +2981,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Extension::TooComplex
+
+# Class: X::Syntax::Extension::TooComplex
 # Status: TO DO
 # Original Code:
 #        "Colon pair value '$.name' too complex to use in name";
@@ -2190,7 +2992,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::InfixInTermPosition
+
+# Class: X::Syntax::InfixInTermPosition
 # Status: TO DO
 # Original Code:
 #        my $infix := $!infix.trim;
@@ -2214,17 +3017,25 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::KeywordAsFunction
+
+# Class: X::Syntax::KeywordAsFunction
 # Status: TO DO
 # Original Code:
-#        "Parent class specification is probably missing some whitespace. Found '$.type is $.parent\{ ...', which tries to specify a parent with a '$.what'.  You probably meant '$.type is $.parent \{ ...'.".naive-word-wrapper
+#        ("The word '$.word' is interpreted as a '{$.word}()' function call.  Please use whitespace "
+#                ~ ($.needparens ?? 'around the' !! 'instead of')
+#                ~ " parentheses."
+#        ).naive-word-wrapper
 
 'X::Syntax::KeywordAsFunction' => method {
-        "Parent class specification is probably missing some whitespace. Found '$.type is $.parent\{ ...', which tries to specify a parent with a '$.what'.  You probably meant '$.type is $.parent \{ ...'.".naive-word-wrapper
+        ("The word '$.word' is interpreted as a '{$.word}()' function call.  Please use whitespace "
+                ~ ($.needparens ?? 'around the' !! 'instead of')
+                ~ " parentheses."
+        ).naive-word-wrapper
 },
 
 
-# Class:  X::Syntax::Malformed
+
+# Class: X::Syntax::Malformed
 # Status: TO DO
 # Original Code:
 #        "Malformed $.what"
@@ -2234,7 +3045,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Malformed::Elsif
+
+# Class: X::Syntax::Malformed::Elsif
 # Status: TO DO
 # Original Code:
 #        qq{In Raku, please use "elsif' instead of "$.what"}
@@ -2244,7 +3056,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Missing
+
+# Class: X::Syntax::Missing
 # Status: TO DO
 # Original Code:
 #        "Missing $.what"
@@ -2254,7 +3067,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Name::Null
+
+# Class: X::Syntax::Name::Null
 # Status: TO DO
 # Original Code:
 #        'Name component may not be null';
@@ -2264,7 +3078,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::NegatedPair
+
+# Class: X::Syntax::NegatedPair
 # Status: TO DO
 # Original Code:
 #        "Argument not allowed on negated pair with key '$.key'"
@@ -2274,7 +3089,19 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::NonAssociative
+
+# Class: X::Syntax::NoSelf
+# Status: TO DO
+# Original Code:
+#        "Variable $.variable used where no 'self' is available"
+
+'X::Syntax::NoSelf' => method {
+        "Variable $.variable used where no 'self' is available"
+},
+
+
+
+# Class: X::Syntax::NonAssociative
 # Status: TO DO
 # Original Code:
 #        "Operators '$.left' and '$.right' are non-associative and require parentheses";
@@ -2284,7 +3111,8 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::NonListAssociative
+
+# Class: X::Syntax::NonListAssociative
 # Status: TO DO
 # Original Code:
 #        "Only identical operators may be list associative; since '$.left' and '$.right' differ, they are non-associative and you need to clarify with parentheses";
@@ -2294,7 +3122,59 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::P5
+
+# Class: X::Syntax::Number::IllegalDecimal
+# Status: TO DO
+# Original Code:
+#        "Decimal point must be followed by digit"
+
+'X::Syntax::Number::IllegalDecimal' => method {
+        "Decimal point must be followed by digit"
+},
+
+
+
+# Class: X::Syntax::Number::LiteralType
+# Status: TO DO
+# Original Code:
+#        my $vartype := $!vartype.WHAT.^name;
+#        my $conversionmethod := $vartype;
+#        $vartype := $vartype.lc if $.native;
+#        my $vt := $!value.^name;
+#        my $value := $vt eq "IntStr" || $vt eq "NumStr" || $vt eq "RatStr" || $vt eq "ComplexStr"
+#                ?? $!value.Str
+#                !! $!value.raku;
+#        my $val = "Cannot assign a literal of type {$.valuetype} ($value) to { $.native ?? "a native" !! "a" } variable of type $vartype. You can declare the variable to be of type $.suggestiontype, or try to coerce the value with { $value ~ '.' ~ $conversionmethod } or $conversionmethod\($value\)";
+#        try $val ~= ", or just write the value as " ~ $!value."$vartype"().raku;
+#        $val;
+
+'X::Syntax::Number::LiteralType' => method {
+        my $vartype := $!vartype.WHAT.^name;
+        my $conversionmethod := $vartype;
+        $vartype := $vartype.lc if $.native;
+        my $vt := $!value.^name;
+        my $value := $vt eq "IntStr" || $vt eq "NumStr" || $vt eq "RatStr" || $vt eq "ComplexStr"
+                ?? $!value.Str
+                !! $!value.raku;
+        my $val = "Cannot assign a literal of type {$.valuetype} ($value) to { $.native ?? "a native" !! "a" } variable of type $vartype. You can declare the variable to be of type $.suggestiontype, or try to coerce the value with { $value ~ '.' ~ $conversionmethod } or $conversionmethod\($value\)";
+        try $val ~= ", or just write the value as " ~ $!value."$vartype"().raku;
+        $val;
+},
+
+
+
+# Class: X::Syntax::Number::RadixOutOfRange
+# Status: TO DO
+# Original Code:
+#        "Radix $.radix out of range (allowed: 2..36)"
+
+'X::Syntax::Number::RadixOutOfRange' => method {
+        "Radix $.radix out of range (allowed: 2..36)"
+},
+
+
+
+# Class: X::Syntax::P5
 # Status: TO DO
 # Original Code:
 #        'This appears to be Perl code'
@@ -2304,7 +3184,19 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 },
 
 
-# Class:  X::Syntax::Perl5Var
+
+# Class: X::Syntax::ParentAsHash
+# Status: TO DO
+# Original Code:
+#        "Parent class specification is probably missing some whitespace. Found '$.type is $.parent\{ ...', which tries to specify a parent with a '$.what'.  You probably meant '$.type is $.parent \{ ...'.".naive-word-wrapper
+
+'X::Syntax::ParentAsHash' => method {
+        "Parent class specification is probably missing some whitespace. Found '$.type is $.parent\{ ...', which tries to specify a parent with a '$.what'.  You probably meant '$.type is $.parent \{ ...'.".naive-word-wrapper
+},
+
+
+
+# Class: X::Syntax::Perl5Var
 # Status: TO DO
 # Original Code:
 #                my $name = $!name;
@@ -2321,49 +3213,6 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
 #                                ?? "Unsupported use of $name variable; in Raku please use $sugg"
 #                                !! "Unsupported use of $name variable"
 #                        !! 'Weird unrecognized variable name: ' ~ $name;
-#            }
-#}
-#
-#my class X::Syntax::Self::WithoutObject does X::Syntax {
-#    method message() { "'self' used where no object is available" }
-#}
-#my class X::Syntax::VirtualCall does X::Syntax {
-#    has $.call;
-#    method message() { "Virtual method call $.call may not be used on partially constructed object (maybe you mean {$.call.subst('.','!')} for direct attribute access here?)" }
-#}
-#my class X::Syntax::NoSelf does X::Syntax {
-#    has $.variable;
-#    method message() { "Variable $.variable used where no 'self' is available" }
-#}
-#
-#my class X::Syntax::Number::RadixOutOfRange does X::Syntax {
-#    has $.radix;
-#    method message() { "Radix $.radix out of range (allowed: 2..36)" }
-#}
-#
-#my class X::Syntax::Number::IllegalDecimal does X::Syntax {
-#    method message() { "Decimal point must be followed by digit" }
-#}
-#
-#my class X::Syntax::Number::LiteralType does X::Syntax {
-#    has $.varname;
-#    has $.vartype;
-#    has $.value;
-#    has $.valuetype;
-#    has $.suggestiontype;
-#    has $.native;
-#
-#    method message() {
-#        my $vartype := $!vartype.WHAT.^name;
-#        my $conversionmethod := $vartype;
-#        $vartype := $vartype.lc if $.native;
-#        my $vt := $!value.^name;
-#        my $value := $vt eq "IntStr" || $vt eq "NumStr" || $vt eq "RatStr" || $vt eq "ComplexStr"
-#                ?? $!value.Str
-#                !! $!value.raku;
-#        my $val = "Cannot assign a literal of type {$.valuetype} ($value) to { $.native ?? "a native" !! "a" } variable of type $vartype. You can declare the variable to be of type $.suggestiontype, or try to coerce the value with { $value ~ '.' ~ $conversionmethod } or $conversionmethod\($value\)";
-#        try $val ~= ", or just write the value as " ~ $!value."$vartype"().raku;
-#        $val;
 
 'X::Syntax::Perl5Var' => method {
                 my $name = $!name;
@@ -2380,53 +3229,11 @@ my class X::EXPORTHOW::InvalidDirective does X::Comp {
                                 ?? "Unsupported use of $name variable; in Raku please use $sugg"
                                 !! "Unsupported use of $name variable"
                         !! 'Weird unrecognized variable name: ' ~ $name;
-            }
-}
-
-my class X::Syntax::Self::WithoutObject does X::Syntax {
-    method message() { "'self' used where no object is available" }
-}
-my class X::Syntax::VirtualCall does X::Syntax {
-    has $.call;
-    method message() { "Virtual method call $.call may not be used on partially constructed object (maybe you mean {$.call.subst('.','!')} for direct attribute access here?)" }
-}
-my class X::Syntax::NoSelf does X::Syntax {
-    has $.variable;
-    method message() { "Variable $.variable used where no 'self' is available" }
-}
-
-my class X::Syntax::Number::RadixOutOfRange does X::Syntax {
-    has $.radix;
-    method message() { "Radix $.radix out of range (allowed: 2..36)" }
-}
-
-my class X::Syntax::Number::IllegalDecimal does X::Syntax {
-    method message() { "Decimal point must be followed by digit" }
-}
-
-my class X::Syntax::Number::LiteralType does X::Syntax {
-    has $.varname;
-    has $.vartype;
-    has $.value;
-    has $.valuetype;
-    has $.suggestiontype;
-    has $.native;
-
-    method message() {
-        my $vartype := $!vartype.WHAT.^name;
-        my $conversionmethod := $vartype;
-        $vartype := $vartype.lc if $.native;
-        my $vt := $!value.^name;
-        my $value := $vt eq "IntStr" || $vt eq "NumStr" || $vt eq "RatStr" || $vt eq "ComplexStr"
-                ?? $!value.Str
-                !! $!value.raku;
-        my $val = "Cannot assign a literal of type {$.valuetype} ($value) to { $.native ?? "a native" !! "a" } variable of type $vartype. You can declare the variable to be of type $.suggestiontype, or try to coerce the value with { $value ~ '.' ~ $conversionmethod } or $conversionmethod\($value\)";
-        try $val ~= ", or just write the value as " ~ $!value."$vartype"().raku;
-        $val;
 },
 
 
-# Class:  X::Syntax::Pod::DeclaratorLeading
+
+# Class: X::Syntax::Pod::DeclaratorLeading
 # Status: TO DO
 # Original Code:
 #        "Opening bracket required for #| declarator block"
@@ -2436,7 +3243,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Pod::DeclaratorTrailing
+
+# Class: X::Syntax::Pod::DeclaratorTrailing
 # Status: TO DO
 # Original Code:
 #        "Opening bracket required for #= declarator block"
@@ -2446,7 +3254,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Regex::Adverb
+
+# Class: X::Syntax::Regex::Adverb
 # Status: TO DO
 # Original Code:
 #        "Adverb $.adverb not allowed on $.construct"
@@ -2456,7 +3265,19 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Regex::MalformedRange
+
+# Class: X::Syntax::Regex::Alias::LongName
+# Status: TO DO
+# Original Code:
+#        "Can only alias to a short name (without '::')";
+
+'X::Syntax::Regex::Alias::LongName' => method {
+        "Can only alias to a short name (without '::')";
+},
+
+
+
+# Class: X::Syntax::Regex::MalformedRange
 # Status: TO DO
 # Original Code:
 #        'Malformed Range. If attempting to use variables for end points, '
@@ -2468,7 +3289,19 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Regex::NullRegex
+
+# Class: X::Syntax::Regex::NonQuantifiable
+# Status: TO DO
+# Original Code:
+#        'Can only quantify a construct that produces a match'
+
+'X::Syntax::Regex::NonQuantifiable' => method {
+        'Can only quantify a construct that produces a match'
+},
+
+
+
+# Class: X::Syntax::Regex::NullRegex
 # Status: TO DO
 # Original Code:
 #        'Null regex not allowed'
@@ -2478,7 +3311,70 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Regex::UnrecognizedMetachar
+
+# Class: X::Syntax::Regex::QuantifierValue
+# Status: TO DO
+# Original Code:
+#        $!inf
+#                && 'Minimum quantity to match for quantifier cannot be Inf.'
+#        ~ ' Did you mean to use + or * quantifiers instead of **?'
+#                || $!non-numeric-range
+#        && 'Cannot use Range with non-Numeric or NaN end points as quantifier'
+#                || $!non-numeric
+#        && 'Cannot use non-Numeric or NaN value as quantifier'
+#                || $!empty-range
+#        && 'Cannot use empty Range as quantifier'
+#                || 'Invalid quantifier value'
+
+'X::Syntax::Regex::QuantifierValue' => method {
+        $!inf
+                && 'Minimum quantity to match for quantifier cannot be Inf.'
+        ~ ' Did you mean to use + or * quantifiers instead of **?'
+                || $!non-numeric-range
+        && 'Cannot use Range with non-Numeric or NaN end points as quantifier'
+                || $!non-numeric
+        && 'Cannot use non-Numeric or NaN value as quantifier'
+                || $!empty-range
+        && 'Cannot use empty Range as quantifier'
+                || 'Invalid quantifier value'
+},
+
+
+
+# Class: X::Syntax::Regex::SolitaryBacktrackControl
+# Status: TO DO
+# Original Code:
+#        "Backtrack control ':' does not seem to have a preceding atom to control"
+
+'X::Syntax::Regex::SolitaryBacktrackControl' => method {
+        "Backtrack control ':' does not seem to have a preceding atom to control"
+},
+
+
+
+# Class: X::Syntax::Regex::SolitaryQuantifier
+# Status: TO DO
+# Original Code:
+#        'Quantifier quantifies nothing'
+
+'X::Syntax::Regex::SolitaryQuantifier' => method {
+        'Quantifier quantifies nothing'
+},
+
+
+
+# Class: X::Syntax::Regex::SpacesInBareRange
+# Status: TO DO
+# Original Code:
+#        'Spaces not allowed in bare range.'
+
+'X::Syntax::Regex::SpacesInBareRange' => method {
+        'Spaces not allowed in bare range.'
+},
+
+
+
+# Class: X::Syntax::Regex::UnrecognizedMetachar
 # Status: TO DO
 # Original Code:
 #        "Unrecognized regex metacharacter $.metachar (must be quoted to match literally)"
@@ -2488,7 +3384,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Regex::UnrecognizedModifier
+
+# Class: X::Syntax::Regex::UnrecognizedModifier
 # Status: TO DO
 # Original Code:
 #        "Unrecognized regex modifier :$.modifier"
@@ -2498,17 +3395,19 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Regex::Unspace
+
+# Class: X::Syntax::Regex::Unspace
 # Status: TO DO
 # Original Code:
-#        "Can only alias to a short name (without '::')";
+#        'Regex not terminated.'
 
 'X::Syntax::Regex::Unspace' => method {
-        "Can only alias to a short name (without '::')";
+        'Regex not terminated.'
 },
 
 
-# Class:  X::Syntax::Reserved
+
+# Class: X::Syntax::Reserved
 # Status: TO DO
 # Original Code:
 #        "The $.reserved is reserved$.instead"
@@ -2518,7 +3417,19 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Signature::InvocantMarker
+
+# Class: X::Syntax::Self::WithoutObject
+# Status: TO DO
+# Original Code:
+#        "'self' used where no object is available"
+
+'X::Syntax::Self::WithoutObject' => method {
+        "'self' used where no object is available"
+},
+
+
+
+# Class: X::Syntax::Signature::InvocantMarker
 # Status: TO DO
 # Original Code:
 #        "Can only use : as invocant marker in a signature after the first parameter"
@@ -2528,7 +3439,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Signature::InvocantNotAllowed
+
+# Class: X::Syntax::Signature::InvocantNotAllowed
 # Status: TO DO
 # Original Code:
 #        "Can only use the : invocant marker in the signature for a method"
@@ -2538,17 +3450,19 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Term::MissingInitializer
+
+# Class: X::Syntax::Term::MissingInitializer
 # Status: TO DO
 # Original Code:
-#        "Not enough symbols provided for categorical of type $.category; needs $.needs"
+#        'Term definition requires an initializer'
 
 'X::Syntax::Term::MissingInitializer' => method {
-        "Not enough symbols provided for categorical of type $.category; needs $.needs"
+        'Term definition requires an initializer'
 },
 
 
-# Class:  X::Syntax::Type::Adverb
+
+# Class: X::Syntax::Type::Adverb
 # Status: TO DO
 # Original Code:
 #        "Cannot use adverb $.adverb on a type name (only 'ver', 'auth' and 'api' are understood)"
@@ -2558,7 +3472,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::UnlessElse
+
+# Class: X::Syntax::UnlessElse
 # Status: TO DO
 # Original Code:
 #        qq|"unless" does not take "$!keyword", please rewrite using "if"|
@@ -2568,7 +3483,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Variable::BadType
+
+# Class: X::Syntax::Variable::BadType
 # Status: TO DO
 # Original Code:
 #        my $what = ~$!type.HOW.WHAT.^name.match(/ .* '::' <(.*)> HOW/) // 'Namespace';
@@ -2580,7 +3496,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Variable::ConflictingTypes
+
+# Class: X::Syntax::Variable::ConflictingTypes
 # Status: TO DO
 # Original Code:
 #        "$!inner.^name() not allowed here; variable list already declared with type $!outer.^name()"
@@ -2590,7 +3507,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Variable::IndirectDeclaration
+
+# Class: X::Syntax::Variable::IndirectDeclaration
 # Status: TO DO
 # Original Code:
 #        'Cannot declare a variable by indirect name (use a hash instead?)'
@@ -2600,7 +3518,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Variable::Initializer
+
+# Class: X::Syntax::Variable::Initializer
 # Status: TO DO
 # Original Code:
 #        "Cannot use variable $!name in declaration to initialize itself"
@@ -2610,7 +3529,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Variable::Match
+
+# Class: X::Syntax::Variable::Match
 # Status: TO DO
 # Original Code:
 #        'Cannot declare a match variable'
@@ -2620,7 +3540,29 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Variable::Numeric
+
+# Class: X::Syntax::Variable::MissingInitializer
+# Status: TO DO
+# Original Code:
+#        my $modality    = $.maybe ?? "may need" !! "needs";
+#        my $type        = $.implicit ?? "$.type (implicit $.implicit)" !! "$.type";
+#        my $requirement = $.what eq 'attribute'
+#                ?? 'to be marked as required or given an initializer'
+#                !! 'to be given an initializer';
+#        "$.what.tc() definition of type $type $modality $requirement"
+
+'X::Syntax::Variable::MissingInitializer' => method {
+        my $modality    = $.maybe ?? "may need" !! "needs";
+        my $type        = $.implicit ?? "$.type (implicit $.implicit)" !! "$.type";
+        my $requirement = $.what eq 'attribute'
+                ?? 'to be marked as required or given an initializer'
+                !! 'to be given an initializer';
+        "$.what.tc() definition of type $type $modality $requirement"
+},
+
+
+
+# Class: X::Syntax::Variable::Numeric
 # Status: TO DO
 # Original Code:
 #        "Cannot declare a numeric $.what"
@@ -2630,7 +3572,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::Variable::Twigil
+
+# Class: X::Syntax::Variable::Twigil
 # Status: TO DO
 # Original Code:
 #        "Cannot use a '$.twigil' twigil on a '$.scope $.name' $.what$.additional.".naive-word-wrapper
@@ -2640,7 +3583,19 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Syntax::WithoutElse
+
+# Class: X::Syntax::VirtualCall
+# Status: TO DO
+# Original Code:
+#        "Virtual method call $.call may not be used on partially constructed object (maybe you mean {$.call.subst('.','!')} for direct attribute access here?)"
+
+'X::Syntax::VirtualCall' => method {
+        "Virtual method call $.call may not be used on partially constructed object (maybe you mean {$.call.subst('.','!')} for direct attribute access here?)"
+},
+
+
+
+# Class: X::Syntax::WithoutElse
 # Status: TO DO
 # Original Code:
 #        qq|"without" does not take "$!keyword", please rewrite using "with"|
@@ -2650,7 +3605,30 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::TooManyDimensions
+
+# Class: X::Temporal::InvalidFormat
+# Status: TO DO
+# Original Code:
+#        "Invalid $.target string '$.invalid-str'; use $.format instead";
+
+'X::Temporal::InvalidFormat' => method {
+        "Invalid $.target string '$.invalid-str'; use $.format instead";
+},
+
+
+
+# Class: X::TooLateForREPR
+# Status: TO DO
+# Original Code:
+#        "Cannot change REPR of $!type.^name() now (must be set at initial declaration)";
+
+'X::TooLateForREPR' => method {
+        "Cannot change REPR of $!type.^name() now (must be set at initial declaration)";
+},
+
+
+
+# Class: X::TooManyDimensions
 # Status: TO DO
 # Original Code:
 #        "Cannot $.operation a $.needed-dimensions dimension array with $.got-dimensions dimensions"
@@ -2660,7 +3638,19 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Trait::NotOnNative
+
+# Class: X::Trait::Invalid
+# Status: TO DO
+# Original Code:
+#        "Cannot use '$.type $.subtype' on $.declaring '$.name'."
+
+'X::Trait::Invalid' => method {
+        "Cannot use '$.type $.subtype' on $.declaring '$.name'."
+},
+
+
+
+# Class: X::Trait::NotOnNative
 # Status: TO DO
 # Original Code:
 #        "Can't use trait '$.type $.subtype' on a native"
@@ -2672,7 +3662,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Trait::Scope
+
+# Class: X::Trait::Scope
 # Status: TO DO
 # Original Code:
 #        "Can't apply trait '$.type $.subtype' on a $.scope scoped $.declaring."
@@ -2684,7 +3675,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Trait::Unknown
+
+# Class: X::Trait::Unknown
 # Status: TO DO
 # Original Code:
 #        "Can't use unknown trait '{
@@ -2702,17 +3694,75 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::TypeCheck::Assignment
+
+# Class: X::TypeCheck
 # Status: TO DO
 # Original Code:
-#        "$.redispatcher is not in the dynamic scope of a dispatcher";
+#        self.priors() ~
+#                "Type check failed in $.operation; expected $.expectedn but got $.gotn";
 
-'X::TypeCheck::Assignment' => method {
-        "$.redispatcher is not in the dynamic scope of a dispatcher";
+'X::TypeCheck' => method {
+        self.priors() ~
+                "Type check failed in $.operation; expected $.expectedn but got $.gotn";
 },
 
 
-# Class:  X::TypeCheck::Binding
+
+# Class: X::TypeCheck::Argument
+# Status: TO DO
+# Original Code:
+#        my $multi = $!signature ~~ /\n/ // '';
+#        "Calling {$!objname}({ join(', ', @!arguments) }) will never work with " ~ (
+#        $!protoguilt ?? 'signature of the proto ' !!
+#                $multi       ?? 'any of these multi signatures:' !!
+#                'declared signature '
+#        ) ~ $!signature;
+
+'X::TypeCheck::Argument' => method {
+        my $multi = $!signature ~~ /\n/ // '';
+        "Calling {$!objname}({ join(', ', @!arguments) }) will never work with " ~ (
+        $!protoguilt ?? 'signature of the proto ' !!
+                $multi       ?? 'any of these multi signatures:' !!
+                'declared signature '
+        ) ~ $!signature;
+},
+
+
+
+# Class: X::TypeCheck::Assignment
+# Status: TO DO
+# Original Code:
+#        my $to = $.symbol.defined && $.symbol ne '$'
+#                ?? " to $.symbol" !! "";
+#        my $is-itself := nqp::eqaddr(self.expected, self.got);
+#        my $expected = $is-itself
+#                ?? "expected type $.expectedn cannot be itself"
+#                !! "expected $.expectedn but got $.gotn";
+#        my $maybe-Nil := $is-itself
+#                || nqp::istype(self.expected.HOW, Metamodel::DefiniteHOW)
+#                && nqp::eqaddr(self.expected.^base_type, self.got)
+#                ?? ' (perhaps Nil was assigned to a :D which had no default?)' !! '';
+#
+#        self.priors() ~ "Type check failed in assignment$to; $expected$maybe-Nil"
+
+'X::TypeCheck::Assignment' => method {
+        my $to = $.symbol.defined && $.symbol ne '$'
+                ?? " to $.symbol" !! "";
+        my $is-itself := nqp::eqaddr(self.expected, self.got);
+        my $expected = $is-itself
+                ?? "expected type $.expectedn cannot be itself"
+                !! "expected $.expectedn but got $.gotn";
+        my $maybe-Nil := $is-itself
+                || nqp::istype(self.expected.HOW, Metamodel::DefiniteHOW)
+                && nqp::eqaddr(self.expected.^base_type, self.got)
+                ?? ' (perhaps Nil was assigned to a :D which had no default?)' !! '';
+
+        self.priors() ~ "Type check failed in assignment$to; $expected$maybe-Nil"
+},
+
+
+
+# Class: X::TypeCheck::Binding
 # Status: TO DO
 # Original Code:
 #        my $to = $.symbol.defined && $.symbol ne '$'
@@ -2734,7 +3784,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::TypeCheck::Binding::Parameter
+
+# Class: X::TypeCheck::Binding::Parameter
 # Status: TO DO
 # Original Code:
 #        my $to = $.symbol.defined && $.symbol ne '$'
@@ -2758,7 +3809,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::TypeCheck::Return
+
+# Class: X::TypeCheck::Return
 # Status: TO DO
 # Original Code:
 #        my $expected = nqp::eqaddr(self.expected, self.got)
@@ -2778,7 +3830,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Undeclared
+
+# Class: X::Undeclared
 # Status: TO DO
 # Original Code:
 #        my $message := "$.what '$.symbol' is not declared";
@@ -2800,7 +3853,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Undeclared::Symbols
+
+# Class: X::Undeclared::Symbols
 # Status: TO DO
 # Original Code:
 #        ("Redeclaration of $.what '$.symbol'"
@@ -2820,7 +3874,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::UnitScope::Invalid
+
+# Class: X::UnitScope::Invalid
 # Status: TO DO
 # Original Code:
 #        "A unit-scoped $.what definition is not allowed $.where;\n$!suggestion"
@@ -2830,7 +3885,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::UnitScope::TooLate
+
+# Class: X::UnitScope::TooLate
 # Status: TO DO
 # Original Code:
 #        "Too late for unit-scoped $.what definition;\n"
@@ -2842,7 +3898,19 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::WheneverOutOfScope
+
+# Class: X::Value::Dynamic
+# Status: TO DO
+# Original Code:
+#        "$.what value must be known at compile time"
+
+'X::Value::Dynamic' => method {
+        "$.what value must be known at compile time"
+},
+
+
+
+# Class: X::WheneverOutOfScope
 # Status: TO DO
 # Original Code:
 #        "Cannot have a 'whenever' block outside the scope of a 'supply' or 'react' block"
@@ -2852,14 +3920,75 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
 },
 
 
-# Class:  X::Worry::P5::Reference
+
+# Class: X::Worry::P5::BackReference
 # Status: TO DO
 # Original Code:
-#        "Cannot use '$.type $.subtype' on $.declaring '$.name'."
+#        q/To refer to a positional match capture, just use $0 (numbering starts at 0).
+#Parenthesize as \\(...) if you intended a capture of a single numeric value./
 
-'X::Worry::P5::Reference' => method {
-        "Cannot use '$.type $.subtype' on $.declaring '$.name'."
+'X::Worry::P5::BackReference' => method {
+        q/To refer to a positional match capture, just use $0 (numbering starts at 0).
+Parenthesize as \\(...) if you intended a capture of a single numeric value./
 },
 
 
-;
+
+# Class: X::Worry::P5::LeadingZero
+# Status: TO DO
+# Original Code:
+#        'Leading 0 has no meaning. If you meant to create an octal number'
+#                ~ ", use '0o' prefix" ~ (
+#        #?if jvm
+#        $!value ~~ /<[89]>/
+##?endif
+##?if !jvm
+#            $!value.comb.grep(*.unival > 7)
+##?endif
+#                ?? ", but note that $!value is not a valid octal number"
+#                !! "; like, '0o$!value'"
+#        ) ~ '. If you meant to create a string, please add quotation marks.'
+
+'X::Worry::P5::LeadingZero' => method {
+        'Leading 0 has no meaning. If you meant to create an octal number'
+                ~ ", use '0o' prefix" ~ (
+        #?if jvm
+        $!value ~~ /<[89]>/
+#?endif
+#?if !jvm
+            $!value.comb.grep(*.unival > 7)
+#?endif
+                ?? ", but note that $!value is not a valid octal number"
+                !! "; like, '0o$!value'"
+        ) ~ '. If you meant to create a string, please add quotation marks.'
+},
+
+
+
+# Class: X::Worry::P5::Reference
+# Status: TO DO
+# Original Code:
+#        q/To pass an array, hash or sub to a function in Raku, just pass it as is.
+#For other uses of Perl's ref operator consider binding with ::= instead.
+#Parenthesize as \\(...) if you intended a capture of a single variable./
+
+'X::Worry::P5::Reference' => method {
+        q/To pass an array, hash or sub to a function in Raku, just pass it as is.
+For other uses of Perl's ref operator consider binding with ::= instead.
+Parenthesize as \\(...) if you intended a capture of a single variable./
+},
+
+
+
+# Class: X::Worry::Precedence::Range
+# Status: TO DO
+# Original Code:
+#        "To $!action a range, parenthesize the whole range.
+#(Or parenthesize the whole endpoint expression, if you meant that.)"
+
+'X::Worry::Precedence::Range' => method {
+        "To $!action a range, parenthesize the whole range.
+(Or parenthesize the whole endpoint expression, if you meant that.)"
+},
+
+

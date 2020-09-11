@@ -8,10 +8,10 @@ my class Exception {
 
     method backtrace(Exception:D:) {
         $!bt
-                ?? $!bt
-                !! nqp::isconcrete($!ex)
-        ?? ($!bt := Backtrace.new($!ex))
-        !! Nil
+          ?? $!bt
+          !! nqp::isconcrete($!ex)
+            ?? ($!bt := Backtrace.new($!ex))
+            !! Nil
     }
 
     # Only valid if .backtrace has not been called yet
@@ -38,12 +38,12 @@ my class Exception {
         if nqp::isconcrete($!ex) {
             my str $message = nqp::getmessage($!ex);
             $str = nqp::isnull_s($message)
-                    ?? (try self.message) // "Died with {self.^name}"
-                    !! nqp::p6box_s($message);
+                ?? (try self.message) // "Died with {self.^name}"
+                !! nqp::p6box_s($message);
             $str ~= "\n";
             try $str ~= self.backtrace
-                    || Backtrace.new()
-                    || '  (no backtrace available)';
+              || Backtrace.new()
+              || '  (no backtrace available)';
         }
         else {
             $str = (try self.message) // "Unthrown {self.^name} with no message";
@@ -102,9 +102,9 @@ my class X::SecurityPolicy::Eval is X::SecurityPolicy {
 
     method message() {
         (($.payload ~~ SlurpySentry
-                ?? $.payload.list.join # Remove spaces die(*@msg)/fail(*@msg) forms
-                !! $.payload.Str
-        ) ~ " (use the MONKEY-SEE-NO-EVAL pragma to override this error but only if you're VERY sure your data contains no injection attacks)."
+          ?? $.payload.list.join # Remove spaces die(*@msg)/fail(*@msg) forms
+          !! $.payload.Str
+         ) ~ " (use the MONKEY-SEE-NO-EVAL pragma to override this error but only if you're VERY sure your data contains no injection attacks)."
         ).naive-word-wrapper
     }
     method Numeric() { $.payload.Numeric }
@@ -162,20 +162,20 @@ my class X::Method::NotFound is Exception {
 
     method of-type() {
         nqp::eqaddr(nqp::decont($!invocant),IterationEnd)
-                ?? "IterationEnd"
-                !! "of type '$.typename'"
+          ?? "IterationEnd"
+          !! "of type '$.typename'"
     }
 
     method TWEAK() {
         my @message = $.private
-                ?? "No such private method '!$.method' for invocant $.of-type"
-                !! "No such method '$.method' for invocant $.of-type";
+          ?? "No such private method '!$.method' for invocant $.of-type"
+          !! "No such method '$.method' for invocant $.of-type";
 
         @message.push: $.addendum if $.addendum;
 
         my $indirect-method = $.method.starts-with("!")
-                ?? $.method.substr(1)
-                !! "";
+                                ?? $.method.substr(1)
+                                !! "";
 
         my %suggestions;
         my int $max_length = do given $.method.chars {
@@ -211,9 +211,9 @@ my class X::Method::NotFound is Exception {
             }
             else {
                 my $dist := StrDistance.new(
-                        before => $before.fc,
-                        after  => $after.fc
-                        );
+                  before => $before.fc,
+                  after  => $after.fc
+                );
                 if $dist <= $max_length {
                     $public_suggested = 1;
                     %suggestions{$after} = $dist;
@@ -224,14 +224,14 @@ my class X::Method::NotFound is Exception {
         if nqp::can($!invocant.HOW, 'methods') {
             # $!invocant can be a KnowHOW which method `methods` returns a hash, not a list.
             my $invocant_methods :=
-                    Set.new: $!invocant.^methods(:local).map: { code-name($_) };
+              Set.new: $!invocant.^methods(:local).map: { code-name($_) };
 
             for $!invocant.^methods(:all) -> $method_candidate {
                 my $method_name := code-name($method_candidate);
                 # GH#1758 do not suggest a submethod from a parent
                 next
-                if $method_candidate.^name eq 'Submethod'  # a submethod
-                        && !$invocant_methods{$method_name};       # unknown method
+                  if $method_candidate.^name eq 'Submethod'  # a submethod
+                  && !$invocant_methods{$method_name};       # unknown method
 
                 find_public_suggestion($.method, $method_name);
             }
@@ -246,13 +246,13 @@ my class X::Method::NotFound is Exception {
         if $.in-class-call && nqp::can($!invocant.HOW, 'private_method_table') {
             for $!invocant.^private_method_table.keys -> $method_name {
                 my $dist = StrDistance.new(
-                        before => $.method.fc,
-                        after  => $method_name.fc
-                        );
+                  before => $.method.fc,
+                  after  => $method_name.fc
+                );
                 if $dist <= $max_length {
                     $private_suggested = 1;
                     %suggestions{"!$method_name"} = $dist
-                    unless $indirect-method eq $method_name;
+                        unless $indirect-method eq $method_name;
                 }
             }
         }
@@ -271,8 +271,8 @@ my class X::Method::NotFound is Exception {
         }
 
         if !$indirect-method
-                &&($private_suggested ^^ $public_suggested)
-                && ($private_suggested ^^ $.private)
+           &&($private_suggested ^^ $public_suggested)
+           && ($private_suggested ^^ $.private)
         {
             @!tips.push: "Perhaps a " ~ ($private_suggested ?? "private" !! "public") ~ " method call must be used."
         }
@@ -296,8 +296,8 @@ my class X::Method::InvalidQualifier is Exception {
     has $.invocant;
     has $.qualifier-type;
     method message() {
-        "Cannot dispatch to method $.method on {$.qualifier-type.^name} "
-                ~ "because it is not inherited or done by {$.invocant.^name}";
+          "Cannot dispatch to method $.method on {$.qualifier-type.^name} "
+        ~ "because it is not inherited or done by {$.invocant.^name}";
     }
 }
 
@@ -305,8 +305,8 @@ my class X::Role::Parametric::NoSuchCandidate is Exception {
     has Mu $.role;
     method message {
         "No appropriate parametric role variant available for '"
-                ~ $.role.^name
-                ~ "'";
+        ~ $.role.^name
+        ~ "'";
     }
 }
 
@@ -412,16 +412,16 @@ sub EXCEPTION(|) is implementation-detail {
         elsif $type == nqp::const::CONTROL_DONE {
             $ex := CX::Done.new();
         }
-        #?if !moar
+#?if !moar
         # for MoarVM this check is done in src/Perl6/Metamodel/BOOTSTRAP.nqp, cmp 222d16b0b9
         elsif !nqp::isnull_s(nqp::getmessage($vm_ex)) &&
                 nqp::p6box_s(nqp::getmessage($vm_ex)) ~~ /"Method '" (.*?) "' not found for invocant of class '" (.+)\'$/ {
             $ex := X::Method::NotFound.new(
-                    method   => ~$0,
-                    typename => ~$1,
-                    );
+                method   => ~$0,
+                typename => ~$1,
+            );
         }
-        #?endif
+#?endif
         else {
             $ex := nqp::create(X::AdHoc);
             nqp::bindattr($ex, X::AdHoc, '$!payload', nqp::p6box_s(nqp::getmessage($vm_ex) // 'unknown exception'));
@@ -460,7 +460,7 @@ do {
                 unless $class.process($e) {
                     nqp::getcurhllsym('&THE_END')();
                     return
-                    }
+                }
             }
         }
         if %*ENV<RAKU_EXCEPTIONS_HANDLER> -> $handler {
@@ -470,7 +470,7 @@ do {
                 unless $class.process($e) {
                     nqp::getcurhllsym('&THE_END')();
                     return
-                    }
+                }
             }
         }
 
@@ -504,20 +504,20 @@ do {
 
     sub print_control(|) {
         nqp::stmts(
-                (my Mu $ex := nqp::atpos(nqp::p6argvmarray(),0)),
-                (my int $type = nqp::getextype($ex)),
-                (my $backtrace = Backtrace.new(nqp::backtrace($ex))),
-                nqp::if(
-                        nqp::iseq_i($type,nqp::const::CONTROL_WARN),
-                        nqp::stmts(
-                                (my Mu $err := $*ERR),
-                                (my str $msg = nqp::getmessage($ex)),
-                                $err.say(nqp::if(nqp::chars($msg),$msg,"Warning")),
-                                $err.print($backtrace.first-none-setting-line),
-                                nqp::resume($ex)
-                                                  )
-                                     )
-                              );
+          (my Mu $ex := nqp::atpos(nqp::p6argvmarray(),0)),
+          (my int $type = nqp::getextype($ex)),
+          (my $backtrace = Backtrace.new(nqp::backtrace($ex))),
+          nqp::if(
+            nqp::iseq_i($type,nqp::const::CONTROL_WARN),
+            nqp::stmts(
+              (my Mu $err := $*ERR),
+              (my str $msg = nqp::getmessage($ex)),
+              $err.say(nqp::if(nqp::chars($msg),$msg,"Warning")),
+              $err.print($backtrace.first-none-setting-line),
+              nqp::resume($ex)
+            )
+          )
+        );
 
         my $label = $type +& nqp::const::CONTROL_LABELED ?? "labeled " !! "";
         if $type +& nqp::const::CONTROL_LAST {
@@ -552,20 +552,20 @@ do {
 
     my Mu $comp := nqp::getcomp('Raku');
     $comp.^add_method('handle-exception',
-            method (|) {
-                my Mu $ex := nqp::atpos(nqp::p6argvmarray(), 1);
-                print_exception($ex);
-                nqp::exit(1);
-                0;
-            }
-            );
+        method (|) {
+            my Mu $ex := nqp::atpos(nqp::p6argvmarray(), 1);
+            print_exception($ex);
+            nqp::exit(1);
+            0;
+        }
+    );
     $comp.^add_method('handle-control',
-            method (|) {
-                my Mu $ex := nqp::atpos(nqp::p6argvmarray(), 1);
-                print_control($ex);
-                nqp::rethrow($ex);
-            }
-            );
+        method (|) {
+            my Mu $ex := nqp::atpos(nqp::p6argvmarray(), 1);
+            print_control($ex);
+            nqp::rethrow($ex);
+        }
+    );
 
 }
 
@@ -696,7 +696,7 @@ my class X::IO::NotAChild does X::IO {
     has $.path;
     has $.child;
     method message() {
-        "Path {$.child.raku} is not a child of path {$.path.raku}"
+      "Path {$.child.raku} is not a child of path {$.path.raku}"
     }
 }
 
@@ -749,13 +749,13 @@ my role X::Comp is Exception {
     multi method gist(::?CLASS:D: :$sorry = True, :$expect = True) {
         if $.is-compile-time {
             my ($red,$clear,$green,$yellow,$eject) =
-                    Rakudo::Internals.error-rcgye;
+              Rakudo::Internals.error-rcgye;
             my $r = $sorry ?? self.sorry_heading() !! "";
             $r ~= $.filename eq '<unknown file>'
-                    ?? $.line == 1
-                            ?? $.message
-                            !! "$.message\nat line $.line"
-                    !! "$.message\nat $.filename():$.line";
+              ?? $.line == 1
+                ?? $.message
+                !! "$.message\nat line $.line"
+              !! "$.message\nat $.filename():$.line";
             $r ~= "\n------> $green$.pre$yellow$eject$red$.post$clear" if defined $.pre;
             if $expect && @.highexpect {
                 $r ~= "\n    expecting any of:";
@@ -778,9 +778,9 @@ my role X::Comp is Exception {
     method sorry_heading() {
         my ($red, $clear) = Rakudo::Internals.error-rcgye;
         "$red==={$clear}SORRY!$red===$clear Error while compiling{
-            $.filename eq '<unknown file>'
-                    ?? ':'
-                    !! " $.filename"
+          $.filename eq '<unknown file>'
+            ?? ':'
+            !! " $.filename"
         }\n"
     }
     method SET_FILE_LINE($file, $line) is implementation-detail {
@@ -811,8 +811,8 @@ my class X::Comp::Group is Exception {
         }
         if @.worries {
             $r ~= $.panic || @.sorrows
-                    ?? "Other potential difficulties:\n"
-                    !! "Potential difficulties:\n";
+                ?? "Other potential difficulties:\n"
+                !! "Potential difficulties:\n";
             for @.worries {
                 $r ~= .gist(:!sorry, :!expect).indent(4) ~ "\n";
             }
@@ -843,8 +843,8 @@ my class X::Comp::BeginTime does X::Comp {
 
     method message() {
         $!exception ~~ X::MOP
-                ?? $!exception.message
-                !! "An exception occurred while $!use-case"
+            ?? $!exception.message
+            !! "An exception occurred while $!use-case"
     }
 
     multi method gist(::?CLASS:D: :$sorry = True) {
@@ -876,7 +876,7 @@ my class X::Comp::FailGoal does X::Comp {
     method is-compile-time(--> True) { }
 
     method message { "Unable to parse expression in $.dba; couldn't find final $.goal"
-            ~ " (corresponding starter was at line $.line-real)" }
+                     ~ " (corresponding starter was at line $.line-real)" }
 }
 
 my role X::Syntax does X::Comp { }
@@ -923,14 +923,14 @@ my class X::Worry is Exception { }
 my class X::Worry::P5 is X::Worry { }
 my class X::Worry::P5::Reference is X::Worry::P5 {
     method message {
-        q/To pass an array, hash or sub to a function in Raku, just pass it as is.
+q/To pass an array, hash or sub to a function in Raku, just pass it as is.
 For other uses of Perl's ref operator consider binding with ::= instead.
 Parenthesize as \\(...) if you intended a capture of a single variable./
     }
 }
 my class X::Worry::P5::BackReference is X::Worry::P5 {
     method message {
-        q/To refer to a positional match capture, just use $0 (numbering starts at 0).
+q/To refer to a positional match capture, just use $0 (numbering starts at 0).
 Parenthesize as \\(...) if you intended a capture of a single numeric value./
     }
 }
@@ -938,9 +938,9 @@ my class X::Worry::P5::LeadingZero is X::Worry::P5 {
     has $.value;
     method message {
         'Leading 0 has no meaning. If you meant to create an octal number'
-                ~ ", use '0o' prefix" ~ (
-        #?if jvm
-        $!value ~~ /<[89]>/
+        ~ ", use '0o' prefix" ~ (
+#?if jvm
+            $!value ~~ /<[89]>/
 #?endif
 #?if !jvm
             $!value.comb.grep(*.unival > 7)
@@ -953,7 +953,7 @@ my class X::Worry::P5::LeadingZero is X::Worry::P5 {
 my class X::Worry::Precedence::Range is X::Worry {
     has $.action;
     method message {
-        "To $!action a range, parenthesize the whole range.
+"To $!action a range, parenthesize the whole range.
 (Or parenthesize the whole endpoint expression, if you meant that.)"
     }
 }
@@ -988,7 +988,7 @@ my class X::Trait::NotOnNative is Exception {
     has $.native;     # type of native (optional)
     method message () {
         "Can't use trait '$.type $.subtype' on a native"
-                ~ ( $.native ?? " $.native." !! "." );
+          ~ ( $.native ?? " $.native." !! "." );
     }
 }
 my class X::Comp::Trait::NotOnNative is X::Trait::NotOnNative does X::Comp { };
@@ -1001,7 +1001,7 @@ my class X::Trait::Scope is Exception {
     has $.supported;  # hint about what is allowed instead
     method message () {
         "Can't apply trait '$.type $.subtype' on a $.scope scoped $.declaring."
-                ~ ( $.supported ?? " Only {$.supported.join(' and ')} scoped {$.declaring}s are supported." !! '' );
+        ~ ( $.supported ?? " Only {$.supported.join(' and ')} scoped {$.declaring}s are supported." !! '' );
     }
 }
 my class X::Comp::Trait::Scope is X::Trait::Scope does X::Comp { };
@@ -1011,8 +1011,8 @@ my class X::Exhausted is Exception {
     has $.reason;
     method message {
         $.reason
-                ?? "Could not create another $.what because of: $.reason"
-                !! "Could not create another $.what"
+          ?? "Could not create another $.what because of: $.reason"
+          !! "Could not create another $.what"
     }
 }
 
@@ -1023,8 +1023,8 @@ my class X::OutOfRange is Exception {
     has $.comment;
     method message() {
         my $result = $.comment.defined
-                ?? "$.what out of range. Is: $.got.gist(), should be in $.range.gist(); $.comment"
-                !! "$.what out of range. Is: $.got.gist(), should be in $.range.gist()";
+           ?? "$.what out of range. Is: $.got.gist(), should be in $.range.gist(); $.comment"
+           !! "$.what out of range. Is: $.got.gist(), should be in $.range.gist()";
         $result;
     }
 }
@@ -1034,8 +1034,8 @@ my class X::Buf::AsStr is Exception {
     has $.method;
     method message() {
         my $message = $.method.starts-with('Str')
-                ?? "Stringification of a {$.object.^name} is not done with '$.method'"
-                !! "A {$.object.^name} is not a Str, so using '$.method' will not work";
+          ?? "Stringification of a {$.object.^name} is not done with '$.method'"
+          !! "A {$.object.^name} is not a Str, so using '$.method' will not work";
         ($message ~ ". The 'decode' method should be used to convert a {$.object.^name} to a Str."
         ).naive-word-wrapper
     }
@@ -1184,10 +1184,10 @@ my class X::Redeclaration does X::Comp {
     has $.what    = 'symbol';
     method message() {
         ("Redeclaration of $.what '$.symbol'"
-                ~ (" $.postfix" if $.postfix)
-                ~ ($.what eq 'routine'
-                        ?? ". Did you mean to declare a multi-sub?"
-                        !! ".")
+          ~ (" $.postfix" if $.postfix)
+          ~ ($.what eq 'routine'
+              ?? ". Did you mean to declare a multi-sub?"
+              !! ".")
         ).naive-word-wrapper
     }
 }
@@ -1218,8 +1218,8 @@ my class X::Import::Redeclaration does X::Comp {
     has $.source-package-name;
     method message() {
         (@.symbols == 1
-                ?? "Cannot import symbol '@.symbols[0]' from '$.source-package-name', because it already exists in this lexical scope."
-                !! "Cannot import the following symbols from '$.source-package-name', because they already exist in this lexical scope: { @.symbols.map( { "'$_'" } ).join(', ')}."
+           ?? "Cannot import symbol '@.symbols[0]' from '$.source-package-name', because it already exists in this lexical scope."
+           !! "Cannot import the following symbols from '$.source-package-name', because they already exist in this lexical scope: { @.symbols.map( { "'$_'" } ).join(', ')}."
         ).naive-word-wrapper
     }
 }
@@ -1229,8 +1229,8 @@ my class X::Import::OnlystarProto does X::Comp {
     has $.source-package-name;
     method message() {
         (@.symbols == 1
-                ?? "Cannot import symbol '@.symbols[0]' from '$.source-package-name', because only onlystar-protos ('proto foo(|) {*}') can be merged."
-                !! "Cannot import the following symbols from '$.source-package-name', only onlystar-protos ('proto foo(|) {*}') can be merged: { @.symbols.map( { "'$_'" } ).join(', ')}."
+           ?? "Cannot import symbol '@.symbols[0]' from '$.source-package-name', because only onlystar-protos ('proto foo(|) {*}') can be merged."
+           !! "Cannot import the following symbols from '$.source-package-name', only onlystar-protos ('proto foo(|) {*}') can be merged: { @.symbols.map( { "'$_'" } ).join(', ')}."
         ).naive-word-wrapper
     }
 }
@@ -1241,9 +1241,9 @@ my class X::PoisonedAlias does X::Comp {
     has str $.package-name;
     method message() {
         ("Cannot directly use poisoned alias '$.alias' because it was declared by several {$.package-type}s." ~
-                ($.package-name
-                        ?? " Please access it via explicit package name like: '{$.package-name}::{$!alias}'"
-                        !! '')
+         ($.package-name
+           ?? " Please access it via explicit package name like: '{$.package-name}::{$!alias}'"
+           !! '')
         ).naive-word-wrapper
     }
 }
@@ -1267,8 +1267,8 @@ my class X::Parameter::Default does X::Comp {
     has $.parameter;
     method message() {
         $.parameter
-                ?? "Cannot put default on $.how parameter $.parameter"
-                !! "Cannot put default on anonymous $.how parameter";
+            ?? "Cannot put default on $.how parameter $.parameter"
+            !! "Cannot put default on anonymous $.how parameter";
     }
 }
 
@@ -1311,7 +1311,7 @@ my class X::Parameter::MultipleTypeConstraints does X::Comp {
     has $.parameter;
     method message() {
         ($.parameter ?? "Parameter $.parameter" !! 'A parameter')
-                ~ " may only have one prefix type constraint";
+        ~ " may only have one prefix type constraint";
     }
 }
 
@@ -1411,8 +1411,8 @@ my class X::Adverb is Exception {
         my $text = '';
         if @!unexpected.elems -> $elems {
             $text = $elems > 1
-                    ?? "$elems unexpected adverbs ('@.unexpected.join("', '")')"
-                    !! "Unexpected adverb '@!unexpected[0]'"
+              ?? "$elems unexpected adverbs ('@.unexpected.join("', '")')"
+              !! "Unexpected adverb '@!unexpected[0]'"
         }
         if @!nogo {
             $text ~= $text ?? " and u" !! "U";
@@ -1428,8 +1428,8 @@ my class X::Bind is Exception {
     has $.target;
     method message() {
         $.target.defined
-                ?? "Cannot bind to $.target"
-                !! 'Cannot use bind operator with this left-hand side'
+            ?? "Cannot bind to $.target"
+            !! 'Cannot use bind operator with this left-hand side'
     }
 }
 my class X::Bind::NativeType does X::Comp {
@@ -1474,8 +1474,8 @@ my class X::Invalid::ComputedValue is Exception {
     has $.reason;
     method message {
         "$.name {"on $.method " if $.method}computed to $.value,"
-                ~ " which cannot be used"
-                ~ (" because $.reason" if $.reason);
+            ~ " which cannot be used"
+            ~ (" because $.reason" if $.reason);
     }
 }
 
@@ -1503,8 +1503,8 @@ my class X::Syntax::KeywordAsFunction does X::Syntax {
     has $.needparens;
     method message {
         ("The word '$.word' is interpreted as a '{$.word}()' function call.  Please use whitespace "
-                ~ ($.needparens ?? 'around the' !! 'instead of')
-                ~ " parentheses."
+          ~ ($.needparens ?? 'around the' !! 'instead of')
+          ~ " parentheses."
         ).naive-word-wrapper
     }
 }
@@ -1661,9 +1661,9 @@ my class X::Syntax::BlockGobbled does X::Syntax {
     method message() {
         my $looks_like_type = $.what ~~ /'::' | <[A..Z]><[a..z]>+/;
         $.what ~~ /^'is '/
-                ?? "Trait '$.what' needs whitespace before block"
-                !! "{ $.what ?? "Function '$.what'" !! 'Expression' } needs parens to avoid gobbling block" ~
-        ($looks_like_type ?? " (or perhaps it's a class that's not declared or available in this scope?)" !! "");
+            ?? "Trait '$.what' needs whitespace before block"
+            !! "{ $.what ?? "Function '$.what'" !! 'Expression' } needs parens to avoid gobbling block" ~
+                    ($looks_like_type ?? " (or perhaps it's a class that's not declared or available in this scope?)" !! "");
     };
 }
 
@@ -1684,60 +1684,60 @@ my class X::Syntax::ConditionalOperator::SecondPartInvalid does X::Syntax {
 my class X::Syntax::Perl5Var does X::Syntax {
     has $.name;
     has $.identifier-name;
-    #?if moar
+#?if moar
     my constant $m = nqp::hash(
-            #?endif
-            #?if !moar
-            my $m := nqp::hash(
-                    #?endif
-                    '$"',    '.join() method',
-                    '$$',    '$*PID',
-                    '$;',    'real multidimensional hashes',
-                    '$&',    '$<>',
-                    '$`',    '$/.prematch',
-                    '$\'',   '$/.postmatch',
-                    '$,',    '.join() method',
-                    '$.',    "the .kv method on e.g. .lines",
-                    '$/',    "the filehandle's .nl-in attribute",
-                    '$\\',   "the filehandle's .nl-out attribute",
-                    '$|',    "the filehandle's .out-buffer attribute",
-                    '$?',    '$! for handling child errors also',
-                    '$@',    '$!',
-                    '$]',    '$*RAKU.version or $*RAKU.compiler.version',
+#?endif
+#?if !moar
+    my $m := nqp::hash(
+#?endif
+      '$"',    '.join() method',
+      '$$',    '$*PID',
+      '$;',    'real multidimensional hashes',
+      '$&',    '$<>',
+      '$`',    '$/.prematch',
+      '$\'',   '$/.postmatch',
+      '$,',    '.join() method',
+      '$.',    "the .kv method on e.g. .lines",
+      '$/',    "the filehandle's .nl-in attribute",
+      '$\\',   "the filehandle's .nl-out attribute",
+      '$|',    "the filehandle's .out-buffer attribute",
+      '$?',    '$! for handling child errors also',
+      '$@',    '$!',
+      '$]',    '$*RAKU.version or $*RAKU.compiler.version',
 
-                    '$^C',   'COMPILING namespace',
-                    '$^H',   '$?FOO variables',
-                    '$^N',   '$/[*-1]',
-                    '$^O',   'VM.osname',
-                    '$^R',   'an explicit result variable',
-                    '$^S',   'context function',
-                    '$^T',   '$*INIT-INSTANT',
-                    '$^V',   '$*RAKU.version or $*RAKU.compiler.version',
-                    '$^X',   '$*EXECUTABLE-NAME',
+      '$^C',   'COMPILING namespace',
+      '$^H',   '$?FOO variables',
+      '$^N',   '$/[*-1]',
+      '$^O',   'VM.osname',
+      '$^R',   'an explicit result variable',
+      '$^S',   'context function',
+      '$^T',   '$*INIT-INSTANT',
+      '$^V',   '$*RAKU.version or $*RAKU.compiler.version',
+      '$^X',   '$*EXECUTABLE-NAME',
 
-                    '@-',    '.from method',
-                    '@+',    '.to method',
+      '@-',    '.from method',
+      '@+',    '.to method',
 
-                    '%-',    '.from method',
-                    '%+',    '.to method',
-                    '%^H',   '$?FOO variables',
-                     );
-            method message() {
-                my $name = $!name;
-                my $v    = $name ~~ m/ <[ $ @ % & ]> [ \^ <[ A..Z ]> | \W ] /;
-                my $sugg = nqp::atkey($m,~$v);
-                if $name eq '$#' {
-                    # Currently only `$#` var has this identifier business handling.
-                    # Should generalize the logic if we get more of stuff like this.
-                    $name ~= $!identifier-name;
-                    $sugg  = '@' ~ $!identifier-name ~ '.end';
-                }
-                $v
-                        ?? $sugg
-                                ?? "Unsupported use of $name variable; in Raku please use $sugg"
-                                !! "Unsupported use of $name variable"
-                        !! 'Weird unrecognized variable name: ' ~ $name;
-            }
+      '%-',    '.from method',
+      '%+',    '.to method',
+      '%^H',   '$?FOO variables',
+    );
+    method message() {
+        my $name = $!name;
+        my $v    = $name ~~ m/ <[ $ @ % & ]> [ \^ <[ A..Z ]> | \W ] /;
+        my $sugg = nqp::atkey($m,~$v);
+        if $name eq '$#' {
+            # Currently only `$#` var has this identifier business handling.
+            # Should generalize the logic if we get more of stuff like this.
+            $name ~= $!identifier-name;
+            $sugg  = '@' ~ $!identifier-name ~ '.end';
+        }
+        $v
+          ?? $sugg
+            ?? "Unsupported use of $name variable; in Raku please use $sugg"
+            !! "Unsupported use of $name variable"
+          !! 'Weird unrecognized variable name: ' ~ $name;
+    }
 }
 
 my class X::Syntax::Self::WithoutObject does X::Syntax {
@@ -1775,8 +1775,8 @@ my class X::Syntax::Number::LiteralType does X::Syntax {
         $vartype := $vartype.lc if $.native;
         my $vt := $!value.^name;
         my $value := $vt eq "IntStr" || $vt eq "NumStr" || $vt eq "RatStr" || $vt eq "ComplexStr"
-                ?? $!value.Str
-                !! $!value.raku;
+            ?? $!value.Str
+            !! $!value.raku;
         my $val = "Cannot assign a literal of type {$.valuetype} ($value) to { $.native ?? "a native" !! "a" } variable of type $vartype. You can declare the variable to be of type $.suggestiontype, or try to coerce the value with { $value ~ '.' ~ $conversionmethod } or $conversionmethod\($value\)";
         try $val ~= ", or just write the value as " ~ $!value."$vartype"().raku;
         $val;
@@ -1836,15 +1836,15 @@ my class X::Syntax::Regex::NullRegex does X::Syntax {
 my class X::Syntax::Regex::MalformedRange does X::Syntax {
     method message() {
         'Malformed Range. If attempting to use variables for end points, '
-                ~ 'wrap the entire range in curly braces.'
+        ~ 'wrap the entire range in curly braces.'
     }
 }
 
 my class X::Syntax::Regex::Unspace does X::Syntax {
     has $.char;
     method message { "No unspace allowed in regex; if you meant to match the literal character, " ~
-            "please enclose in single quotes ('" ~ $.char ~ "') or use a backslashed form like \\x" ~
-            sprintf('%02x', $.char.ord)
+        "please enclose in single quotes ('" ~ $.char ~ "') or use a backslashed form like \\x" ~
+        sprintf('%02x', $.char.ord)
     }
 }
 
@@ -1863,15 +1863,15 @@ my class X::Syntax::Regex::QuantifierValue does X::Syntax {
     has $.empty-range;
     method message {
         $!inf
-                && 'Minimum quantity to match for quantifier cannot be Inf.'
-        ~ ' Did you mean to use + or * quantifiers instead of **?'
-                || $!non-numeric-range
-        && 'Cannot use Range with non-Numeric or NaN end points as quantifier'
-                || $!non-numeric
-        && 'Cannot use non-Numeric or NaN value as quantifier'
-                || $!empty-range
-        && 'Cannot use empty Range as quantifier'
-                || 'Invalid quantifier value'
+          && 'Minimum quantity to match for quantifier cannot be Inf.'
+            ~ ' Did you mean to use + or * quantifiers instead of **?'
+        || $!non-numeric-range
+          && 'Cannot use Range with non-Numeric or NaN end points as quantifier'
+        || $!non-numeric
+          && 'Cannot use non-Numeric or NaN value as quantifier'
+        || $!empty-range
+          && 'Cannot use empty Range as quantifier'
+        || 'Invalid quantifier value'
     }
 }
 
@@ -1904,8 +1904,8 @@ my class X::Syntax::Variable::MissingInitializer does X::Syntax {
         my $modality    = $.maybe ?? "may need" !! "needs";
         my $type        = $.implicit ?? "$.type (implicit $.implicit)" !! "$.type";
         my $requirement = $.what eq 'attribute'
-                ?? 'to be marked as required or given an initializer'
-                !! 'to be given an initializer';
+                      ?? 'to be marked as required or given an initializer'
+                      !! 'to be given an initializer';
         "$.what.tc() definition of type $type $modality $requirement"
     }
 }
@@ -1957,7 +1957,7 @@ my class X::Syntax::Extension::TooComplex does X::Syntax {
 my class X::Syntax::Coercer::TooComplex does X::Syntax {
     method message() {
         'Coercer is too complex. Only type objects, with optional type'
-                ~ " smileys, or empty parentheses, implying 'Any', are supported."
+        ~ " smileys, or empty parentheses, implying 'Any', are supported."
     }
 }
 
@@ -1967,7 +1967,7 @@ my class X::Syntax::Extension::SpecialForm does X::Syntax {
     has $.hint;
     method message() {
         "Cannot override $.category operator '$.opname', as it is a special form " ~
-                "handled directly by the compiler" ~ ($!hint ?? "\n$!hint" !! "")
+            "handled directly by the compiler" ~ ($!hint ?? "\n$!hint" !! "")
     }
 }
 
@@ -1976,11 +1976,11 @@ my class X::Syntax::InfixInTermPosition does X::Syntax {
     method message() {
         my $infix := $!infix.trim;
         "Preceding context expects a term, but found infix $infix instead."
-                ~ (
-        $.post && $.post.starts-with('end ')
+        ~ (
+            $.post && $.post.starts-with('end ')
                 ?? "\nDid you forget '=begin $.post.substr(4)' Pod marker?"
                 !! "\nDid you make a mistake in Pod syntax?"
-        if $infix eq '='
+            if $infix eq '='
         )
     }
 }
@@ -1990,7 +1990,7 @@ my class X::Syntax::DuplicatedPrefix does X::Syntax {
     method message() {
         my $prefix = substr($.prefixes,0,1);
         "Expected a term, but found either infix $.prefixes or redundant prefix $prefix\n"
-                ~ "  (to suppress this message, please use a space like $prefix $prefix)";
+        ~ "  (to suppress this message, please use a space like $prefix $prefix)";
     }
 }
 
@@ -2008,8 +2008,8 @@ my class X::Attribute::Required does X::MOP {
     has $.why;
     method message() {
         $.why && nqp::istype($.why,Str)
-                ?? "The attribute '$.name' is required because $.why,\nbut you did not provide a value for it."
-                !! "The attribute '$.name' is required, but you did not provide a value for it."
+          ?? "The attribute '$.name' is required because $.why,\nbut you did not provide a value for it."
+          !! "The attribute '$.name' is required, but you did not provide a value for it."
     }
 }
 my class X::Attribute::Scope::Package does X::Comp {
@@ -2017,7 +2017,7 @@ my class X::Attribute::Scope::Package does X::Comp {
     has $.allowed;
     has $.disallowed;
     method message() { "Cannot use {$.scope}-scoped attribute in $.disallowed"
-            ~ ($.allowed ?? ", only $.allowed." !! ".") }
+        ~ ($.allowed ?? ", only $.allowed." !! ".") }
 }
 my class X::Declaration::Scope does X::Comp {
     has $.scope;
@@ -2035,8 +2035,8 @@ my class X::Declaration::OurScopeInRole does X::Comp {
     has $.declaration;
     method message() {
         "Cannot declare our-scoped $.declaration inside of a role\n" ~
-                "(the scope inside of a role is generic, so there is no unambiguous\n" ~
-                "package to install the symbol in)"
+        "(the scope inside of a role is generic, so there is no unambiguous\n" ~
+        "package to install the symbol in)"
     }
 }
 
@@ -2069,11 +2069,11 @@ my class X::Hash::Store::OddNumber is Exception {
     has $.last;
     method message() {
         my $msg =
-                "Odd number of elements found where hash initializer expected";
+          "Odd number of elements found where hash initializer expected";
         if $.found == 1 {
             $msg ~= $.last
-                    ?? ":\nOnly saw: $.last.raku()"
-                    !! ":\nOnly saw 1 element"
+              ?? ":\nOnly saw: $.last.raku()"
+              !! ":\nOnly saw 1 element"
         }
         else {
             $msg ~= ":\nFound $.found (implicit) elements";
@@ -2105,7 +2105,7 @@ my class X::Package::Stubbed does X::Comp {
     has @.packages;
     method message() {
         "The following packages were stubbed but not defined:\n    "
-                ~ @.packages.join("\n    ");
+        ~ @.packages.join("\n    ");
     }
 
     # The unnamed named param is here so this candidate, rather than
@@ -2122,8 +2122,8 @@ my class X::Phaser::PrePost is Exception {
     method message {
         my $what = $.phaser eq 'PRE' ?? 'Precondition' !! 'Postcondition';
         $.condition.defined
-                ?? "$what '$.condition.trim()' failed"
-                !! "$what failed";
+            ?? "$what '$.condition.trim()' failed"
+            !! "$what failed";
     }
 }
 
@@ -2131,7 +2131,7 @@ my class X::Str::InvalidCharName is Exception {
     has $.name;
     method message() {
         $!name.chars ?? "Unrecognized character name [{$!name}]"
-        !! "Cannot use empty name as character name"
+                     !! "Cannot use empty name as character name"
     }
 }
 
@@ -2238,8 +2238,8 @@ my class X::Str::Sprintf::Directives::BadType is Exception {
     has $.value;
     method message() {
         $.expected
-                ??  "Directive $.directive expected a $.expected value, not a $.type ({Rakudo::Internals.SHORT-STRING: $.value[0]})"
-                !! "Directive $.directive not applicable for value of type $.type ({Rakudo::Internals.SHORT-STRING: $.value[0]})"
+          ??  "Directive $.directive expected a $.expected value, not a $.type ({Rakudo::Internals.SHORT-STRING: $.value[0]})"
+          !! "Directive $.directive not applicable for value of type $.type ({Rakudo::Internals.SHORT-STRING: $.value[0]})"
     }
 }
 
@@ -2270,7 +2270,7 @@ my class X::Sequence::Deduction is Exception {
     has $.from;
     method message() {
         $!from ?? "Unable to deduce arithmetic or geometric sequence from: $!from\nDid you really mean '..'?"
-        !! 'Unable to deduce sequence for some unfathomable reason'
+               !! 'Unable to deduce sequence for some unfathomable reason'
     }
 }
 
@@ -2279,9 +2279,9 @@ my class X::Sequence::Endpoint is Exception {
     has $.endpoint;
     method message() {
         "Incompatible endpoint for sequence: "
-                ~ $!from.raku
-                ~ " ... "
-                ~ $!endpoint.raku
+          ~ $!from.raku
+          ~ " ... "
+          ~ $!endpoint.raku
     }
 }
 
@@ -2307,8 +2307,8 @@ my class X::Cannot::Lazy is Exception {
     has $.what;
     method message() {
         $.what
-                ?? "Cannot $.action a lazy list onto a $.what"
-                !! "Cannot $.action a lazy list";
+          ?? "Cannot $.action a lazy list onto a $.what"
+          !! "Cannot $.action a lazy list";
     }
 }
 my class X::Cannot::Empty is Exception {
@@ -2328,10 +2328,10 @@ my class X::Cannot::Capture is Exception {
     has $.what;
     method message() {
         "Cannot unpack or Capture `$!what.gist()`.\n"
-                ~ "To create a Capture, add parentheses: \\(...)\n"
-                ~ 'If unpacking in a signature, perhaps you needlessly used'
-                ~ ' parentheses? -> ($x) {} vs. -> $x {}'
-                ~ "\nor missed `:` in signature unpacking? -> \&c:(Int) \{}";
+          ~ "To create a Capture, add parentheses: \\(...)\n"
+          ~ 'If unpacking in a signature, perhaps you needlessly used'
+          ~ ' parentheses? -> ($x) {} vs. -> $x {}'
+          ~ "\nor missed `:` in signature unpacking? -> \&c:(Int) \{}";
     }
 }
 
@@ -2340,7 +2340,7 @@ my class X::Backslash::UnrecognizedSequence does X::Syntax {
     has $.suggestion;
     method message() {
         "Unrecognized backslash sequence: '\\$.sequence'"
-                ~ (nqp::defined($!suggestion) ?? ". Did you mean $!suggestion?" !! '')
+        ~ (nqp::defined($!suggestion) ?? ". Did you mean $!suggestion?" !! '')
     }
 }
 
@@ -2367,10 +2367,10 @@ my class X::ControlFlow::Return is X::ControlFlow {
     method enclosing() { 'Routine' }
     method message()   {
         'Attempt to return outside of ' ~ (
-        $!out-of-dynamic-scope
-                ?? 'immediately-enclosing Routine (i.e. `return` execution is'
-                        ~ ' outside the dynamic scope of the Routine where `return` was used)'
-                !! 'any Routine'
+            $!out-of-dynamic-scope
+              ?? 'immediately-enclosing Routine (i.e. `return` execution is'
+               ~ ' outside the dynamic scope of the Routine where `return` was used)'
+              !! 'any Routine'
         )
     }
 }
@@ -2395,32 +2395,32 @@ my class X::TypeCheck is Exception {
     method expected() { $!expected }
     method gotn() {
         nqp::stmts(
-                (my Str:D $raku := Rakudo::Internals.SHORT-STRING: $!got, :method<raku>),
-                nqp::if(
-                        nqp::eqaddr($!got.WHAT, $!expected.WHAT),
-                        $raku,
-                        nqp::if(
-                                nqp::can($!got.HOW, 'name'),
-                                "$!got.^name() ($raku)",
-                                $raku)))
+          (my Str:D $raku := Rakudo::Internals.SHORT-STRING: $!got, :method<raku>),
+          nqp::if(
+            nqp::eqaddr($!got.WHAT, $!expected.WHAT),
+            $raku,
+            nqp::if(
+              nqp::can($!got.HOW, 'name'),
+              "$!got.^name() ($raku)",
+              $raku)))
     }
     method expectedn() {
         nqp::if(
-                nqp::eqaddr($!got.WHAT, $!expected.WHAT),
-                Rakudo::Internals.MAYBE-STRING($!expected, :method<raku>),
-                nqp::if(
-                        nqp::can($!expected.HOW, 'name'),
-                        $!expected.^name,
-                        '?'))
+          nqp::eqaddr($!got.WHAT, $!expected.WHAT),
+          Rakudo::Internals.MAYBE-STRING($!expected, :method<raku>),
+          nqp::if(
+            nqp::can($!expected.HOW, 'name'),
+            $!expected.^name,
+            '?'))
     }
     method priors() {
         nqp::isconcrete($!got) && nqp::istype($!got, Failure)
-                ?? "Earlier failure:\n " ~ $!got.mess ~ "\nFinal error:\n "
-                !! ''
+          ?? "Earlier failure:\n " ~ $!got.mess ~ "\nFinal error:\n "
+          !! ''
     }
     method message() {
         self.priors() ~
-                "Type check failed in $.operation; expected $.expectedn but got $.gotn";
+        "Type check failed in $.operation; expected $.expectedn but got $.gotn";
     }
 }
 
@@ -2429,11 +2429,11 @@ my class X::TypeCheck::Binding is X::TypeCheck {
     method operation { 'binding' }
     method message() {
         my $to = $.symbol.defined && $.symbol ne '$'
-                ?? " to '$.symbol'"
-                !! "";
+            ?? " to '$.symbol'"
+            !! "";
         my $expected = nqp::eqaddr(self.expected, self.got)
-                ?? "expected type $.expectedn cannot be itself"
-                !! "expected $.expectedn but got $.gotn";
+            ?? "expected type $.expectedn cannot be itself"
+            !! "expected $.expectedn but got $.gotn";
         self.priors() ~ "Type check failed in $.operation$to; $expected";
     }
 }
@@ -2442,16 +2442,16 @@ my class X::TypeCheck::Binding::Parameter is X::TypeCheck::Binding {
     has Bool $.constraint;
     method expectedn() {
         $.constraint && nqp::istype(self.expected, Code)
-                ?? 'anonymous constraint to be met'
-                !! callsame()
+            ?? 'anonymous constraint to be met'
+            !! callsame()
     }
     method message() {
         my $to = $.symbol.defined && $.symbol ne '$'
-                ?? " to parameter '$.symbol'"
-                !! " to anonymous parameter";
+            ?? " to parameter '$.symbol'"
+            !! " to anonymous parameter";
         my $expected = nqp::eqaddr(self.expected, self.got)
-                ?? "expected type $.expectedn cannot be itself"
-                !! "expected $.expectedn but got $.gotn";
+            ?? "expected type $.expectedn cannot be itself"
+            !! "expected $.expectedn but got $.gotn";
         my $what-check = $.constraint ?? 'Constraint type' !! 'Type';
         self.priors() ~ "$what-check check failed in $.operation$to; $expected";
     }
@@ -2460,11 +2460,11 @@ my class X::TypeCheck::Return is X::TypeCheck {
     method operation { 'returning' }
     method message() {
         my $expected = nqp::eqaddr(self.expected, self.got)
-                ?? "expected return type $.expectedn cannot be itself " ~
-                        "(perhaps $.operation a :D type object?)"
-                !! "expected $.expectedn but got $.gotn";
+            ?? "expected return type $.expectedn cannot be itself " ~
+               "(perhaps $.operation a :D type object?)"
+            !! "expected $.expectedn but got $.gotn";
         self.priors() ~
-                "Type check failed for return value; $expected";
+        "Type check failed for return value; $expected";
     }
 }
 my class X::TypeCheck::Assignment is X::TypeCheck {
@@ -2472,15 +2472,15 @@ my class X::TypeCheck::Assignment is X::TypeCheck {
     method operation { 'assignment' }
     method message {
         my $to = $.symbol.defined && $.symbol ne '$'
-                ?? " to $.symbol" !! "";
+            ?? " to $.symbol" !! "";
         my $is-itself := nqp::eqaddr(self.expected, self.got);
         my $expected = $is-itself
-                ?? "expected type $.expectedn cannot be itself"
-                !! "expected $.expectedn but got $.gotn";
+            ?? "expected type $.expectedn cannot be itself"
+            !! "expected $.expectedn but got $.gotn";
         my $maybe-Nil := $is-itself
-                || nqp::istype(self.expected.HOW, Metamodel::DefiniteHOW)
-                && nqp::eqaddr(self.expected.^base_type, self.got)
-                ?? ' (perhaps Nil was assigned to a :D which had no default?)' !! '';
+          || nqp::istype(self.expected.HOW, Metamodel::DefiniteHOW)
+          && nqp::eqaddr(self.expected.^base_type, self.got)
+          ?? ' (perhaps Nil was assigned to a :D which had no default?)' !! '';
 
         self.priors() ~ "Type check failed in assignment$to; $expected$maybe-Nil"
     }
@@ -2491,12 +2491,12 @@ my class X::TypeCheck::Argument is X::TypeCheck {
     has $.objname;
     has $.signature;
     method message {
-        my $multi = $!signature ~~ /\n/ // '';
-        "Calling {$!objname}({ join(', ', @!arguments) }) will never work with " ~ (
-        $!protoguilt ?? 'signature of the proto ' !!
+            my $multi = $!signature ~~ /\n/ // '';
+            "Calling {$!objname}({ join(', ', @!arguments) }) will never work with " ~ (
+                $!protoguilt ?? 'signature of the proto ' !!
                 $multi       ?? 'any of these multi signatures:' !!
-                'declared signature '
-        ) ~ $!signature;
+                                'declared signature '
+            ) ~ $!signature;
     }
 }
 
@@ -2505,7 +2505,7 @@ my class X::TypeCheck::Attribute::Default is X::TypeCheck does X::Comp {
     has $.operation;
     method message {
         self.priors() ~
-                "Can never $.operation default value $.gotn to attribute '$.name', it expects: $.expectedn"
+        "Can never $.operation default value $.gotn to attribute '$.name', it expects: $.expectedn"
     }
 }
 
@@ -2513,7 +2513,7 @@ my class X::TypeCheck::Splice is X::TypeCheck does X::Comp {
     has $.action;
     method message {
         self.priors() ~
-                "Type check failed in {$.action}; expected $.expectedn but got $.gotn";
+        "Type check failed in {$.action}; expected $.expectedn but got $.gotn";
     }
 
 }
@@ -2522,10 +2522,10 @@ my class X::Assignment::RO is Exception {
     has $.value = "value";
     method message {
         nqp::isconcrete($!value)
-                ?? "Cannot modify an immutable {$!value.^name} ({
-                    Rakudo::Internals.SHORT-STRING: $!value
-                })"
-                !! "Cannot modify an immutable '{$!value.^name}' type object"
+          ?? "Cannot modify an immutable {$!value.^name} ({
+                 Rakudo::Internals.SHORT-STRING: $!value
+             })"
+          !! "Cannot modify an immutable '{$!value.^name}' type object"
     }
     method typename { $.value.^name }
 }
@@ -2575,7 +2575,7 @@ my class X::Inheritance::Unsupported does X::Comp {
     has $.parent;
     method message {
         $!parent.^name ~ ' does not support inheritance, so '
-                ~ $!child-typename ~ ' cannot inherit from it';
+        ~ $!child-typename ~ ' cannot inherit from it';
     }
 }
 
@@ -2617,8 +2617,8 @@ my class X::HyperOp::NonDWIM is Exception {
     has $.recursing;
     method message() {
         "Lists on either side of non-dwimmy hyperop of &.operator.name() are not of the same length"
-                ~ " while recursing" x +$.recursing
-                ~ "\nleft: $.left-elems elements, right: $.right-elems elements";
+        ~ " while recursing" x +$.recursing
+        ~ "\nleft: $.left-elems elements, right: $.right-elems elements";
     }
 }
 
@@ -2627,8 +2627,8 @@ my class X::HyperOp::Infinite is Exception {
     has $.side;
     method message() {
         $.side eq "both"
-                ?? "Lists on both sides of hyperop of &.operator.name() are known to be infinite"
-                !! "List on $.side side of hyperop of &.operator.name() is known to be infinite"
+            ?? "Lists on both sides of hyperop of &.operator.name() are known to be infinite"
+            !! "List on $.side side of hyperop of &.operator.name() is known to be infinite"
     }
 }
 
@@ -2673,7 +2673,7 @@ my class X::Import::MissingSymbols is Exception {
     has @.missing;
     method message() {
         "Trying to import from '$.from', but the following symbols are missing: "
-                ~ @.missing.join(', ');
+            ~ @.missing.join(', ');
     }
 }
 
@@ -2689,7 +2689,7 @@ my class X::Import::Positional is Exception {
     has $.source-package;
     method message() {
         "Error while importing from '$.source-package':\n"
-                ~ "no EXPORT sub, but you provided positional argument in the 'use' statement"
+        ~ "no EXPORT sub, but you provided positional argument in the 'use' statement"
     }
 }
 
@@ -2711,8 +2711,8 @@ my class X::Numeric::DivideByZero is Exception {
     has $.numerator;
     method message() {
         "Attempt to divide{$.numerator ?? " $.numerator" !! ''} by zero"
-                ~ ( $.using ?? " using $.using" !! '' )
-                ~ ( " $_" with $.details );
+          ~ ( $.using ?? " using $.using" !! '' )
+          ~ ( " $_" with $.details );
     }
 }
 
@@ -2729,11 +2729,11 @@ my class X::Numeric::Confused is Exception {
     has $.base;
     method message() {
         "This call only converts base-$.base strings to numbers; value "
-                ~ "{$.num.raku} is of type {$.num.WHAT.^name}, so cannot be converted!"
-                ~ (
-        "\n(If you really wanted to convert {$.num.raku} to a base-$.base"
+        ~ "{$.num.raku} is of type {$.num.WHAT.^name}, so cannot be converted!"
+        ~ (
+            "\n(If you really wanted to convert {$.num.raku} to a base-$.base"
                 ~ " string, use {$.num.raku}.base($.base) instead.)"
-        if $.num.^can('base')
+            if $.num.^can('base')
         );
     }
 }
@@ -2801,11 +2801,11 @@ my class X::Multi::Ambiguous is Exception {
         my $cap = '(' ~ @bits.join(", ") ~ ')';
         @priors = flat "Earlier failures:\n", @priors, "\nFinal error:\n " if @priors;
         @priors.join ~ join "\n",
-                "Ambiguous call to '$.dispatcher.name()$cap'; these signatures all match:",
-                @.ambiguous.map: {
-                    my $sig := .signature.raku.substr(1).subst(/ \s* "-->" <-[)]>+ /);
-                    .?default ?? "  $sig is default" !! "  $sig"
-                }
+            "Ambiguous call to '$.dispatcher.name()$cap'; these signatures all match:",
+            @.ambiguous.map: {
+                my $sig := .signature.raku.substr(1).subst(/ \s* "-->" <-[)]>+ /);
+                .?default ?? "  $sig is default" !! "  $sig"
+            }
     }
 }
 
@@ -2817,9 +2817,9 @@ my class X::Multi::NoMatch is Exception {
         my @un-rw-cand;
         if first / 'is rw' /, @cand {
             my $rw-capture = Capture.new(
-                    :list( $!capture.list.map({ my $ = $_ })                  ),
-                    :hash( $!capture.hash.map({ .key => my $ = .value }).hash ),
-                    );
+                :list( $!capture.list.map({ my $ = $_ })                  ),
+                :hash( $!capture.hash.map({ .key => my $ = .value }).hash ),
+            );
             @un-rw-cand = $.dispatcher.dispatchees».signature.grep({
                 $rw-capture ~~ $^cand
             })».gist;
@@ -2831,8 +2831,8 @@ my class X::Multi::NoMatch is Exception {
         if $.capture {
             for $.capture.list {
                 try @bits.push(
-                        $where ?? Rakudo::Internals.SHORT-STRING($_) !! .WHAT.raku ~ ':' ~ (.defined ?? "D" !! "U")
-                        );
+                    $where ?? Rakudo::Internals.SHORT-STRING($_) !! .WHAT.raku ~ ':' ~ (.defined ?? "D" !! "U")
+                );
                 @bits.push($_.^name) if $!;
                 if nqp::istype($_,Failure) {
                     @priors.push(" " ~ .mess);
@@ -2847,8 +2847,8 @@ my class X::Multi::NoMatch is Exception {
                 }
                 else {
                     try @bits.push(":$(.key)\($($where
-                            ?? Rakudo::Internals.SHORT-STRING(.value)
-                            !! .value.WHAT.raku
+                        ?? Rakudo::Internals.SHORT-STRING(.value)
+                        !! .value.WHAT.raku
                     ))");
                     @bits.push(':' ~ .value.^name) if $!;
                 }
@@ -2865,17 +2865,17 @@ my class X::Multi::NoMatch is Exception {
         my $cap = '(' ~ @bits.join(", ") ~ ')';
         @priors = flat "Earlier failures:\n", @priors, "\nFinal error:\n " if @priors;
         @priors.join ~ "Cannot resolve caller $.dispatcher.name()$cap; " ~ (
-        @un-rw-cand
-                ?? "the following candidates\nmatch the type but require "
-                        ~ 'mutable arguments:' ~  join("\n    ", '', @un-rw-cand) ~ (
-                "\n\nThe following do not match for other reasons:"
+            @un-rw-cand
+            ?? "the following candidates\nmatch the type but require "
+                ~ 'mutable arguments:' ~  join("\n    ", '', @un-rw-cand) ~ (
+                        "\n\nThe following do not match for other reasons:"
                         ~  join("\n    ", '', sort keys @cand ∖ @un-rw-cand)
-                unless @cand == @un-rw-cand
+                    unless @cand == @un-rw-cand
                 )
-                !! ( @cand
-                ??  join "\n    ", 'none of these signatures match:', @cand
-                !! "Routine does not have any candidates. Is only the proto defined?"
-        )
+            !! ( @cand
+                 ??  join "\n    ", 'none of these signatures match:', @cand
+                 !! "Routine does not have any candidates. Is only the proto defined?"
+               )
         );
     }
 }
@@ -2896,7 +2896,7 @@ my class X::Inheritance::NotComposed does X::MOP {
     has $.parent-name;
     method message() {
         "'$.child-name' cannot inherit from '$.parent-name' because '$.parent-name' isn't composed yet"
-                ~ ' (maybe it is stubbed)';
+            ~ ' (maybe it is stubbed)';
     }
 }
 
@@ -2907,99 +2907,99 @@ my class X::PhaserExceptions is Exception {
     }
     multi method gist(X::PhaserExceptions:D:) {
         join "\n", flat
-                "Multiple exceptions were thrown by LEAVE/POST phasers\n",
-                @!exceptions>>.gist>>.indent(4)
+            "Multiple exceptions were thrown by LEAVE/POST phasers\n",
+            @!exceptions>>.gist>>.indent(4)
     }
 }
 
 
 #?if !moar
 nqp::bindcurhllsym('P6EX', nqp::hash(
-        #?endif
-        #?if moar
-        nqp::bindcurhllsym('P6EX', BEGIN nqp::hash(
-                #?endif
-                'X::TypeCheck::Binding',
-                -> Mu $got is raw, Mu $expected is raw, $symbol? is raw {
-                    X::TypeCheck::Binding.new(:$got, :$expected, :$symbol).throw;
-                },
-                'X::TypeCheck::Binding::Parameter',
-                -> Mu $got is raw, Mu $expected is raw, $symbol is raw, $parameter is raw, $is-constraint? is raw {
-                    my $constraint = $is-constraint ?? True !! False;
-                    X::TypeCheck::Binding::Parameter.new(:$got, :$expected, :$symbol, :$parameter, :$constraint).throw;
-                },
-                'X::TypeCheck::Assignment',
-                -> Mu $symbol is raw, Mu $got is raw, Mu $expected is raw {
-                    X::TypeCheck::Assignment.new(:$symbol, :$got, :$expected).throw;
-                },
-                'X::TypeCheck::Return',
-                -> Mu $got is raw, Mu $expected is raw {
-                    X::TypeCheck::Return.new(:$got, :$expected).throw;
-                },
-                'X::Assignment::RO',
-                -> $value is raw = "value" {
-                    X::Assignment::RO.new(:$value).throw;
-                },
-                'X::ControlFlow::Return',
-                -> $out-of-dynamic-scope is raw = False {
-                    X::ControlFlow::Return.new(:$out-of-dynamic-scope).throw;
-                },
-                'X::NoDispatcher',
-                -> $redispatcher is raw {
-                    X::NoDispatcher.new(:$redispatcher).throw;
-                },
-                'X::Method::NotFound',
-                -> Mu $invocant is raw, $method is raw, $typename is raw, $private is raw = False, :$in-class-call is raw = False {
-                    X::Method::NotFound.new(:$invocant, :$method, :$typename, :$private, :$in-class-call).throw
-                },
-                'X::Multi::Ambiguous',
-                -> $dispatcher is raw, @ambiguous is raw, $capture is raw {
-                    X::Multi::Ambiguous.new(:$dispatcher, :@ambiguous, :$capture).throw
-                },
-                'X::Multi::NoMatch',
-                -> $dispatcher is raw, $capture is raw {
-                    X::Multi::NoMatch.new(:$dispatcher, :$capture).throw
-                },
-                'X::Role::Initialization',
-                -> $role is raw {
-                    X::Role::Initialization.new(:$role).throw
-                },
-                'X::Role::Parametric::NoSuchCandidate',
-                -> Mu $role is raw {
-                    X::Role::Parametric::NoSuchCandidate.new(:$role).throw;
-                },
-                'X::Inheritance::NotComposed',
-                -> $child-name is raw, $parent-name is raw {
-                    X::Inheritance::NotComposed.new(:$child-name, :$parent-name).throw;
-                },
-                'X::Parameter::RW',
-                -> Mu $got is raw, $symbol is raw {
-                    X::Parameter::RW.new(:$got, :$symbol).throw;
-                },
-                'X::PhaserExceptions',
-                -> @exceptions is raw {
-                    X::PhaserExceptions.new(exceptions =>
-                    @exceptions.map(-> Mu \e { EXCEPTION(e) })).throw;
-                },
-                'X::Trait::Invalid',
-                -> $type is raw, $subtype is raw, $declaring is raw, $name is raw {
-                    X::Trait::Invalid.new(:$type, :$subtype, :$declaring, :$name).throw;
-                },
-                'X::Parameter::InvalidConcreteness',
-                -> $expected is raw, $got is raw, $routine is raw, $param is raw, Bool() $should-be-concrete is raw, Bool() $param-is-invocant is raw {
-                    X::Parameter::InvalidConcreteness.new(:$expected, :$got, :$routine, :$param, :$should-be-concrete, :$param-is-invocant).throw;
-                },
-                'X::NYI',
-                -> $feature is raw {
-                    X::NYI.new(:$feature).throw;
-                },
-                                         ));
+#?endif
+#?if moar
+nqp::bindcurhllsym('P6EX', BEGIN nqp::hash(
+#?endif
+  'X::TypeCheck::Binding',
+  -> Mu $got is raw, Mu $expected is raw, $symbol? is raw {
+      X::TypeCheck::Binding.new(:$got, :$expected, :$symbol).throw;
+  },
+  'X::TypeCheck::Binding::Parameter',
+  -> Mu $got is raw, Mu $expected is raw, $symbol is raw, $parameter is raw, $is-constraint? is raw {
+      my $constraint = $is-constraint ?? True !! False;
+      X::TypeCheck::Binding::Parameter.new(:$got, :$expected, :$symbol, :$parameter, :$constraint).throw;
+  },
+  'X::TypeCheck::Assignment',
+  -> Mu $symbol is raw, Mu $got is raw, Mu $expected is raw {
+      X::TypeCheck::Assignment.new(:$symbol, :$got, :$expected).throw;
+  },
+  'X::TypeCheck::Return',
+  -> Mu $got is raw, Mu $expected is raw {
+      X::TypeCheck::Return.new(:$got, :$expected).throw;
+  },
+  'X::Assignment::RO',
+  -> $value is raw = "value" {
+      X::Assignment::RO.new(:$value).throw;
+  },
+  'X::ControlFlow::Return',
+  -> $out-of-dynamic-scope is raw = False {
+      X::ControlFlow::Return.new(:$out-of-dynamic-scope).throw;
+  },
+  'X::NoDispatcher',
+  -> $redispatcher is raw {
+      X::NoDispatcher.new(:$redispatcher).throw;
+  },
+  'X::Method::NotFound',
+  -> Mu $invocant is raw, $method is raw, $typename is raw, $private is raw = False, :$in-class-call is raw = False {
+      X::Method::NotFound.new(:$invocant, :$method, :$typename, :$private, :$in-class-call).throw
+  },
+  'X::Multi::Ambiguous',
+  -> $dispatcher is raw, @ambiguous is raw, $capture is raw {
+      X::Multi::Ambiguous.new(:$dispatcher, :@ambiguous, :$capture).throw
+  },
+  'X::Multi::NoMatch',
+  -> $dispatcher is raw, $capture is raw {
+      X::Multi::NoMatch.new(:$dispatcher, :$capture).throw
+  },
+  'X::Role::Initialization',
+  -> $role is raw {
+      X::Role::Initialization.new(:$role).throw
+  },
+  'X::Role::Parametric::NoSuchCandidate',
+  -> Mu $role is raw {
+      X::Role::Parametric::NoSuchCandidate.new(:$role).throw;
+  },
+  'X::Inheritance::NotComposed',
+  -> $child-name is raw, $parent-name is raw {
+      X::Inheritance::NotComposed.new(:$child-name, :$parent-name).throw;
+  },
+  'X::Parameter::RW',
+  -> Mu $got is raw, $symbol is raw {
+      X::Parameter::RW.new(:$got, :$symbol).throw;
+  },
+  'X::PhaserExceptions',
+  -> @exceptions is raw {
+      X::PhaserExceptions.new(exceptions =>
+        @exceptions.map(-> Mu \e { EXCEPTION(e) })).throw;
+  },
+  'X::Trait::Invalid',
+  -> $type is raw, $subtype is raw, $declaring is raw, $name is raw {
+      X::Trait::Invalid.new(:$type, :$subtype, :$declaring, :$name).throw;
+  },
+  'X::Parameter::InvalidConcreteness',
+  -> $expected is raw, $got is raw, $routine is raw, $param is raw, Bool() $should-be-concrete is raw, Bool() $param-is-invocant is raw {
+      X::Parameter::InvalidConcreteness.new(:$expected, :$got, :$routine, :$param, :$should-be-concrete, :$param-is-invocant).throw;
+  },
+  'X::NYI',
+  -> $feature is raw {
+      X::NYI.new(:$feature).throw;
+  },
+));
 
-        my class X::HyperWhatever::Multiple is Exception {
-            method message() {
-                "Multiple HyperWhatevers and Whatevers may not be used together"
-            }
-        }
+my class X::HyperWhatever::Multiple is Exception {
+    method message() {
+        "Multiple HyperWhatevers and Whatevers may not be used together"
+    }
+}
 
 my class X::EXPORTHOW::InvalidDirective does X::Comp {
     has $.directive;
@@ -3036,7 +3036,7 @@ my class X::UnitScope::TooLate does X::Syntax {
     has $.what;
     method message() {
         "Too late for unit-scoped $.what definition;\n"
-                ~ "Please use the block form."
+        ~ "Please use the block form."
     }
 }
 
@@ -3092,8 +3092,8 @@ my class X::MultipleTypeSmiley does X::Comp {
 my class X::Seq::Consumed is Exception {
     method message() {
         "The iterator of this Seq is already in use/consumed by another Seq\n" ~
-                "(you might solve this by adding .cache on usages of the Seq, or\n" ~
-                "by assigning the Seq into an array)"
+        "(you might solve this by adding .cache on usages of the Seq, or\n" ~
+        "by assigning the Seq into an array)"
     }
 }
 
@@ -3192,6 +3192,7 @@ my class X::Proc::Unsuccessful is Exception {
 }
 
 class CompUnit::DependencySpecification { ... }
+class CompUnit::Repository::FileSystem { ... }
 my class X::CompUnit::UnsatisfiedDependency is Exception {
     has CompUnit::DependencySpecification $.specification;
 
@@ -3204,20 +3205,29 @@ my class X::CompUnit::UnsatisfiedDependency is Exception {
             $ns := $ns{$_}.WHO;
         };
         $ns{$last}:exists
-                and not nqp::istype(nqp::how($ns{$last}), Metamodel::PackageHOW)
+            and not nqp::istype(nqp::how($ns{$last}), Metamodel::PackageHOW)
+    }
+
+    method !is-missing-from-meta-file() {
+        $*REPO.isa(CompUnit::Repository::FileSystem) and $*REPO.prefix.add("META6.json").e
     }
 
     method message() {
         my $name = $.specification.short-name;
         is-core($name)
-                ?? "{$name} is a builtin type, not an external module"
-                !! "Could not find $.specification in:\n"
+            ?? "{$name} is a builtin type, not an external module"
+            !! "Could not find $.specification in:\n"
                 ~ $*REPO.repo-chain.map(*.path-spec).join("\n").indent(4)
-        ~ ($.specification ~~ / $<name>=.+ '::from' $ /
-                ?? "\n\nIf you meant to use the :from adverb, use"
+                ~ ($.specification ~~ / $<name>=.+ '::from' $ /
+                    ?? "\n\nIf you meant to use the :from adverb, use"
                         ~ " a single colon for it: $<name>:from<...>\n"
-                !! ''
-        )
+                    !! self!is-missing-from-meta-file
+                        ?? "\n\nPlease note that a 'META6.json' file was found in '$*REPO.prefix.relative()',"
+                            ~ " of which the 'provides' section was used to determine if a dependency is available"
+                            ~ " or not.  Perhaps you need to add '$!specification' in the <provides> section of"
+                            ~ " that file?  Or need to specify a directory that does *not* have a 'META6.json' file?"
+                        !! ''
+                )
     }
 }
 
