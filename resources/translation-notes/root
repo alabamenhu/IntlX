@@ -1,15 +1,3 @@
-CLASS X::SecurityPolicy::Eval
-The SlurpySentry referenced is an internal role, however it is unused.
-Simply use $.payload.Str instead, which is what core should have.
-
-CLASS X::AdHoc
-The SlurpySentry referenced is an old internal role, nowadays unused.
-Most languages should simply use '$.payload.Str' as the entire method,
-which is what core should probably do as well.
-
-CLASS X::ControlFlow::Return
-Use $.out-of-dynamic-scope instead of $!out-of-dynamic-scope in translations
-
 CLASS CX::Done
 Currently untranslated in core.  Ensure 'done' is left verbatim.
 
@@ -37,6 +25,11 @@ Currently untranslated in core.  Ensure 'succeed' is left verbatim.
 CLASS CX::Take
 Currently untranslated in core.  Ensure 'take' is left verbatim.
 
+CLASS X::AdHoc
+The SlurpySentry referenced is an old internal role, nowadays unused.
+Most languages should simply use '$.payload.Str' as the entire method,
+which is what core should probably do as well.
+
 CLASS X::Adverb
 Use the method access for the instance variables (@.unexpected, @.nogo, etc).
 You may need to substantially rewrite the logic to create a text that is
@@ -57,3 +50,149 @@ role knowhow native slang block>.
 CLASS X::Attribute::Required
 The reason is arbitrary text at the moment.  You may consider avoiding printing it.
 
+CLASS X::Backslash::UnrecognizedSequence
+Use $.suggestion instead of $!value.  You can also use $.suggestion.defined
+to avoid NQP if you wish.
+
+CLASS X::ControlFlow::Return
+Use $.out-of-dynamic-scope instead of $!out-of-dynamic-scope in translations
+
+CLASS X::IO::Lock
+The lock-type is a semiarbitrary string defined as
+     '[non-]?blocking, [shared|exclusive]'
+The OS error will likely be localized to the user's OS, or may be a numeric code.
+
+CLASS X::SecurityPolicy::Eval
+The SlurpySentry referenced is an internal role, however it is unused.
+Simply use $.payload.Str instead, which is what core should have.
+
+CLASS Class: X::Cannot::Capture
+Make sure to use $.what instead of $!what
+
+CLASS X::Comp::BeginTime
+Make sure to use $.exception and $.use-case instead of $!exception and $!use-case
+
+CLASS X::ControlFlow::Return
+Make sure to use $.out-of-dynamic-scope instead of $!out-of-dynamic-scope
+
+CLASS X::Inheritance::Unsupported
+Make sure to use $.parent and $.child-typename instead of $!parent and $!child-typename
+
+CLASS X::Multi::NoMatch
+Make sure to use $.capture instead of $!capture
+
+CLASS X::MustBeParametric
+Make sure to use $.type instead of $!type
+
+CLASS X::NYI::BigInt
+Make sure to use $.big, $.op, $.side instead of $!big, $!op, $!side
+
+CLASS X::NoCoreRevision
+Make sure to use $.lang-rev instead of $!lang-rev
+
+CLASS X::NotParametric
+Make sure to use $.type instead of $!type
+
+CLASS X::Numeric::CannotConvert
+Make sure to use $.target, $.reason, $.source instead of $!target, $!reason, $!source
+
+CLASS X::Parameter::BadType
+Make sure to use $.type instead of $!type
+
+CLASS X::Parameter::Default::TypeCheck
+Make sure to use $.got, $.expected instead of $!got, $!expected
+
+CLASS X::Parameter::InvalidConcreteness
+Make sure to use $.routine, $.param, $.got, $.expected, $.param-is-invocant,
+and $.should-be-concrete instead of their direct ($!) access variants.
+
+CLASS X::Placeholder::NonPlaceholder
+Make sure to use $.decl, $.placeholder, $.variable-name instead
+of $!decl, $!placeholder $!variable-name
+
+CLASS X::PoisonedAlias
+Make sure to use $.alias instead of $!alias.  $.package-type will
+only return 'package' at the moment.  This message does not appear
+anywhere in Rakudo at the present time.
+
+CLASS X::Sequence::Deduction
+Make sure to use $.from instead of $!from
+
+CLASS X::Sequence::Endpoint
+Make sure to use $.from and $.endpoint instead of $!from and $!endpoint
+
+CLASS X::Str::InvalidCharName
+Make sure to use $.name instead of $!name
+
+CLASS X::Syntax::Extension::SpecialForm
+Make sure to use $.hint instead of $!hint.
+Currently $.hint is only provided when $.code is "~~".  The message is
+'(consider implementing an ACCEPTS method)'.  You may consider handling
+this specially in the method.  The $.category is generally an operator
+type like infix/circumfix, etc.
+
+CLASS X::Syntax::InfixInTermPosition
+Make sure to use $.infix instead of $!.infix
+
+CLASS X::Syntax::Number::LiteralType
+Make sure to use $.value and $var-type instead of $!value and $!var-type
+
+CLASS X::Syntax::Perl5Var
+Make sure to use $.name and $.identifier-name instead of $!name and $!identifier-name.
+The $m variable is a predefined hash that we do not have access to.
+TODO explain these
+
+CLASS X::Syntax::Regex::QuantifierValue
+Make sure to use $.inf, $.non-numeric-range, $.non-numeric, $.empty-range
+instead of their direct accessor ($!foo) equivalents.
+
+CLASS X::Syntax::UnlessElse
+Make sure to use $.keyword intsead of $!keyword
+
+CLASS X::Syntax::Variable::BadType
+Make sure to use $.type instead of $!type
+
+CLASS X::Syntax::Variable::ConflictingTypes
+Make sure to use $.inner and $.outer instead of $!inner and $!outer
+
+CLASS X::Syntax::Variable::Initializer
+Make sure to use $.name instead of $!name
+
+CLASS X::Syntax::WithoutElse
+Make sure to use $.keyword instead of $!keyword
+
+CLASS X::TooLateForREPR
+Make sure to use $.type instead of $!type
+
+CLASS X::TypeCheck::Argument
+Make sure to use $.signature, $.objname, $.arguments, @.arguments,
+$.protoguilt instead of their direct access ($!foo) variants.
+In current versions of Rakudo, protoguilt will always be empty,
+but presumably it will be an adhoc string :-(
+
+CLASS X::UnitScope::Invalid
+Make sure to use $.what, $.where and $.suggestion. Currently,
+$.where and $.suggestion are adhoc and not necessarily easy to
+localize using Intl::X
+
+CLASS X::Worry::P5::LeadingZero
+To handle the virtual machine pragmas, check $*VM eq 'jvm' to detect
+the Java backend (fyi: 'moar' and 'js' are the others).  This code
+block is formatted ugly as sin, so you'll likely need to rewrite it.
+Here's how I'd recommend (pardon my informality):
+    'Makes no sense, for an octal'
+    ~ ", use prefix '0o'"
+    ~ (
+        (if $*JV.name eq 'jvm' {
+            $.value ~~ /<[89]>/
+        }else{
+            $.value.comb.grep(*.unival > 7)
+        })
+            ?? ", but $.value ain't no octal"
+            !! "; like, '0o$.value'"
+    )
+    ~ '. For a string, add quotes.'
+
+CLASS X::Worry::Precedence::Range
+Use $.action instead of $!action.  Note, however, that $.action is
+an adhoc value that isn't easily translatable at the moment.

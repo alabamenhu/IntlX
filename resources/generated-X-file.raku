@@ -26,8 +26,10 @@ my $header = q:to/GENERATED/;
 
 GENERATED
 
+my @skip = 'X::Sequence::Endpoint';
 my $wrap-code = [~] do for @classes.sort -> $type {
-     $type ~ '.^find_method("message").wrap(%x{$language}<{' ~ $type ~ '>//ENGLISH);' ~ "\n"
+    ('#' if $type (elem) @skip) ~
+     $type ~ ".^find_method('message').wrap: method \{with \%x\{\$language}<$type> \{self.\&(\$_)} else \{callsame}};\n"
 }
 
 my $current-file = $gen-file.slurp;

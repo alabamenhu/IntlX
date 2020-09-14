@@ -7,6 +7,17 @@ confusing error messages are considered a bug in Rakudo, its primary compiler.
 Nonetheless, not everyone speaks English exceptionally well, and sometimes it can be nice to get errors and warnings reported back in someone's native language.
 If a user wants to report the message on an international forum where English is generally spoken, in the future the `.message` will (unlike in English) report the name of the exception type.
 
+[//]: # "[Unrendered_BEGIN_LOCALIZATION_LIST"
+
+The following localizations are available:
+
+  * Asturian (Matthew Stuckwisch)
+  * Spanish (Matthew Stuckwisch)
+  * European Portuguese (Matthew Stuckwisch)
+  
+[//]: # "[Unrendered_END_LOCALIZATION_LIST"
+
+
 ## How to help localize Rakudo
 
 Localization does require some basic knowledge of the Raku language, although deep knowledge is not required.
@@ -71,6 +82,17 @@ For stats purposes, it will count as translated, and the updater script will pre
 Don't adjust the contents of `Original Code`, however, because that is used to compare with newer copies of `Exceptions.pm6` and alert you to potential changes.
 Only change the contents of the method -- **I'm lazy** and various scripts depend on the `'X::Type' => method {` header and `},` footer being exactly as they are.
 
+Every method that uses a private variable (`$!foo`) *must* be handled according to the translation notes or else your file will not compile.
+As a result, if you use the template file directly, you will likely get the following error:
+
+    Cannot find method 'EXISTS-KEY' on 'BOOTHash': no method cache and no .^find_method
+
+When in doubt, simply try to use `raku xx.pm6` (where xx is your language code). 
+Fix anything it says. 
+Probably the translation notes near the error line number will explain what you need to do. 
+
+Lastly, wherever `naive-word-wrapper` is used, you may experience errors if your version of Rakudo does not include it.
+I am working to include a stable workaround for earlier versions.
 
 ## Translation notes
 

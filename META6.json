@@ -12,6 +12,7 @@
   "test-depends": [],
   "provides": {
     "Intl::X::es" : "lib/Intl/X/es.pm6",
+    "Intl::X::ast" : "lib/Intl/X/ast.pm6",
     "Intl::X" : "lib/Intl/X.pm6"
   },
   "resources": [],

@@ -10,7 +10,7 @@ my @exclude = <Exception X::Method::NotFound X::StubCode CX::Warn>;
 sub MAIN ($lang) {
     #my $lang = 'ast';
     my $t-file = $?FILE.IO.parent.sibling('lib').add('Intl').add('X').add("$lang.pm6");
-    my $b-file = $?FILE.IO.parent.sibling('lib').add('Intl').add('X').add("{ $lang }_BACKUP.pm6");
+    my $b-file = $?FILE.IO.parent.sibling('lib').add('Intl').add('X').add("{$lang}_BACKUP.pm6");
 
     my $orig = $t-file.slurp;
 
@@ -32,14 +32,10 @@ sub MAIN ($lang) {
     # 1.b: Parse out translations
     my %misc;
     my regex header-translation {
-        \' $<class>=(.*?) \'
-        # key (quoted class name)
-        <.ws> '=>' <.ws>
-        # fat comma
-        'method' <.ws>
-        # value (method)
-        '{'$<content>=(.*)'},' $
-        #   contents of method
+        \' $<class>=(.*?) \'     # key (quoted class name)
+        <.ws> '=>' <.ws>         # fat comma
+        'method' <.ws>           # value (method)
+        '{'$<content>=(.*)'},' $ #   contents of method
     }
 
     my $header = trim $orig.substr: $misc-header-end, $misc-footer-start - $misc-header-end;

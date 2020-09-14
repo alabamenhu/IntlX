@@ -41,6 +41,11 @@ sub MAIN() {
 
         our %exceptions = Map.new:
 
+        # You may wish to create a glossary or provide other translation notes for
+        # future localizers to your language here.  All text before the first translation
+        # is preserved verbatim during updates, so you can also feel free to delete
+        # the instructions from this template.
+
         # These first few are special translations that are not directly messages,
         # but may be produced as a part of other messages.  They should be very stable
         # however should be checked upon each release that they match the current set
