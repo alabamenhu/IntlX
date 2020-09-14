@@ -1,4 +1,4 @@
-use Intl::X;
+use X;
 use Test;
 
 done-testing;

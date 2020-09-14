@@ -1,19 +1,20 @@
 {
   "name": "Intl::X",
-  "description": "Write me!",
+  "description": "A module enabling localized exceptions",
   "version": "0.1",
   "perl": "6.*",
   "authors": [
-    "Write me!"
+    "Matthew ‘Matéu’ Stephen STUCKWISCH"
   ],
-  "auth": "Write me!",
+  "auth": "github:alabamenhu",
   "depends": [],
   "build-depends": [],
   "test-depends": [],
   "provides": {
-    "Intl::X::es" : "lib/Intl/X/es.pm6",
-    "Intl::X::ast" : "lib/Intl/X/ast.pm6",
-    "Intl::X" : "lib/Intl/X.pm6"
+    "Intl::X::es" : "lib/Intl/X/es.rakumod",
+    "Intl::X::ast" : "lib/Intl/X/ast.rakumod",
+    "Intl::X" : "lib/Intl/X.rakumod",
+    "Intl::X::Support" : "lib/Intl/X/Support.rakumod"
   },
   "resources": [],
   "license": "Artistic-2.0",

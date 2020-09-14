@@ -6,7 +6,7 @@
 unit module Intl::X::ast;
 
 use MONKEY-GUTS;
-use Intl::X::Support;
+use Support;
 
 our %exceptions = Map.new:
 

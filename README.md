@@ -9,11 +9,11 @@ If a user wants to report the message on an international forum where English is
 
 [//]: # "[Unrendered_BEGIN_LOCALIZATION_LIST"
 
-The following localizations are available:
+The following localization is currently available:
 
-  * Asturian (Matthew Stuckwisch)
-  * Spanish (Matthew Stuckwisch)
-  * European Portuguese (Matthew Stuckwisch)
+  * Asturian (25% complete, by Matthew Stuckwisch)
+  
+There are other localizations in progress for Spanish, Portuguese (European), and Mandarin (Traditional Script).
   
 [//]: # "[Unrendered_END_LOCALIZATION_LIST"
 
@@ -101,6 +101,23 @@ In these cases, a translation note will be provided to aid translation.
 For example, private subs/methods are provided through `Intl::X::Support`, but may require a slightly different syntax which is illustrated in the notes.
 
 To provide language-specific guidance (for reference by future translators), simply use comments in the method block, as these are preserved throughout processing.
+
+## Resource scripts
+
+In the resources folder there are several scripts which are potentially useful:
+
+  - **parse-exceptions.raku**  
+  Parses `Exception.pm6` and translation notes to create `template.rakumod`
+  - **template.rakumod**  
+  This is the template that all languages should work from.
+  - **generate-X-file.raku**  
+  Detects all exceptions in `Exception.pm6` and creates the wrap code in `X.pm6` for them.
+  - **update-translation.raku**
+  Updates a translation file by integrating new translation notes and noting where the content of `Exception.pm6` has changed and thus requires revision.
+  - **translation-stats.raku**  
+  For the curious, provides statistics on translation progress.  Use `-d` for details.
+  - **clean-up-translation-notes.raku**  
+  Just alphabetizes the translation notes and normalizes spacing.
 
 ## Questions?
 
