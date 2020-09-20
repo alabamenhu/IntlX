@@ -6,7 +6,7 @@
 unit module Intl::X::ast;
 
 use MONKEY-GUTS;
-use Support;
+use Intl::X::Support;
 
 our %exceptions = Map.new:
 
@@ -14,9 +14,10 @@ our %exceptions = Map.new:
 
 English - Asturian Glossary
 
-type object X       oxetu tipal
+type object X       oxetu abstrautu
 object of type X    oxetu de tipu X
-slice               tayada
+slice               estrautu
+stub                códigu furracu
 
 
 -->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -213,11 +214,11 @@ slice               tayada
             $text ~= "ombinación inesperada d’alverbios ('@.nogo.join("', '")')";
         }
         my $slice = $.what ~~ /'[]'/
-                        ?? 'tayada []'
+                        ?? 'estrautu []'
                         !! $.what ~~ /'{}'/
-                            ?? 'tayada {}'
-                            !! 'tayada';
-        ($text ~ " pas{ $plural ?? 'aos' !! $female ?? 'ada' !! 'áu'} a $slice en '$.source'.").naive-word-wrapper
+                            ?? 'estrautu {}'
+                            !! 'estrautu';
+        ($text ~ " pas{ $plural ?? 'aos' !! $female ?? 'ada' !! 'áu'} al $slice en '$.source'.").naive-word-wrapper
 },
 
 
@@ -443,7 +444,7 @@ slice               tayada
 #        "Cannot bind to {$.type.^name} slice";
 
 'X::Bind::Slice' => method {
-        "Nun se pue enllaciar a una tayada {$.type.^name}";
+        "Nun se pue enllaciar a un estrautu {$.type.^name}";
 },
 
 
@@ -454,7 +455,7 @@ slice               tayada
 #        "Cannot bind to {$.type.^name} zen slice";
 
 'X::Bind::ZenSlice' => method {
-        "Nun se pue enllaciar a una tayada zen {$.type.^name}";
+        "Nun se pue enllaciar a un estrautu zen {$.type.^name}";
 },
 
 
@@ -2460,6 +2461,27 @@ slice               tayada
 
 
 
+# Class:  X::Redeclaration
+# Status: TO DO
+# Original Code:
+#        ("Redeclaration of $.what '$.symbol'"
+#          ~ (" $.postfix" if $.postfix)
+#          ~ ($.what eq 'routine'
+#              ?? ". Did you mean to declare a multi-sub?"
+#              !! ".")
+#        ).naive-word-wrapper
+
+'X::Redeclaration' => method {
+    ("Redeclaration of $.what '$.symbol'"
+            ~ (" $.postfix" if $.postfix)
+            ~ ($.what eq 'routine'
+                    ?? ". Did you mean to declare a multi-sub?"
+                    !! ".")
+    ).naive-word-wrapper
+},
+
+
+
 # Class: X::Redeclaration::Outer
 # Status: TO DO
 # Original Code:
@@ -3837,7 +3859,7 @@ slice               tayada
 #        $message.naive-word-wrapper
 
 'X::Undeclared' => method {
-        my $message := "$.what '$.symbol' is not declared";
+        my $message := "$.what '$.symbol' nun ta declarada";
         if +@.suggestions == 1 {
             $message := "$message. Did you mean '@.suggestions[0]'?";
         } elsif +@.suggestions > 1 {
@@ -3848,23 +3870,101 @@ slice               tayada
 
 
 
-# Class: X::Undeclared::Symbols
+# Class:  X::Undeclared::Symbols
 # Status: TO DO
 # Original Code:
-#        ("Redeclaration of $.what '$.symbol'"
-#                ~ (" $.postfix" if $.postfix)
-#                ~ ($.what eq 'routine'
-#                        ?? ". Did you mean to declare a multi-sub?"
-#                        !! ".")
-#        ).naive-word-wrapper
+#        sub l(@l) {
+#            my @lu = @l.map({ nqp::hllize($_) }).unique.sort;
+#            'used at line' ~ (@lu == 1 ?? ' ' !! 's ') ~ @lu.join(', ')
+#        }
+#        sub s(@s) {
+#            "Did you mean '{ @s.join("', '") }'?";
+#        }
+#        my $r = "";
+#        if %.post_types {
+#            $r ~= "Illegally post-declared type" ~ (%.post_types.elems == 1 ?? "" !! "s") ~ ":\n";
+#            for %.post_types.sort(*.key) {
+#                $r ~= "    $_.key() &l($_.value)\n";
+#            }
+#        }
+#        if %.unk_types {
+#            $r ~= "Undeclared name" ~ (%.unk_types.elems == 1 ?? "" !! "s") ~ ":\n";
+#            for %.unk_types.sort(*.key) {
+#                $r ~= "    $_.key() &l($_.value)";
+#                if +%.type_suggestion{$_.key()} {
+#                    $r ~= ". " ~ s(%.type_suggestion{$_.key()});
+#                }
+#                $r ~= "\n";
+#            }
+#        }
+#        if %.unk_routines {
+#            my $obs = {
+#                y => "tr",
+#                qr => "rx",
+#                local => "temp (or dynamic var)",
+#                new => "method call syntax",
+#                foreach => "for",
+#                use => '"v" prefix for pragma (e.g., "use v6;", "use v6.c;")',
+#                need => '"v" prefix and "use" for pragma (e.g., "use v6;", "use v6.c;")',
+#            }
+#            $r ~= "Undeclared routine" ~ (%.unk_routines.elems == 1 ?? "" !! "s") ~ ":\n";
+#            for %.unk_routines.sort(*.key) {
+#                $r ~= "    $_.key() &l($_.value)";
+#                $r ~= " (in Raku please use " ~ $obs{$_.key()} ~ " instead)" if $obs{$_.key()};
+#                if +%.routine_suggestion{$_.key()}.list {
+#                    $r ~= ". " ~ s(%.routine_suggestion{$_.key()}.list);
+#                }
+#                $r ~= "\n";
+#            }
+#        }
+#        $r
 
 'X::Undeclared::Symbols' => method {
-        ("Redeclaration of $.what '$.symbol'"
-                ~ (" $.postfix" if $.postfix)
-                ~ ($.what eq 'routine'
-                        ?? ". Did you mean to declare a multi-sub?"
-                        !! ".")
-        ).naive-word-wrapper
+    sub l(@l) {
+        my @lu = @l.map({ nqp::hllize($_) }).unique.sort;
+        'used at line' ~ (@lu == 1 ?? ' ' !! 's ') ~ @lu.join(', ')
+    }
+    sub s(@s) {
+        "Did you mean '{ @s.join("', '") }'?";
+    }
+    my $r = "";
+    if %.post_types {
+        $r ~= "Illegally post-declared type" ~ (%.post_types.elems == 1 ?? "" !! "s") ~ ":\n";
+        for %.post_types.sort(*.key) {
+            $r ~= "    $_.key() &l($_.value)\n";
+        }
+    }
+    if %.unk_types {
+        $r ~= "Undeclared name" ~ (%.unk_types.elems == 1 ?? "" !! "s") ~ ":\n";
+        for %.unk_types.sort(*.key) {
+            $r ~= "    $_.key() &l($_.value)";
+            if +%.type_suggestion{$_.key()} {
+                $r ~= ". " ~ s(%.type_suggestion{$_.key()});
+            }
+            $r ~= "\n";
+        }
+    }
+    if %.unk_routines {
+        my $obs = {
+            y => "tr",
+            qr => "rx",
+            local => "temp (or dynamic var)",
+            new => "method call syntax",
+            foreach => "for",
+            use => '"v" prefix for pragma (e.g., "use v6;", "use v6.c;")',
+            need => '"v" prefix and "use" for pragma (e.g., "use v6;", "use v6.c;")',
+        }
+        $r ~= "Undeclared routine" ~ (%.unk_routines.elems == 1 ?? "" !! "s") ~ ":\n";
+        for %.unk_routines.sort(*.key) {
+            $r ~= "    $_.key() &l($_.value)";
+            $r ~= " (in Raku please use " ~ $obs{$_.key()} ~ " instead)" if $obs{$_.key()};
+            if +%.routine_suggestion{$_.key()}.list {
+                $r ~= ". " ~ s(%.routine_suggestion{$_.key()}.list);
+            }
+            $r ~= "\n";
+        }
+    }
+    $r
 },
 
 
@@ -3881,36 +3981,36 @@ slice               tayada
 
 
 # Class: X::UnitScope::TooLate
-# Status: TO DO
+# Status: COMPLETE
 # Original Code:
 #        "Too late for unit-scoped $.what definition;\n"
 #                ~ "Please use the block form."
 
 'X::UnitScope::TooLate' => method {
-        "Too late for unit-scoped $.what definition;\n"
-                ~ "Please use the block form."
+        "Demasiao tarde pa una definición $.what d’algame unit;\n"
+                ~ "Pues usar la forma en bloque."
 },
 
 
 
 # Class: X::Value::Dynamic
-# Status: TO DO
+# Status: COMPLETE
 # Original Code:
 #        "$.what value must be known at compile time"
 
 'X::Value::Dynamic' => method {
-        "$.what value must be known at compile time"
+        "El valor $.what ha sabese nel momentu de compilar."
 },
 
 
 
 # Class: X::WheneverOutOfScope
-# Status: TO DO
+# Status: COMPLETE
 # Original Code:
 #        "Cannot have a 'whenever' block outside the scope of a 'supply' or 'react' block"
 
 'X::WheneverOutOfScope' => method {
-        "Cannot have a 'whenever' block outside the scope of a 'supply' or 'react' block"
+        "Nun se pue tener un bloque 'whenever' fuera del algame d’un bloque 'supply' or 'react'"
 },
 
 
@@ -3961,16 +4061,16 @@ Parenthesize as \\(...) if you intended a capture of a single numeric value./
 
 
 # Class: X::Worry::P5::Reference
-# Status: TO DO
+# Status: COMPLETE
 # Original Code:
 #        q/To pass an array, hash or sub to a function in Raku, just pass it as is.
 #For other uses of Perl's ref operator consider binding with ::= instead.
 #Parenthesize as \\(...) if you intended a capture of a single variable./
 
 'X::Worry::P5::Reference' => method {
-        q/To pass an array, hash or sub to a function in Raku, just pass it as is.
-For other uses of Perl's ref operator consider binding with ::= instead.
-Parenthesize as \\(...) if you intended a capture of a single variable./
+        q/Para pasar una matriz, hash o subrutina a una función en Raku, pásala como ye.
+Pa otros usos del operador Perl 'ref', quiciabes pueas enllaciar con ::=
+Pon ente paréntesis como \\(...) si quixisti capturar una sola variable./
 },
 
 
