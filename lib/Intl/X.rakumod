@@ -91,13 +91,55 @@ Exception.^find_method('Str').wrap: method (Exception:D:) {
     $str // ( self.&(%x<Exception.something-wrong>) // "Something went wrong in {self.WHAT.gist}");
 }
 
-#| The sub that will eventually handle language fallback logic
-sub intl-x($type) {
-    %x{$language}{$type}
+# need to do anything special for multi?
+X::Comp::Group.^find_method('gist').wrap: method (\self:D:) {
+    my $r = "";
+    my $sorry = 'SORRY!';
+    with %x{$language}<X::Comp::Group.sorry> { $sorry = self.&($_)};
+
+    if $.panic || @.sorrows {
+        my ($red, $clear) = Rakudo::Internals.error-rcgye;
+        $r ~= "$red==={$clear}$sorry$red===$clear\n";
+        for @.sorrows {
+            $r ~= .gist(:!sorry, :!expect) ~ "\n";
+        }
+        if $.panic {
+            $r ~= $.panic.gist(:!sorry) ~ "\n";
+        }
+    }
+    if @.worries {
+        my $potential = "Potential difficulties:";
+        my $others    = "Other potential difficulties";
+        with %x{$language}<X::Comp::Group.difficulties> { $potential = self.&($_)};
+        with %x{$language}<X::Comp::Group.other-diff>   { $others    = self.&($_)};
+
+        $r ~= $.panic || @.sorrows
+                ?? "$others:\n"
+                !! "$potential:\n";
+        for @.worries {
+            $r ~= .gist(:!sorry, :!expect).indent(4) ~ "\n";
+        }
+    }
+    $r
 }
+
+
+X::AdHoc.^find_method('payload').wrap: method {
+    my $adhoc = callsame;
+    if $adhoc eq 'Unexplained error' { # the original default
+        with %x{$language}<X::Adhoc::Eval.payload> { $adhoc = self.&($_) }
+    }
+    $adhoc
+}
+
 
 X::SecurityPolicy::Eval.^find_method('payload').wrap: method {
     with %x{$language}<X::SecurityPolicy::Eval.payload> { self.&($_)} else { callsame }
+}
+
+#| The sub that will eventually handle language fallback logic
+sub intl-x($type) {
+    %x{$language}{$type}
 }
 
 #####################################################
