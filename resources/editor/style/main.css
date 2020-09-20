@@ -1,0 +1,83 @@
+{
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+#normal-original {
+    background-color: rgba(200,200,200,1);
+    white-space: pre;
+    font-family: monospace;
+    border: solid 1pt black;
+    width: 100%;
+    margin: 0;
+    font-size: 10pt;
+    padding: .25em;
+}
+
+#normal-status {
+    width: 100%;
+    position: absolute;
+    margin: 0;
+    padding: .25em;
+    border: solid 1pt black;
+}
+
+#normal-translation {
+    background-color: rgba(255,255,255,1);
+    white-space: pre;
+    font-family: monospace;
+    border: none;
+    width: 100%;
+    font-size: 10pt;
+    padding-left: .25em;
+    padding-right: .25em;
+    padding-top: 0;
+    padding-bottom: 0;
+    resize: none;
+    margin: 0;
+    min-height: 1em;
+    overflow-y: hidden;
+    width: 100%;
+    position: absolute;
+    display: inline-block;
+}
+
+#normal-translation:focus {
+outline:none
+}
+
+#x-selector {
+    width: 20%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    visibility:hidden;
+}
+
+#normal-table {
+    position:fixed; left: 20%; top: 0; width: 80%;
+    visibility:hidden;
+}
+
+#intro {
+
+}
+.normal-cell {
+    min-height: 1.5em;
+    position: relative;
+    vertical-align: top;
+}
+
+#output {
+
+white-space: pre;
+font-family: monospace;
+color: rgba(0,100,0,1);
+
+}
+
+#generateSamples {
+   margin-bottom: .5em;
+}
