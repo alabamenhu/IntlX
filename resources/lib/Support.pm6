@@ -10,7 +10,7 @@ my rule class-header {
 
 my rule method-header {
     ^$<indent>=(\h*)method
-        message ['(' ')']?
+        message ['(' <-[\n)]>* ')']?
         '{'
         [$<oneliner>=[.*?] '}' \h* ]?  # a few exceptions are in a single line
     $
