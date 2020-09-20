@@ -23,7 +23,7 @@ sub MAIN(
             });
 
     for @language-code -> $lang {
-        my $file = $?FILE.IO.parent.sibling('lib').add('Intl').add('X').add("$lang.pm6");
+        my $file = $?FILE.IO.parent.sibling('lib').add('Intl').add('X').add("$lang.rakumod");
         my @status;
         @status.push: $0
             if $_ ~~ /^'# Status:'\h* (.*?)\h*$/
