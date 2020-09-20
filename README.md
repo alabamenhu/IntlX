@@ -12,8 +12,9 @@ If a user wants to report the message on an international forum where English is
 The following localization is currently available:
 
   * Asturian (25% complete, by Matthew Stuckwisch)
+  * Spanish (1% complete, by Matthew Stuckwisch)
   
-There are other localizations in progress for Spanish, Portuguese (European), and Mandarin (Traditional Script).
+There are other localizations in progress for Portuguese (European), and Mandarin (Traditional Script).
   
 [//]: # "[Unrendered_END_LOCALIZATION_LIST"
 
@@ -128,3 +129,9 @@ Find me (guifa) on #raku
   - Create a better fallback system
   - Add more translations.  
     Want to help?  File an issue and let's get started.
+    
+## Licenses and credit
+
+See the CREDITS file for a detailed list of translators and contributors.
+The module code was written by Matthew Stephen Stuckwisch and is licensed under the Artistic License 2.0.
+The support files include a executable version of webperl (Artistic License, by Hauke Daempfling) which itself includes a version of Rakudo (Artistic License 2.0, The Perl Foundation, the JS version being thanks in large part to Paweł Murias).
