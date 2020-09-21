@@ -155,10 +155,6 @@ function onChooseNormalException(event) {
     resizeTextArea();
 }
 
-/* ugly as sin lol */
-const jsEnc = "sub js-enc($s) { my $t = [~] do for $s.comb { given $_ { when '\"' { '\\\"' }; when '\\\\' { '\\\\\\\\' }; when \"\\n\" { '\\\\n' }; default {$_}}};'\"'~$t~'\"';}\n";
-
-
 function onGenerateMessages(event) {
     if (Raku.state != "Ready") {
         Raku.init( function () {onGenerateMessages(event)} );
@@ -190,6 +186,8 @@ function onGenerateMessages(event) {
                 testClass += attr + " => Nil,\n";
             }
         }
+        testClass += document.getElementById('args').value;
+
         testClass += ")";
 
         console.log("Calling the following:")
@@ -200,39 +198,24 @@ function onGenerateMessages(event) {
 
 }
 
+Raku.output = function(text, chan) { fromRaku(text, chan) };
 function fromRaku(text, chan) {
     document.getElementById('output').textContent += text + "\n";
 }
 
-Raku.output = function(text, chan) { fromRaku(text, chan) };
 
-function jsToRakuArgs(args) {
-    let rakuArgs;
-    for (key of Objects.keys(args)) {
-        rakuArgs += key + " => " + args[key] + ", ";
-    }
-}
-
+/* Resizes the code entry area to match its content */
 function resizeTextArea() {
-
     let text = document.getElementById("normal-translation");
+    let cell = document.getElementById("normal-translation-cell");
     text.style.height = "auto";
-    console.log("resizing with scrollHeight " + text.scrollHeight);
-    text.style.height = (text.scrollHeight + 0) + "px";
-    document.getElementById("normal-translation-cell").style.height = (text.scrollHeight + 0) + "px";
-
+    text.style.height = text.scrollHeight + "px";
+    cell.style.height = text.scrollHeight + "px";
 }
 
 
-var test = {
-    "X::Phaser::PrePost" : [
-        {
-            'condition' : `"say 'hello'"`,
-            'phaser' : `"PRE"`
-        },
-        {
-            'condition' : `"$*OUT.say: ':-('"`,
-            'phaser' : `"POST"`
-        }
-    ]
-}
+
+/* This will hold all of the test values.  Each script in test-values/
+ * will populate it with their associated values
+ */
+var test = {};
