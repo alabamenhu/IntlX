@@ -107,11 +107,11 @@ To provide language-specific guidance (for reference by future translators), sim
 
 In the resources folder there are several scripts which are potentially useful:
 
-  - **parse-exceptions.raku**  
+  - **generate-template.raku**  
   Parses `Exception.pm6` and translation notes to create `template.rakumod`
   - **template.rakumod**  
-  This is the template that all languages should work from.
-  - **generate-X-file.raku**  
+  This is the initial template that all languages should work from.
+  - **update-X-file.raku**  
   Detects all exceptions in `Exception.pm6` and creates the wrap code in `X.pm6` for them.
   - **update-translation.raku**
   Updates a translation file by integrating new translation notes and noting where the content of `Exception.pm6` has changed and thus requires revision.
@@ -132,6 +132,6 @@ Find me (guifa) on #raku
     
 ## Licenses and credit
 
-See the CREDITS file for a detailed list of translators and contributors.
+See the CREDITS file for a detailed list of translators.
 The module code was written by Matthew Stephen Stuckwisch and is licensed under the Artistic License 2.0.
 The support files include a executable version of webperl (Artistic License, by Hauke Daempfling) which itself includes a version of Rakudo (Artistic License 2.0, The Perl Foundation, the JS version being thanks in large part to Paweł Murias).
