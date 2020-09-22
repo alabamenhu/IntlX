@@ -16,16 +16,33 @@
         </script>
         <link rel="stylesheet" href="style/main.css">
         <!-- Below are all of the test data files, organized by namespace -->
+        <script src="scripts/test-values/x-anon.js"></script>
+        <script src="scripts/test-values/x-phaser.js"></script>
         <script src="scripts/test-values/x-undeclared.js"></script>
     </head>
     <body onload="init()">
-        <div id="intro">
+        <div id="intro" style="z-index:2">
+            <div style="z-index:2"
+                 id="file-dragdrop"
+                 ondragenter="onDragEnter(event)"
+                 ondragleave="onDragLeave(event)"
+                 ondragover="onDragOver(event)"
+                 ondrop="onDrop(event)"
+            >
+            <h1>Rakudo Exceptions Editor</h1>
             <p>Welcome to the localization editor for Rakudo exceptions files.  Please wait a few seconds for the Javascript VM version of Rakudo to load, it may take sometime.</p>
-            <p>To use this tool, simply select the appropriate <em>.rakumod</em> file for your language, found in the <em>lib/Intl/X/</em> directory of the source.  It will be automatically loaded.</p>
+            <p>To use this tool, simply select the appropriate <em>.rakumod</em> file for your language, found in the <em>lib/Intl/X/</em> directory of the source (hint: you can also drag and drop it onto this window).  It will be automatically loaded.</p>
+            <input type="file" id="file-selector" style="z-index:3">
+
+            </div>
         </div>
-        <input type="file" id="file-selector">
+        <div id="controls">
+            <h1>Rakudo Exceptions Editor</h1>
+            <p style="text-align:center"><input type="button" value="Download Modified Copy" style="display:inline-block" onclick="saveFile()"></p>
+            <hr>
+        </div>
+        <select id="x-selector" size="2"></select>
         <div id="normal">
-            <select id="x-selector" size="2"></select>
             <table id="normal-table">
                 <caption id="normal-type">This is the caption</caption>
                 <tr style="height:2em"><th>Status</th><td class="normal-cell"><input id="normal-status"></td></tr>
@@ -34,7 +51,7 @@
                 <tr><th>Translated</th><td><pre>    method message (<span id="trans-type-name">X</span>:D:) {</pre></td></tr>
                 <tr style="height:2em"><th class="normal-cell"></th><td class="normal-cell" id="normal-translation-cell"><textarea id="normal-translation"></textarea></td></tr>
                 <tr><th></th><td><pre>    }</pre></td></tr>
-                <tr style="height:auto"><th class="normal-cell">Sample</th><td class="normal-cell"><input type="button" id="generateSamples" value="Generate"> with attributes <input id="args"><div id="output"></div></td></tr>
+                <tr style="height:auto"><th class="normal-cell">Sample</th><td class="normal-cell"><input type="button" id="generateSamples" value="Generate"> with attributes <input id="generateAttributes"><div id="output"></div></td></tr>
             </table>
         </div>
     </body>
