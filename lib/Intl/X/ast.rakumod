@@ -239,7 +239,7 @@ stub                códigu furracu
 
 
 # Class: X::Anon::Multi
-# Status: TO DO
+# Status: COMPLETE
 # Original Code:
 #        "An anonymous $.routine-type may not take a $.multiness declarator"
 
