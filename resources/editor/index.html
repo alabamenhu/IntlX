@@ -21,6 +21,7 @@
         <script src="scripts/test-values/x-undeclared.js"></script>
     </head>
     <body onload="init()">
+    <div id="rakuStatus"><img src="imgs/camelia-bw.png" id="camelia"/><span id="statusText">Loading</span></div>
         <div id="intro" style="z-index:2">
             <div style="z-index:2"
                  id="file-dragdrop"
@@ -30,7 +31,7 @@
                  ondrop="onDrop(event)"
             >
             <h1>Rakudo Exceptions Editor</h1>
-            <p>Welcome to the localization editor for Rakudo exceptions files.  Please wait a few seconds for the Javascript VM version of Rakudo to load, it may take sometime.</p>
+            <p>Welcome to the localization editor for Rakudo exceptions files.  Please wait a few seconds for the Javascript VM version of Rakudo to load, it may take sometime (Camelia will show all of her colors when loaded).</p>
             <p>To use this tool, simply select the appropriate <em>.rakumod</em> file for your language, found in the <em>lib/Intl/X/</em> directory of the source (hint: you can also drag and drop it onto this window).  It will be automatically loaded.</p>
             <input type="file" id="file-selector" style="z-index:3">
 

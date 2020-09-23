@@ -6,7 +6,7 @@ var currentType = "";
 function init() {
   const fileSelector = document.getElementById('file-selector');
   fileSelector.addEventListener('change', (event) => { onChooseFile(event.target.files[0]) } );
-  document.getElementById('generateSamples').addEventListener('click', (event) => { onGenerateMessages() } );
+  document.getElementById('generateSamples').addEventListener('click', (event) => { onClickGenerate() } );
 
   /* allow for auto resizing of the textarea */
   document.getElementById('normal-translation').addEventListener('change', resizeTextArea );
@@ -186,15 +186,22 @@ function onChooseNormalException(event) {
     resizeTextArea();
 }
 
-function onGenerateMessages(event) {
+function onClickGenerate(event) {
     if (Raku.state != "Ready") {
-        Raku.init( function () {onGenerateMessages(event)} );
+        Raku.init( function () {onClickGenerate(event)} );
         return;
     }
+    runningStatus(true);
+    /* Because of animation optimizations in Chrome */
+    window.setTimeout( function() { onGenerateMessages(event)}, 0);
+}
+
+function onGenerateMessages(event) {
 
     /* Clear the current output */
     document.getElementById('output').textContent = "";
 
+    /* We have to use NQP for some of the operations, although Rakudo.js doesn't seem to support all of them */
     let preCode = 'use nqp; ';
 
     /* Generate the that we'll use definition */
@@ -217,8 +224,8 @@ function onGenerateMessages(event) {
                 testClass += attr + " => Nil,\n";
             }
         }
+        /* Lastly add any of the user-supplied values and close up*/
         testClass += document.getElementById('generateAttributes').value;
-
         testClass += ")";
 
         console.log("Calling the following:")
@@ -226,7 +233,7 @@ function onGenerateMessages(event) {
         /* Actually run the method.  $*OUT is captured in JS's fromRaku() */
         Raku.eval(preCode + methodDef + testClass + ".&test-method.say");
     }
-
+    runningStatus(false);
 }
 
 Raku.output = function(text, chan) { fromRaku(text, chan) };
@@ -345,6 +352,30 @@ function download(filename, text) {
 
   document.body.removeChild(e);
 }
+
+Raku.addStateChangeListener( function(from, to) {
+  if (to == "Initializing") {
+    document.getElementById("camelia").src = "imgs/camelia-animated.png";
+    document.getElementById("statusText").innerHTML = "Initializing";
+  } else if (to == "Ready") {
+    document.getElementById("camelia").src = "imgs/camelia-color.png";
+    document.getElementById("statusText").innerHTML = "Ready";
+  }
+  console.log(from + " -> " + to);
+});
+
+function runningStatus(isRunning) {
+  console.log("Running status is " + isRunning);
+
+  if (isRunning) {
+    document.getElementById("camelia").src = "imgs/camelia-purple.png";
+    document.getElementById("statusText").innerHTML = "Running";
+  }else{
+    document.getElementById("camelia").src = "imgs/camelia-color.png";
+    document.getElementById("statusText").innerHTML = "Ready";
+  }
+}
+
 
 
 

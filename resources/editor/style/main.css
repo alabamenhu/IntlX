@@ -115,3 +115,19 @@ h1 {
     z-index:1;
     background-color:rgba(0,0,0,0)
 }
+
+
+#rakuStatus {
+font-size: 66%;
+  text-align: center;
+  position: fixed;
+  height: calc(48px + 1em);
+  width: 64px;
+  top: 0;
+  right: 0;
+}
+
+#camelia {
+  height: 48px;
+  width: 64px;
+}
