@@ -37,7 +37,6 @@ var translations = { special : {}, normal : {}   };
 
 function onReadTranslations(text) {
     const lines = text.split("\n");
-    console.log(lines[0]);
 
     let lineNº = 0;
 
@@ -143,10 +142,8 @@ function onParsedFile() {
 }
 
 function onChooseException(event) {
+    /* save old values if they exist */
     if (currentType) {
-        console.log(currentType);
-        console.log(currentType.indexOf("."));
-
         if (currentType.indexOf(".") >= 0) {
             /* special types have a period */
 
@@ -155,11 +152,10 @@ function onChooseException(event) {
             translations["normal"][currentType]["trans"] = document.getElementById("normal-translation").value;
             translations["normal"][currentType]["status"] = document.getElementById("normal-status").value;
         }
-
     }
 
-
-    if (event.target.selectedIndex <= event.target.childNodes[0].childNodes.length) {
+    /* load the new ones */
+    if (event.target.selectedIndex < event.target.childNodes[0].childNodes.length) {
         onChooseSpecialException(event);
     }else{
         onChooseNormalException(event);
@@ -210,29 +206,29 @@ function onGenerateMessages(event) {
 
     /* Grab the set of sample values, if there are any */
     let testAttrSets = test[currentType] || [{}];
-
+    console.group("Testing message(s) for " + currentType);
     /* Run a test for each set of test values */
     for (testAttrs of testAttrSets) {
 
         /* The Tester class allows any attribute to be set */;
-        let testClass = "Tester.new(\n";
+        let testClass = "Tester.new( ";
         for (attr of Object.keys(testAttrs)) {
             if (testAttrs[attr]) {
-                testClass += attr + " => " + testAttrs[attr] + ",\n";
+                testClass += attr + " => " + testAttrs[attr] + ", ";
             } else {
                 /* Allows us to test for a blank item */
-                testClass += attr + " => Nil,\n";
+                testClass += attr + " => Nil, ";
             }
         }
         /* Lastly add any of the user-supplied values and close up*/
         testClass += document.getElementById('generateAttributes').value;
         testClass += ")";
 
-        console.log("Calling the following:")
-        console.log(methodDef + testClass + ".&test-method.say");
+        console.log(preCode + methodDef + testClass + ".&test-method.say");
         /* Actually run the method.  $*OUT is captured in JS's fromRaku() */
         Raku.eval(preCode + methodDef + testClass + ".&test-method.say");
     }
+    console.groupEnd();
     runningStatus(false);
 }
 
@@ -282,8 +278,6 @@ function onDrop(event) {
         // Use DataTransferItemList interface to access the file(s)
         if (event.dataTransfer.items[0].kind === 'file') {
             var file = event.dataTransfer.items[0].getAsFile();
-            console.log('... filename = ' + file.name);
-            console.log(file);
             fileName = file.name;
 
             const reader = new FileReader();
@@ -299,10 +293,6 @@ function onDrop(event) {
 
 
 function saveFile() {
-
-//    console.log(fileHeader + fileMiddle);
-
-
     /* Handle special translations */
     let fileSpecial = "";
     let maxMethodLength = Object.values(translations['special']).map( function(x) {return x.length} ).reduce(function(a, b) { return Math.max(a, b); });
@@ -344,12 +334,10 @@ function download(filename, text) {
   var e = document.createElement('a');
   e.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
   e.setAttribute('download', filename);
-
   e.style.display = 'none';
+
   document.body.appendChild(e);
-
   e.click();
-
   document.body.removeChild(e);
 }
 
@@ -361,11 +349,9 @@ Raku.addStateChangeListener( function(from, to) {
     document.getElementById("camelia").src = "imgs/camelia-color.png";
     document.getElementById("statusText").innerHTML = "Ready";
   }
-  console.log(from + " -> " + to);
 });
 
 function runningStatus(isRunning) {
-  console.log("Running status is " + isRunning);
 
   if (isRunning) {
     document.getElementById("camelia").src = "imgs/camelia-purple.png";
