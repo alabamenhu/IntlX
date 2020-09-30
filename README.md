@@ -13,8 +13,11 @@ The following localization is currently available:
 
   * Asturian (25% complete, by Matthew Stuckwisch)
   * Spanish (1% complete, by Matthew Stuckwisch)
+  * Mandarin (Taiwan) (1% complete, by Perry Thompson)
   
-There are other localizations in progress for Portuguese (European), and Mandarin (Traditional Script).
+There are other localizations in progress:
+
+  * Portuguese (European)
   
 [//]: # "[Unrendered_END_LOCALIZATION_LIST"
 
