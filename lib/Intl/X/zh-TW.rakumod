@@ -12,6 +12,7 @@ unit module Intl::X::zh-TW;
 # 5. Violà :-)
 
 use MONKEY-GUTS;
+use Intl::X::Support;
 
 our %exceptions = Map.new:
 
@@ -184,14 +185,7 @@ our %exceptions = Map.new:
 
 'X::AdHoc' => method {
         # Remove spaces for die(*@msg)/fail(*@msg) forms
-        given $.payload {
-            when SlurpySentry {
-                $_.list.join;
-            }
-            default {
-                .Str;
-            }
-        }
+        $.payload.Str
 },
 
 
@@ -666,12 +660,12 @@ our %exceptions = Map.new:
                 ~ ($.specification ~~ / $<name>=.+ '::from' $ /
                     ?? "\n\nIf you meant to use the :from adverb, use"
                         ~ " a single colon for it: $<name>:from<...>\n"
-                    !! self!is-missing-from-meta-file
-                        ?? "\n\nPlease note that a 'META6.json' file was found in '$*REPO.prefix.relative()',"
-                            ~ " of which the 'provides' section was used to determine if a dependency is available"
-                            ~ " or not.  Perhaps you need to add '$.specification' in the <provides> section of"
-                            ~ " that file?  Or need to specify a directory that does *not* have a 'META6.json' file?"
-                        !! ''
+                    !! #self!is-missing-from-meta-file
+                       # ?? "\n\nPlease note that a 'META6.json' file was found in '$*REPO.prefix.relative()',"
+                       #     ~ " of which the 'provides' section was used to determine if a dependency is available"
+                       #     ~ " or not.  Perhaps you need to add '$.specification' in the <provides> section of"
+                       #     ~ " that file?  Or need to specify a directory that does *not* have a 'META6.json' file?"
+                       #`( !! ) ''
                 )
 },
 
@@ -2400,11 +2394,8 @@ our %exceptions = Map.new:
 #        ).naive-word-wrapper
 
 'X::SecurityPolicy::Eval' => method {
-        (($.payload ~~ SlurpySentry
-          ?? $.payload.list.join # Remove spaces die(*@msg)/fail(*@msg) forms
-          !! $.payload.Str
-         ) ~ " (use the MONKEY-SEE-NO-EVAL pragma to override this error but only if you're VERY sure your data contains no injection attacks)."
-        ).naive-word-wrapper
+        ($.payload.Str ~ " (use the MONKEY-SEE-NO-EVAL pragma to override this error but only if you're VERY sure your data contains no injection attacks)."
+        ).&naive-word-wrapper
 },
 
 
@@ -3068,7 +3059,7 @@ our %exceptions = Map.new:
 'X::Syntax::Perl5Var' => method {
         my $name = $.name;
         my $v    = $name ~~ m/ <[ $ @ % & ]> [ \^ <[ A..Z ]> | \W ] /;
-        my $sugg = nqp::atkey($m,~$v);
+        my $sugg = ''; # nqp::atkey($m,~$v);
         if $name eq '$#' {
             # Currently only `$#` var has this identifier business handling.
             # Should generalize the logic if we get more of stuff like this.
@@ -3859,13 +3850,13 @@ Parenthesize as \\(...) if you intended a capture of a single numeric value./
 
 'X::Worry::P5::LeadingZero' => method {
         'Leading 0 has no meaning. If you meant to create an octal number'
-        ~ ", use '0o' prefix" ~ (
-#?if jvm
-            $.value ~~ /<[89]>/
-#?endif
-#?if !jvm
-            $.value.comb.grep(*.unival > 7)
-#?endif
+        ~ ", use '0o' prefix"
+        ~ (
+            (if $*JV.name eq 'jvm' {
+                $.value ~~ /<[89]>/
+            }else{
+                $.value.comb.grep(*.unival > 7)
+            })
                 ?? ", but note that $.value is not a valid octal number"
                 !! "; like, '0o$.value'"
         ) ~ '. If you meant to create a string, please add quotation marks.'
