@@ -5,7 +5,7 @@
 # and update scripts.
 #
 # 1. Change the ?? to your language code
-unit module Intl::X::??;
+unit module Intl::X::es;
 # 2. Rename this template file to match the language code
 # 3. Place in the lib/Intl/X/ directory.
 # 4. Add the module to the 'provides' section of META6.json
