@@ -1,7 +1,7 @@
 unit module Support;
 
 # This currently copies the contents of Str.naive-word-wrapper, allowing
-# us to use the method on compiler releases that lack it (pre-Summer 2020.
+# us to use the method on compiler releases that lack it (pre-Summer 2020).
 
 sub naive-word-wrapper(Str $text, int :$max = 72, str :$indent = "", --> Str:D) is export {
     my @lines;
