@@ -1,4 +1,4 @@
-# EXCEPTIONS LOCALIZATION FOR ----
+# EXCEPTIONS LOCALIZATION FOR SPANISH
 #
 # Note that this file has been automatically generated.
 # Do NOT allow a code editor to reformat, as it will mess up (NYI) comparison
@@ -12,6 +12,7 @@ unit module Intl::X::es;
 # 5. Violà :-)
 
 use MONKEY-GUTS;
+use Intl::X::Support;
 
 our %exceptions = Map.new:
 
@@ -169,14 +170,7 @@ our %exceptions = Map.new:
 
 'X::AdHoc' => method {
         # Remove spaces for die(*@msg)/fail(*@msg) forms
-        given $.payload {
-            when SlurpySentry {
-                $_.list.join;
-            }
-            default {
-                .Str;
-            }
-        }
+        $.payload.Str
 },
 
 
@@ -201,16 +195,16 @@ our %exceptions = Map.new:
 
 'X::Adverb' => method {
         my $text = '';
-        if @!unexpected.elems -> $elems {
+        if @.unexpected.elems -> $elems {
             $text = $elems > 1
               ?? "$elems unexpected adverbs ('@.unexpected.join("', '")')"
-              !! "Unexpected adverb '@!unexpected[0]'"
+              !! "Unexpected adverb '@.unexpected[0]'"
         }
-        if @!nogo {
+        if @.nogo {
             $text ~= $text ?? " and u" !! "U";
             $text ~= "nsupported combination of adverbs ('@.nogo.join("', '")')";
         }
-        ($text ~ " passed to $!what on '$!source'.").naive-word-wrapper
+        ($text ~ " passed to $.what on '$.source'.").naive-word-wrapper
 },
 
 
@@ -267,11 +261,11 @@ our %exceptions = Map.new:
 #          !! "Cannot modify an immutable '{$!value.^name}' type object"
 
 'X::Assignment::RO' => method {
-        nqp::isconcrete($!value)
-          ?? "Cannot modify an immutable {$!value.^name} ({
-                 Rakudo::Internals.SHORT-STRING: $!value
+        nqp::isconcrete($.value)
+          ?? "Cannot modify an immutable {$.value.^name} ({
+                 Rakudo::Internals.SHORT-STRING: $.value
              })"
-          !! "Cannot modify an immutable '{$!value.^name}' type object"
+          !! "Cannot modify an immutable '{$.value.^name}' type object"
 },
 
 
@@ -382,7 +376,7 @@ our %exceptions = Map.new:
 
 'X::Backslash::UnrecognizedSequence' => method {
         "Unrecognized backslash sequence: '\\$.sequence'"
-        ~ (nqp::defined($!suggestion) ?? ". Did you mean $!suggestion?" !! '')
+        ~ (nqp::defined($.suggestion) ?? ". Did you mean $.suggestion?" !! '')
 },
 
 
@@ -488,7 +482,7 @@ our %exceptions = Map.new:
 #          ~ "\nor missed `:` in signature unpacking? -> \&c:(Int) \{}";
 
 'X::Cannot::Capture' => method {
-        "Cannot unpack or Capture `$!what.gist()`.\n"
+        "Cannot unpack or Capture `$.what.gist()`.\n"
           ~ "To create a Capture, add parentheses: \\(...)\n"
           ~ 'If unpacking in a signature, perhaps you needlessly used'
           ~ ' parentheses? -> ($x) {} vs. -> $x {}'
@@ -561,9 +555,9 @@ our %exceptions = Map.new:
 #            !! "An exception occurred while $!use-case"
 
 'X::Comp::BeginTime' => method {
-        $!exception ~~ X::MOP
-            ?? $!exception.message
-            !! "An exception occurred while $!use-case"
+        $.exception ~~ X::MOP
+            ?? $.exception.message
+            !! "An exception occurred while $.use-case"
 },
 
 
@@ -651,12 +645,12 @@ our %exceptions = Map.new:
                 ~ ($.specification ~~ / $<name>=.+ '::from' $ /
                     ?? "\n\nIf you meant to use the :from adverb, use"
                         ~ " a single colon for it: $<name>:from<...>\n"
-                    !! self!is-missing-from-meta-file
-                        ?? "\n\nPlease note that a 'META6.json' file was found in '$*REPO.prefix.relative()',"
-                            ~ " of which the 'provides' section was used to determine if a dependency is available"
-                            ~ " or not.  Perhaps you need to add '$!specification' in the <provides> section of"
-                            ~ " that file?  Or need to specify a directory that does *not* have a 'META6.json' file?"
-                        !! ''
+                    !! #self!is-missing-from-meta-file
+                       # ?? "\n\nPlease note that a 'META6.json' file was found in '$*REPO.prefix.relative()',"
+                       #     ~ " of which the 'provides' section was used to determine if a dependency is available"
+                       #     ~ " or not.  Perhaps you need to add '$.specification' in the <provides> section of"
+                       #     ~ " that file?  Or need to specify a directory that does *not* have a 'META6.json' file?"
+                       #`( !! ) ''
                 )
 },
 
@@ -667,7 +661,7 @@ our %exceptions = Map.new:
 #        $!composer.^name ~ " is not composable, so $!target-name cannot compose it";
 
 'X::Composition::NotComposable' => method {
-        $!composer.^name ~ " is not composable, so $!target-name cannot compose it";
+        $.composer.^name ~ " is not composable, so $.target-name cannot compose it";
 },
 
 
@@ -704,7 +698,7 @@ our %exceptions = Map.new:
 
 'X::ControlFlow::Return' => method {
         'Attempt to return outside of ' ~ (
-            $!out-of-dynamic-scope
+            $.out-of-dynamic-scope
               ?? 'immediately-enclosing Routine (i.e. `return` execution is'
                ~ ' outside the dynamic scope of the Routine where `return` was used)'
               !! 'any Routine'
@@ -772,7 +766,7 @@ our %exceptions = Map.new:
 #        "Dynamic variables cannot have package-like names (with '::'), so '$!symbol' is not allowed.".naive-word-wrapper
 
 'X::Dynamic::Package' => method {
-        "Dynamic variables cannot have package-like names (with '::'), so '$!symbol' is not allowed.".naive-word-wrapper
+        "Dynamic variables cannot have package-like names (with '::'), so '$.symbol' is not allowed.".naive-word-wrapper
 },
 
 
@@ -1333,8 +1327,8 @@ our %exceptions = Map.new:
 #        ~ $!child-typename ~ ' cannot inherit from it';
 
 'X::Inheritance::Unsupported' => method {
-        $!parent.^name ~ ' does not support inheritance, so '
-        ~ $!child-typename ~ ' cannot inherit from it';
+        $.parent.^name ~ ' does not support inheritance, so '
+        ~ $.child-typename ~ ' cannot inherit from it';
 },
 
 
@@ -1672,8 +1666,8 @@ our %exceptions = Map.new:
         my @un-rw-cand;
         if first / 'is rw' /, @cand {
             my $rw-capture = Capture.new(
-                :list( $!capture.list.map({ my $ = $_ })                  ),
-                :hash( $!capture.hash.map({ .key => my $ = .value }).hash ),
+                :list( $.capture.list.map({ my $ = $_ })                  ),
+                :hash( $.capture.hash.map({ .key => my $ = .value }).hash ),
             );
             @un-rw-cand = $.dispatcher.dispatchees».signature.grep({
                 $rw-capture ~~ $^cand
@@ -1752,7 +1746,7 @@ our %exceptions = Map.new:
 #        "$!type.^name() *must* be parameterized";
 
 'X::MustBeParametric' => method {
-        "$!type.^name() *must* be parameterized";
+        "$.type.^name() *must* be parameterized";
 },
 
 
@@ -1783,7 +1777,7 @@ our %exceptions = Map.new:
 #        "Big integer $!big not yet supported on {$!side}hand side of '$!op' operator"
 
 'X::NYI::BigInt' => method {
-        "Big integer $!big not yet supported on {$!side}hand side of '$!op' operator"
+        "Big integer $.big not yet supported on {$.side}hand side of '$.op' operator"
 },
 
 
@@ -1794,7 +1788,7 @@ our %exceptions = Map.new:
 #        "No CORE for language version 6.$!lang-rev"
 
 'X::NoCoreRevision' => method {
-        "No CORE for language version 6.$!lang-rev"
+        "No CORE for language version 6.$.lang-rev"
 },
 
 
@@ -1835,7 +1829,7 @@ our %exceptions = Map.new:
 #        "$!type.^name() cannot be parameterized";
 
 'X::NotParametric' => method {
-        "$!type.^name() cannot be parameterized";
+        "$.type.^name() cannot be parameterized";
 },
 
 
@@ -1846,7 +1840,7 @@ our %exceptions = Map.new:
 #        "Cannot convert {$!source // $!source.raku} to {$!target // $!target.raku}: $!reason";
 
 'X::Numeric::CannotConvert' => method {
-        "Cannot convert {$!source // $!source.raku} to {$!target // $!target.raku}: $!reason";
+        "Cannot convert {$.source // $.source.raku} to {$.target // $.target.raku}: $.reason";
 },
 
 
@@ -1982,8 +1976,8 @@ our %exceptions = Map.new:
 #        "$what '$!type.^name()' is insufficiently type-like to qualify a parameter.  Did you mean 'class'?".naive-word-wrapper
 
 'X::Parameter::BadType' => method {
-        my $what = ~$!type.HOW.WHAT.^name.match(/ .* '::' <(.*)> HOW/) // 'Namespace';
-        "$what '$!type.^name()' is insufficiently type-like to qualify a parameter.  Did you mean 'class'?".naive-word-wrapper
+        my $what = ~$.type.HOW.WHAT.^name.match(/ .* '::' <(.*)> HOW/) // 'Namespace';
+        "$what '$.type.^name()' is insufficiently type-like to qualify a parameter.  Did you mean 'class'?".naive-word-wrapper
 },
 
 
@@ -2008,7 +2002,7 @@ our %exceptions = Map.new:
 #        "Default value '{Rakudo::Internals.MAYBE-STRING: $!got}' will never bind to a parameter of type {$!expected.^name}"
 
 'X::Parameter::Default::TypeCheck' => method {
-        "Default value '{Rakudo::Internals.MAYBE-STRING: $!got}' will never bind to a parameter of type {$!expected.^name}"
+        "Default value '{Rakudo::Internals.MAYBE-STRING: $.got}' will never bind to a parameter of type {$.expected.^name}"
 },
 
 
@@ -2027,14 +2021,14 @@ our %exceptions = Map.new:
 #        "$beginning '$!routine' must be $must-be of type '$!expected', not $not-a of type '$!got'.  Did you forget a '$suggestion'?".naive-word-wrapper
 
 'X::Parameter::InvalidConcreteness' => method {
-        $!routine = '<anon>' if not $!routine.defined or $!routine eq '';
-        $!param   = '<anon>' if not $!param.defined   or $!param   eq '';
-        my $beginning  = $!param-is-invocant  ?? 'Invocant of method' !! "Parameter '$!param' of routine";
-        my $must-be    = $!should-be-concrete ?? 'an object instance' !! 'a type object';
-        my $not-a      = $!should-be-concrete ?? 'a type object'      !! 'an object instance';
-        my $suggestion = $!should-be-concrete ?? '.new'               !! 'multi';
+        $.routine = '<anon>' if not $.routine.defined or $.routine eq '';
+        $.param   = '<anon>' if not $.param.defined   or $.param   eq '';
+        my $beginning  = $.param-is-invocant  ?? 'Invocant of method' !! "Parameter '$.param' of routine";
+        my $must-be    = $.should-be-concrete ?? 'an object instance' !! 'a type object';
+        my $not-a      = $.should-be-concrete ?? 'a type object'      !! 'an object instance';
+        my $suggestion = $.should-be-concrete ?? '.new'               !! 'multi';
 
-        "$beginning '$!routine' must be $must-be of type '$!expected', not $not-a of type '$!got'.  Did you forget a '$suggestion'?".naive-word-wrapper
+        "$beginning '$.routine' must be $must-be of type '$.expected', not $not-a of type '$.got'.  Did you forget a '$suggestion'?".naive-word-wrapper
 },
 
 
@@ -2203,8 +2197,8 @@ our %exceptions = Map.new:
 #        "'$!variable_name' has already been used as a non-placeholder in the surrounding $decl, so you will confuse the reader if you suddenly declare $!placeholder here.".naive-word-wrapper
 
 'X::Placeholder::NonPlaceholder' => method {
-        my $decl = $!decl ?? $!decl !! 'block';
-        "'$!variable_name' has already been used as a non-placeholder in the surrounding $decl, so you will confuse the reader if you suddenly declare $!placeholder here.".naive-word-wrapper
+        my $decl = $.decl ?? $.decl !! 'block';
+        "'$.variable_name' has already been used as a non-placeholder in the surrounding $decl, so you will confuse the reader if you suddenly declare $.placeholder here.".naive-word-wrapper
 },
 
 
@@ -2223,7 +2217,7 @@ our %exceptions = Map.new:
 'X::PoisonedAlias' => method {
         ("Cannot directly use poisoned alias '$.alias' because it was declared by several {$.package-type}s." ~
          ($.package-name
-           ?? " Please access it via explicit package name like: '{$.package-name}::{$!alias}'"
+           ?? " Please access it via explicit package name like: '{$.package-name}::{$.alias}'"
            !! '')
         ).naive-word-wrapper
 },
@@ -2385,11 +2379,8 @@ our %exceptions = Map.new:
 #        ).naive-word-wrapper
 
 'X::SecurityPolicy::Eval' => method {
-        (($.payload ~~ SlurpySentry
-          ?? $.payload.list.join # Remove spaces die(*@msg)/fail(*@msg) forms
-          !! $.payload.Str
-         ) ~ " (use the MONKEY-SEE-NO-EVAL pragma to override this error but only if you're VERY sure your data contains no injection attacks)."
-        ).naive-word-wrapper
+        ($.payload.Str ~ " (use the MONKEY-SEE-NO-EVAL pragma to override this error but only if you're VERY sure your data contains no injection attacks)."
+        ).&naive-word-wrapper
 },
 
 
@@ -2425,7 +2416,7 @@ our %exceptions = Map.new:
 #               !! 'Unable to deduce sequence for some unfathomable reason'
 
 'X::Sequence::Deduction' => method {
-        $!from ?? "Unable to deduce arithmetic or geometric sequence from: $!from\nDid you really mean '..'?"
+        $.from ?? "Unable to deduce arithmetic or geometric sequence from: $.from\nDid you really mean '..'?"
                !! 'Unable to deduce sequence for some unfathomable reason'
 },
 
@@ -2441,9 +2432,9 @@ our %exceptions = Map.new:
 
 'X::Sequence::Endpoint' => method {
         "Incompatible endpoint for sequence: "
-          ~ $!from.raku
+          ~ $.from.raku
           ~ " ... "
-          ~ $!endpoint.raku
+          ~ $.endpoint.raku
 },
 
 
@@ -2485,7 +2476,7 @@ our %exceptions = Map.new:
 #                     !! "Cannot use empty name as character name"
 
 'X::Str::InvalidCharName' => method {
-        $!name.chars ?? "Unrecognized character name [{$!name}]"
+        $.name.chars ?? "Unrecognized character name [{$.name}]"
                      !! "Cannot use empty name as character name"
 },
 
@@ -2825,7 +2816,7 @@ our %exceptions = Map.new:
 
 'X::Syntax::Extension::SpecialForm' => method {
         "Cannot override $.category operator '$.opname', as it is a special form " ~
-            "handled directly by the compiler" ~ ($!hint ?? "\n$!hint" !! "")
+            "handled directly by the compiler" ~ ($.hint ?? "\n$.hint" !! "")
 },
 
 
@@ -2853,7 +2844,7 @@ our %exceptions = Map.new:
 #        )
 
 'X::Syntax::InfixInTermPosition' => method {
-        my $infix := $!infix.trim;
+        my $infix := $.infix.trim;
         "Preceding context expects a term, but found infix $infix instead."
         ~ (
             $.post && $.post.starts-with('end ')
@@ -2986,15 +2977,15 @@ our %exceptions = Map.new:
 #        $val;
 
 'X::Syntax::Number::LiteralType' => method {
-        my $vartype := $!vartype.WHAT.^name;
+        my $vartype := $.vartype.WHAT.^name;
         my $conversionmethod := $vartype;
         $vartype := $vartype.lc if $.native;
-        my $vt := $!value.^name;
+        my $vt := $.value.^name;
         my $value := $vt eq "IntStr" || $vt eq "NumStr" || $vt eq "RatStr" || $vt eq "ComplexStr"
-            ?? $!value.Str
-            !! $!value.raku;
+            ?? $.value.Str
+            !! $.value.raku;
         my $val = "Cannot assign a literal of type {$.valuetype} ($value) to { $.native ?? "a native" !! "a" } variable of type $vartype. You can declare the variable to be of type $.suggestiontype, or try to coerce the value with { $value ~ '.' ~ $conversionmethod } or $conversionmethod\($value\)";
-        try $val ~= ", or just write the value as " ~ $!value."$vartype"().raku;
+        try $val ~= ", or just write the value as " ~ $.value."$vartype"().raku;
         $val;
 },
 
@@ -3051,14 +3042,14 @@ our %exceptions = Map.new:
 #          !! 'Weird unrecognized variable name: ' ~ $name;
 
 'X::Syntax::Perl5Var' => method {
-        my $name = $!name;
+        my $name = $.name;
         my $v    = $name ~~ m/ <[ $ @ % & ]> [ \^ <[ A..Z ]> | \W ] /;
-        my $sugg = nqp::atkey($m,~$v);
+        my $sugg = ''; # nqp::atkey($m,~$v);
         if $name eq '$#' {
             # Currently only `$#` var has this identifier business handling.
             # Should generalize the logic if we get more of stuff like this.
-            $name ~= $!identifier-name;
-            $sugg  = '@' ~ $!identifier-name ~ '.end';
+            $name ~= $.identifier-name;
+            $sugg  = '@' ~ $.identifier-name ~ '.end';
         }
         $v
           ?? $sugg
@@ -3157,14 +3148,14 @@ our %exceptions = Map.new:
 #        || 'Invalid quantifier value'
 
 'X::Syntax::Regex::QuantifierValue' => method {
-        $!inf
+        $.inf
           && 'Minimum quantity to match for quantifier cannot be Inf.'
             ~ ' Did you mean to use + or * quantifiers instead of **?'
-        || $!non-numeric-range
+        || $.non-numeric-range
           && 'Cannot use Range with non-Numeric or NaN end points as quantifier'
-        || $!non-numeric
+        || $.non-numeric
           && 'Cannot use non-Numeric or NaN value as quantifier'
-        || $!empty-range
+        || $.empty-range
           && 'Cannot use empty Range as quantifier'
         || 'Invalid quantifier value'
 },
@@ -3297,7 +3288,7 @@ our %exceptions = Map.new:
 #        qq|"unless" does not take "$!keyword", please rewrite using "if"|
 
 'X::Syntax::UnlessElse' => method {
-        qq|"unless" does not take "$!keyword", please rewrite using "if"|
+        qq|"unless" does not take "$.keyword", please rewrite using "if"|
 },
 
 
@@ -3309,8 +3300,8 @@ our %exceptions = Map.new:
 #        "$what '$!type.^name()' is insufficiently type-like to qualify a variable.  Did you mean 'class'?".naive-word-wrapper
 
 'X::Syntax::Variable::BadType' => method {
-        my $what = ~$!type.HOW.WHAT.^name.match(/ .* '::' <(.*)> HOW/) // 'Namespace';
-        "$what '$!type.^name()' is insufficiently type-like to qualify a variable.  Did you mean 'class'?".naive-word-wrapper
+        my $what = ~$.type.HOW.WHAT.^name.match(/ .* '::' <(.*)> HOW/) // 'Namespace';
+        "$what '$.type.^name()' is insufficiently type-like to qualify a variable.  Did you mean 'class'?".naive-word-wrapper
 },
 
 
@@ -3321,7 +3312,7 @@ our %exceptions = Map.new:
 #        "$!inner.^name() not allowed here; variable list already declared with type $!outer.^name()"
 
 'X::Syntax::Variable::ConflictingTypes' => method {
-        "$!inner.^name() not allowed here; variable list already declared with type $!outer.^name()"
+        "$.inner.^name() not allowed here; variable list already declared with type $.outer.^name()"
 },
 
 
@@ -3342,7 +3333,7 @@ our %exceptions = Map.new:
 #        "Cannot use variable $!name in declaration to initialize itself"
 
 'X::Syntax::Variable::Initializer' => method {
-        "Cannot use variable $!name in declaration to initialize itself"
+        "Cannot use variable $.name in declaration to initialize itself"
 },
 
 
@@ -3413,7 +3404,7 @@ our %exceptions = Map.new:
 #        qq|"without" does not take "$!keyword", please rewrite using "with"|
 
 'X::Syntax::WithoutElse' => method {
-        qq|"without" does not take "$!keyword", please rewrite using "with"|
+        qq|"without" does not take "$.keyword", please rewrite using "with"|
 },
 
 
@@ -3434,7 +3425,7 @@ our %exceptions = Map.new:
 #        "Cannot change REPR of $!type.^name() now (must be set at initial declaration)";
 
 'X::TooLateForREPR' => method {
-        "Cannot change REPR of $!type.^name() now (must be set at initial declaration)";
+        "Cannot change REPR of $.type.^name() now (must be set at initial declaration)";
 },
 
 
@@ -3527,12 +3518,12 @@ our %exceptions = Map.new:
 #            ) ~ $!signature;
 
 'X::TypeCheck::Argument' => method {
-            my $multi = $!signature ~~ /\n/ // '';
-            "Calling {$!objname}({ join(', ', @!arguments) }) will never work with " ~ (
-                $!protoguilt ?? 'signature of the proto ' !!
+            my $multi = $.signature ~~ /\n/ // '';
+            "Calling {$.objname}({ join(', ', @.arguments) }) will never work with " ~ (
+                $.protoguilt ?? 'signature of the proto ' !!
                 $multi       ?? 'any of these multi signatures:' !!
                                 'declared signature '
-            ) ~ $!signature;
+            ) ~ $.signature;
 },
 
 
@@ -3763,7 +3754,7 @@ our %exceptions = Map.new:
 #        "A unit-scoped $.what definition is not allowed $.where;\n$!suggestion"
 
 'X::UnitScope::Invalid' => method {
-        "A unit-scoped $.what definition is not allowed $.where;\n$!suggestion"
+        "A unit-scoped $.what definition is not allowed $.where;\n$.suggestion"
 },
 
 
@@ -3844,15 +3835,15 @@ Parenthesize as \\(...) if you intended a capture of a single numeric value./
 
 'X::Worry::P5::LeadingZero' => method {
         'Leading 0 has no meaning. If you meant to create an octal number'
-        ~ ", use '0o' prefix" ~ (
-#?if jvm
-            $!value ~~ /<[89]>/
-#?endif
-#?if !jvm
-            $!value.comb.grep(*.unival > 7)
-#?endif
-                ?? ", but note that $!value is not a valid octal number"
-                !! "; like, '0o$!value'"
+        ~ ", use '0o' prefix"
+        ~ (
+            (if $*JV.name eq 'jvm' {
+                $.value ~~ /<[89]>/
+            }else{
+                $.value.comb.grep(*.unival > 7)
+            })
+                ?? ", but note that $.value is not a valid octal number"
+                !! "; like, '0o$.value'"
         ) ~ '. If you meant to create a string, please add quotation marks.'
 },
 
@@ -3880,7 +3871,7 @@ Parenthesize as \\(...) if you intended a capture of a single variable./
 #(Or parenthesize the whole endpoint expression, if you meant that.)"
 
 'X::Worry::Precedence::Range' => method {
-"To $!action a range, parenthesize the whole range.
+"To $.action a range, parenthesize the whole range.
 (Or parenthesize the whole endpoint expression, if you meant that.)"
 },
 
