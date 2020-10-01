@@ -13,6 +13,7 @@
   "provides": {
     "Intl::X::es" : "lib/Intl/X/es.rakumod",
     "Intl::X::ast" : "lib/Intl/X/ast.rakumod",
+    "Intl::X::zh-TW" : "lib/Intl/X/zh-TW.rakumod",
     "Intl::X" : "lib/Intl/X.rakumod",
     "Intl::X::Support" : "lib/Intl/X/Support.rakumod"
   },
